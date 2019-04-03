@@ -8,7 +8,7 @@ import GithubStarButton from '../../github/StarButton';
 
 import './style.scss';
 
-const availableSizes = ['XS', 'S', 'M', 'ML', 'L', 'XL', 'XXL'];
+const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 class Filter extends Component {
   static propTypes = {
