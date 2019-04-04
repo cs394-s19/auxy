@@ -9,6 +9,9 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
+        <h1 style={{ textAlign: 'center' }}>
+          Does this count as a visible change?
+        </h1>
         <GithubCorner />
         <main>
           <Filter />
