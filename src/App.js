@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Song from "./Components/Song";
 import SongForm from "./Components/SongForm";
+import NowPlaying from "./Components/NowPlaying";
 
 import { DB_CONFIG } from "./Config/config";
 import firebase from "firebase/app";
@@ -24,7 +25,11 @@ class App extends Component {
 
     // Set up React state of our component -- list of songs (with songId, songName, songScore)
     this.state = {
-      songs: []
+      songs: [],
+      currSong: {
+        name: "TestSong",
+        id: "1234"
+      }
     };
 
     // binding to be able to refer to "this"
@@ -144,11 +149,16 @@ class App extends Component {
       <div className="songsWrapper">
         <div className="songsHeader">
           <div className="heading">Auxy Song List v1</div>
-          <input
+            <NowPlaying 
+              songName = {this.state.currSong.name}
+            />
+
+
+          {/* <input
             type="text"
             value={this.state.search}
             onChange={this.updateSearch}
-          />
+          /> */}
         </div>
         <div className="songsBody">
           {/* USE this.state.songs INSTEAD of filteredSongs to ignore filter */}
