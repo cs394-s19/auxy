@@ -51,6 +51,7 @@ function CustomizedTable(props) {
 
   return (
     <Paper className={classes.root}>
+    Hi
       <Table className={classes.table}>
         <TableBody>
           {rows.map(row => (
