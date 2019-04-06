@@ -10,22 +10,28 @@ class Song extends Component {
     this.handleremoveSong = this.handleremoveSong.bind(this);
     this.handleLike = this.handleLike.bind(this);
 
+    this.songName = props.songName;
+    this.songId = props.songId;
+    this.songScore = props.songScore;
+
     this.state = {
       songName: props.songName,
       songId: props.songId,
       songScore: props.songScore
     };
   }
-
+  componentDidUpdate(prevProps) {
+    if (this.props.songScore !== prevProps.songScore) {
+      this.setState({ songScore: this.props.songScore });
+    }
+    // this.props.reSort();
+  }
   handleremoveSong(id) {
     this.props.removeSong(id);
   }
 
   handleLike(id) {
     this.props.likeSong(id);
-    this.setState({
-      songScore: this.state.songScore + 1
-    });
   }
 
   render(props) {

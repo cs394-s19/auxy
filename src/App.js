@@ -37,6 +37,7 @@ class App extends Component {
     this.removeSong = this.removeSong.bind(this);
     this.likeSong = this.likeSong.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
+    this.reSort = this.reSort.bind(this);
   }
 
   componentWillMount() {
@@ -71,6 +72,23 @@ class App extends Component {
 
       this.setState({
         songs: previousSongs
+      });
+    });
+
+    this.database.child("songs").on("child_changed", snap => {
+      console.log(snap.key);
+      console.log(snap.val());
+      for (var i = 0; i < previousSongs.length; i++) {
+        if (previousSongs[i].songId === snap.key) {
+          previousSongs[i].songScore++;
+        }
+      }
+
+      var sortedSongs = previousSongs;
+      sortedSongs.sort((a, b) => b.songScore - a.songScore);
+
+      this.setState({
+        songs: sortedSongs
       });
     });
   }
@@ -119,16 +137,17 @@ class App extends Component {
     //   var currScore = snap.val().songScore;
     // })
 
-    // Now we have to update the score seen on our display (since it could be unsyncd with database)
-    // Iterate through songs looking for match, incremenent songScore
-    for (var i = 0; i < previousSongs.length; i++) {
-      if (previousSongs[i].songId === songId) {
-        previousSongs[i].songScore += 1;
-      }
-    }
-
     // Resort if necessary and make the change above into set state
 
+    previousSongs.sort((a, b) => b.songScore - a.songScore);
+
+    this.setState({
+      songs: previousSongs
+    });
+  }
+
+  reSort() {
+    const previousSongs = this.state.songs;
     previousSongs.sort((a, b) => b.songScore - a.songScore);
 
     this.setState({
@@ -149,10 +168,7 @@ class App extends Component {
       <div className="songsWrapper">
         <div className="songsHeader">
           <div className="heading">Auxy Song List v1</div>
-            <NowPlaying 
-              songName = {this.state.currSong.name}
-            />
-
+          <NowPlaying songName={this.state.currSong.name} />
 
           {/* <input
             type="text"
@@ -171,6 +187,7 @@ class App extends Component {
                 key={song.songId}
                 removeSong={this.removeSong}
                 likeSong={this.likeSong}
+                reSort={this.reSort}
               />
             );
           })}
