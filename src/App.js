@@ -76,8 +76,6 @@ class App extends Component {
     });
 
     this.database.child("songs").on("child_changed", snap => {
-      console.log(snap.key);
-      console.log(snap.val());
       for (var i = 0; i < previousSongs.length; i++) {
         if (previousSongs[i].songId === snap.key) {
           previousSongs[i].songScore++;
