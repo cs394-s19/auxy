@@ -42,23 +42,23 @@ class App extends Component {
     this.reSort = this.reSort.bind(this);
   }
 
-  authenticate() {
+  // authenticate() {
 
-    //authenticate api
-    var spotifyApi = new SpotifyWebApi({
-      clientId : confidential.id,
-      clientSecret : confidential.secret,
-      redirectUri : 'http://www.example.com/callback'
-    });
+  //   //authenticate api
+  //   var spotifyApi = new SpotifyWebApi({
+  //     clientId : confidential.id,
+  //     clientSecret : confidential.secret,
+  //     redirectUri : 'http://www.example.com/callback'
+  //   });
 
-    //get Elvis's Albums
-    spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
-      .then(function(data) {
-        console.log('Artist albums', data.body);
-      }, function(err) {
-        console.error(err);
-      });
-  }
+  //   //get Elvis's Albums
+  //   spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
+  //     .then(function(data) {
+  //       console.log('Artist albums', data.body);
+  //     }, function(err) {
+  //       console.error(err);
+  //     });
+  // }
 
   componentWillMount() {
     const previousSongs = this.state.songs;
