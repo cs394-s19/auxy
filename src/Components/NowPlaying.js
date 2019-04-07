@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import "../Styles/NowPlaying.css";
+
 class NowPlaying extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ class NowPlaying extends Component {
 
   render(){
       return(
-        <div>
+        <div class="container">
           {this.state.songName}
         </div>
       )  
