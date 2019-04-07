@@ -8,8 +8,10 @@ import NowPlaying from "./Components/NowPlaying";
 import { DB_CONFIG } from "./Config/config";
 import firebase from "firebase/app";
 import "firebase/database";
-
+import confidential from "./confidential.json"
 import Table from "./Components/Table";
+var SpotifyWebApi = require('spotify-web-api-node');
+
 
 class App extends Component {
   constructor(props) {
@@ -37,6 +39,24 @@ class App extends Component {
     this.removeSong = this.removeSong.bind(this);
     this.likeSong = this.likeSong.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
+  }
+
+  authenticate() {
+
+    //authenticate api
+    var spotifyApi = new SpotifyWebApi({
+      clientId : confidential.id,
+      clientSecret : confidential.secret,
+      redirectUri : 'http://www.example.com/callback'
+    });
+
+    //get Elvis's Albums
+    spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
+      .then(function(data) {
+        console.log('Artist albums', data.body);
+      }, function(err) {
+        console.error(err);
+      });
   }
 
   componentWillMount() {
