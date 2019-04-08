@@ -169,7 +169,7 @@ class App extends Component {
       <div className="songsWrapper">
         <div className="songsHeader">
           <div className="heading">auxy playlist v1</div>
-          <NowPlaying songName={this.state.currSong.name} 
+          <NowPlaying songName={this.state.currSong.name}
                       songArtist={this.state.currSong.artist}/>
 
           {/* <input
