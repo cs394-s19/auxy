@@ -20,7 +20,7 @@ class SongForm extends Component {
     });
 
     let searchResults = this.props.getTracks(e.target.value);
-    if (e.target.value != null) {
+    if (e.target.value != null && e.target.value != '') {
       this.setState({results: searchResults});
       this.props.setSearchResults(searchResults);
       this.props.showResult();
