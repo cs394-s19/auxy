@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import "./App.css";
 import "./Styles/Song.css"
 import Song from "./Components/Song";
@@ -10,8 +9,23 @@ import SongForm from "./Components/SongForm";
 import { DB_CONFIG } from "./Config/config";
 import firebase from "firebase/app";
 import "firebase/database";
-
+import confidential from "./confidential.json"
 import Table from "./Components/Table";
+// import Modal from "./Components/Modal"
+import "./Styles/modal.css"
+import "./"
+
+var Spotify = require('spotify-web-api-js');
+
+
+var clientId = 'c6c554d53a714986b9f3141786a18bd3',
+clientSecret = '3fe07453c2474370a5a5c54ba30738b7';
+
+var spotifyApi = new Spotify({
+  clientId : clientId,
+  clientSecret : clientSecret
+});
+
 
 class App extends Component {
   constructor(props) {
@@ -32,7 +46,9 @@ class App extends Component {
         name: "Starboy",
         artist: "The Weeknd",
         id: "1234"
-      }
+      },
+      show: false,
+      searchNames: []
     };
 
     // binding to be able to refer to "this"
@@ -42,6 +58,24 @@ class App extends Component {
     this.updateSearch = this.updateSearch.bind(this);
     this.reSort = this.reSort.bind(this);
   }
+
+  // authenticate() {
+
+  //   //authenticate api
+  //   var spotifyApi = new SpotifyWebApi({
+  //     clientId : confidential.id,
+  //     clientSecret : confidential.secret,
+  //     redirectUri : 'http://www.example.com/callback'
+  //   });
+
+  //   //get Elvis's Albums
+  //   spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
+  //     .then(function(data) {
+  //       console.log('Artist albums', data.body);
+  //     }, function(err) {
+  //       console.error(err);
+  //     });
+  // }
 
   componentWillMount() {
     const previousSongs = this.state.songs;
@@ -93,6 +127,52 @@ class App extends Component {
       });
     });
   }
+
+  getTracks(input) {
+    spotifyApi.setAccessToken("BQBZcIiqABNVP8JwrcYAha6z_C1Xiovlt1ypZx95XLM8Ug4CpGuoMd10VZegWJ5BSHrqzubs3rDZ6zU74jC9rMn35_CiA6UsPodFpZHLnSHbaeAUB0DDVtbMZozg2uHnsZmRQC_6hYP7k-U13d-U2zsRqmTwDxYvKTucZ4Sl");
+    var input1 = input
+    console.log(input1)
+    var artists = []
+    var names = []
+    spotifyApi.searchTracks(input1, {market: ["US"]})
+      .then(function(data) {
+        console.log('Search by what u type', data.tracks.items);
+        if(data.tracks.items.length!=0){
+          // for(i=0;i<data.tracks.items.length;i++){
+          //   document.getElementById("myUL").innerHTML+="<li><a href='#'></a></li>"   
+          // }
+          // li = document.getElementsByTagName("a");
+          for(let i=0;i<data.tracks.items.length;i++){
+            artists[i] = data.tracks.items[i].artists
+            names[i] = data.tracks.items[i].name
+            // li[i].innerHTML=data.tracks.items[i].name+='&nbsp&nbsp&nbsp Artist: '
+            // artists=data.tracks.items[i].artists
+
+            // for (j=0;j<artists.length;j++){
+            //   li[i].innerHTML+=artists[j].name
+            //   if(j<artists.length-1)  {
+            //     li[i].innerHTML+=', '
+            //   }
+              
+            // }
+          }
+      }
+      }, function(err) {
+        console.error(err);
+      });
+      console.log(names)
+      this.setState({
+        searchNames: names
+      })
+  }
+
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
 
   updateSearch(e) {
     this.setState({ search: e.target.value });
@@ -198,11 +278,33 @@ class App extends Component {
         {/* Optional Table formatting -- barely implemented */}
         {/* <Table songList={this.state.songs} handleLike /> */}
         <div className="songsFooter">
-          <SongForm addSong={this.addSong} />
+          <SongForm addSong={this.addSong} showModal={this.showModal} getTracks={this.getTracks}/>
         </div>
+        <Modal show={this.state.show} handleClose={this.hideModal} names={this.state.searchNames} />
+        <button type="button" onClick={this.showModal}>
+          Search
+        </button>
       </div>
+
     );
   }
 }
+
+const Modal = ({ handleClose, show, children }) => {
+  const showHideClassName = show ? 'modal display-block' : 'modal display-none';
+
+  return (
+    <div className={showHideClassName}>
+      <section className='modal-main'>
+        {children}
+        <button
+          onClick={handleClose}
+        >
+          Close
+        </button>
+      </section>
+    </div>
+  );
+};
 
 export default App;

@@ -11,12 +11,15 @@ class SongForm extends Component {
 
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    
   }
 
   handleUserInput(e) {
     this.setState({
       newsongName: e.target.value
     });
+    this.props.showModal();
+    this.props.getTracks("hello");
   }
 
   handleSubmit(e) {
