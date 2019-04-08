@@ -10,7 +10,7 @@ var spotifyApi = new SpotifyWebApi({
   clientSecret : clientSecret
 });
 
-// //Retrieve an access token.
+//Retrieve an access token.
 // spotifyApi.clientCredentialsGrant().then(function(data) {
 //     console.log('The access token expires in ' + data.body['expires_in']);
 //     console.log('The access token is ' + data.body['access_token']);
@@ -22,9 +22,9 @@ var spotifyApi = new SpotifyWebApi({
 //   });
 
 // // Get tracks in a playlist
-spotifyApi.setAccessToken("BQDOIXhJwjeJOHmDIbDWkw05RTRtjIJpXicjOfI7iuVxBYQnjAE1FMyXjpg-b5_dBuNRYBCQ-0hHZ6qXN4Zj9TN3ZCRyk6o9OkHDBJmTMuyPoPTmk0cAdgC6G9I594QsFetYyvgmLzG7UOTqzt19pNjuUKIWdhK5DDsZEarq56zhkXSUfVl1e1xL");
+spotifyApi.setAccessToken("BQBZcIiqABNVP8JwrcYAha6z_C1Xiovlt1ypZx95XLM8Ug4CpGuoMd10VZegWJ5BSHrqzubs3rDZ6zU74jC9rMn35_CiA6UsPodFpZHLnSHbaeAUB0DDVtbMZozg2uHnsZmRQC_6hYP7k-U13d-U2zsRqmTwDxYvKTucZ4Sl");
 var input1 = document.getElementById('myInput')
-spotifyApi.searchTracks(input1.value)
+spotifyApi.searchTracks(input1.value, {market: ["IN"]})
   .then(function(data) {
     console.log('Search by what u type', data.tracks.items);
     if(data.tracks.items.length!=0){
@@ -33,11 +33,14 @@ spotifyApi.searchTracks(input1.value)
     }
     li = document.getElementsByTagName("a");
     for(i=0;i<data.tracks.items.length;i++){
-      li[i].innerHTML=data.tracks.items[i].name+='&nbsp&nbsp&nbsp Related Artists:'
+      li[i].innerHTML=data.tracks.items[i].name+='&nbsp&nbsp&nbsp Artist: '
       artists=data.tracks.items[i].artists
 
       for (j=0;j<artists.length;j++){
-        li[i].innerHTML+=artists[j].name+='&nbsp&nbsp'
+        li[i].innerHTML+=artists[j].name
+        if(j<artists.length-1)  {
+          li[i].innerHTML+=', '
+        }
         
       }
     }
