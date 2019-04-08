@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import "./App.css";
 import "./Styles/Song.css"
 import Song from "./Components/Song";
-import SongForm from "./Components/SongForm";
 import NowPlaying from "./Components/NowPlaying";
+import SongForm from "./Components/SongForm";
+
 
 import { DB_CONFIG } from "./Config/config";
 import firebase from "firebase/app";
