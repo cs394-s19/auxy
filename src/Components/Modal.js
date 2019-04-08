@@ -6,14 +6,10 @@ import "../Styles/modal.css"
 class Modal extends Component {
   constructor(props) {
     super(props);
-    // this.handleClose = props.handleClose
-    // this.show = props.show
-    // this.children = props.children
     this.state = {
       handleClose: props.handleClose,
       show: props.show,
-      children: props.children,
-      searchNames: props.searchNames
+      searchResults: props.searchResults,
     };
   }
 
@@ -21,28 +17,26 @@ class Modal extends Component {
 
   }
 
-  showModal = () => {
-    this.setState({ show: true });
-  };
-
-  hideModal = () => {
-    this.setState({ show: false });
-  };
-
   render(){
     let showHideClassName = this.state.show ? "modal display-block" : "modal display-none";
-    let searchList = this.state.searchNames.map(songName => {
-      return <li>{songName}</li>;
+    let resultList = this.state.searchResults.map((result, i) => {
+      return <li key={i}>{result}</li>;
     });
+
     return (
-      <div className={showHideClassName}>
-        <ui>{searchList}</ui>
-        <section className="modal-main">
-          {this.children}
-          <button onClick={this.state.handleClose}>close</button>
-        </section>
+      <div>
+        <ul>{resultList}</ul>
       </div>
     );
+
+    // return (
+    //   <div className={showHideClassName}>
+    //     <ul>{resultList}</ul>
+    //     <section className="modal-main">
+    //       <button onClick={this.state.handleClose}>close</button>
+    //     </section>
+    //   </div>
+    // );
   }
 }
 

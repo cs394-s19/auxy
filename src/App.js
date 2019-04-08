@@ -4,20 +4,16 @@ import "./Styles/Song.css"
 import Song from "./Components/Song";
 import NowPlaying from "./Components/NowPlaying";
 import SongForm from "./Components/SongForm";
+import Table from "./Components/Table";
 
 
 import { DB_CONFIG } from "./Config/config";
 import firebase from "firebase/app";
 import "firebase/database";
-import confidential from "./confidential.json"
-import Table from "./Components/Table";
-// import Modal from "./Components/Modal"
-import "./Styles/modal.css"
+// import confidential from "./confidential.json"
 import "./"
 
 var Spotify = require('spotify-web-api-js');
-
-
 var clientId = 'c6c554d53a714986b9f3141786a18bd3',
 clientSecret = '3fe07453c2474370a5a5c54ba30738b7';
 
@@ -48,7 +44,6 @@ class App extends Component {
         id: "1234"
       },
       show: false,
-      searchNames: []
     };
 
     // binding to be able to refer to "this"
@@ -129,7 +124,7 @@ class App extends Component {
   }
 
   getTracks(input) {
-    spotifyApi.setAccessToken("BQBZcIiqABNVP8JwrcYAha6z_C1Xiovlt1ypZx95XLM8Ug4CpGuoMd10VZegWJ5BSHrqzubs3rDZ6zU74jC9rMn35_CiA6UsPodFpZHLnSHbaeAUB0DDVtbMZozg2uHnsZmRQC_6hYP7k-U13d-U2zsRqmTwDxYvKTucZ4Sl");
+    spotifyApi.setAccessToken("BQBRR7vMrp2XeD8FQTwxr-BLuvPckg19CAGRjgMxpuHzKUePP1SbGUIoCI8bCKbFiJ8dnVW_8CqQWBQMEP6TBVowPcPxTXbae6u8Uwmy8uVHXNBfnFyQIbixU-OxLwcL2Mb-UTI-RyWXPh_HsqrxzKewvNBmNbEbI8MlmPhQuLG7vvJFYSBzxfIs");
     var input1 = input
     console.log(input1)
     var artists = []
@@ -160,19 +155,9 @@ class App extends Component {
       }, function(err) {
         console.error(err);
       });
-      console.log(names)
-      this.setState({
-        searchNames: names
-      })
+    console.log(names);
+    return names;
   }
-
-  showModal = () => {
-    this.setState({ show: true });
-  };
-
-  hideModal = () => {
-    this.setState({ show: false });
-  };
 
   updateSearch(e) {
     this.setState({ search: e.target.value });
@@ -278,10 +263,9 @@ class App extends Component {
         {/* Optional Table formatting -- barely implemented */}
         {/* <Table songList={this.state.songs} handleLike /> */}
         <div className="songsFooter">
-          <SongForm addSong={this.addSong} showModal={this.showModal} getTracks={this.getTracks}/>
+          <SongForm addSong={this.addSong} getTracks={this.getTracks}/>
         </div>
-        <Modal show={this.state.show} handleClose={this.hideModal} names={this.state.searchNames} />
-        <button type="button" onClick={this.showModal}>
+        <button type="button">
           Search
         </button>
       </div>
@@ -289,22 +273,5 @@ class App extends Component {
     );
   }
 }
-
-const Modal = ({ handleClose, show, children }) => {
-  const showHideClassName = show ? 'modal display-block' : 'modal display-none';
-
-  return (
-    <div className={showHideClassName}>
-      <section className='modal-main'>
-        {children}
-        <button
-          onClick={handleClose}
-        >
-          Close
-        </button>
-      </section>
-    </div>
-  );
-};
 
 export default App;
