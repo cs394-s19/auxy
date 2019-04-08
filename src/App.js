@@ -5,6 +5,8 @@ import Song from "./Components/Song";
 import NowPlaying from "./Components/NowPlaying";
 import SongForm from "./Components/SongForm";
 import Table from "./Components/Table";
+import Modal from "./Components/Modal";
+import "./Styles/modal.css"
 
 
 import { DB_CONFIG } from "./Config/config";
@@ -44,6 +46,7 @@ class App extends Component {
         id: "1234"
       },
       show: false,
+      searchResults: [],
     };
 
     // binding to be able to refer to "this"
@@ -221,6 +224,18 @@ class App extends Component {
     });
   }
 
+  setSearchResults = results => {
+    this.setState({ searchResults: results});
+  }
+
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+
   render() {
     // Current classNames dont do anything -- no styling
     let filteredSongs = this.state.songs.filter(song => {
@@ -262,8 +277,11 @@ class App extends Component {
         </div>
         {/* Optional Table formatting -- barely implemented */}
         {/* <Table songList={this.state.songs} handleLike /> */}
+        <div className="songsSearchResults">
+          {this.state.show ? <Modal searchResults={this.state.searchResults} /> : null}
+        </div>
         <div className="songsFooter">
-          <SongForm addSong={this.addSong} getTracks={this.getTracks}/>
+          <SongForm addSong={this.addSong} getTracks={this.getTracks} setSearchResults={this.setSearchResults} showResult={this.showModal} hideResult={this.hideModal} />
         </div>
         <button type="button">
           Search

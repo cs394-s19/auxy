@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import "../Styles/SongForm.css"
 import Search from "@material-ui/icons/Search";
-import Modal from "./Modal";
-import "./../Styles/modal.css"
 
 class SongForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       newsongName: "",
-      searchResults: [],
-      show : false,
+      results: [],
     };
 
     this.handleUserInput = this.handleUserInput.bind(this);
@@ -19,13 +16,17 @@ class SongForm extends Component {
 
   handleUserInput(e) {
     this.setState({
-      newsongName: e.target.value
+      newsongName: e.target.value,
     });
-    this.setState({
-      searchResults: this.props.getTracks(e),
-    })
-    if (this.state.searchResults.length != 0) {
-      this.showModal();
+
+    let searchResults = this.props.getTracks(e.target.value);
+    if (e.target.value != null) {
+      this.setState({results: searchResults});
+      this.props.setSearchResults(searchResults);
+      this.props.showResult();
+    }
+    else {
+      this.props.hideResult();
     }
   }
 
@@ -36,19 +37,9 @@ class SongForm extends Component {
     });
   }
 
-  showModal = () => {
-    this.setState({ show: true });
-  };
-
-  hideModal = () => {
-    this.setState({ show: false });
-  };
-
   render() {
     return (
       <div className="formWrapper">
-        {/* <Modal show={this.state.show} handleClose={this.hideModal} results={this.state.searchResults} /> */}
-        {this.state.show ? <Modal handleClose={this.hideModal} searchResults={this.state.searchResults} /> : null}
         <input
           className="songInput"
           placeholder="* SEARCH FOR A BANGER * . . . !"

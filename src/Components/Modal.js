@@ -7,8 +7,6 @@ class Modal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      handleClose: props.handleClose,
-      show: props.show,
       searchResults: props.searchResults,
     };
   }
@@ -18,7 +16,6 @@ class Modal extends Component {
   }
 
   render(){
-    let showHideClassName = this.state.show ? "modal display-block" : "modal display-none";
     let resultList = this.state.searchResults.map((result, i) => {
       return <li key={i}>{result}</li>;
     });
@@ -28,15 +25,6 @@ class Modal extends Component {
         <ul>{resultList}</ul>
       </div>
     );
-
-    // return (
-    //   <div className={showHideClassName}>
-    //     <ul>{resultList}</ul>
-    //     <section className="modal-main">
-    //       <button onClick={this.state.handleClose}>close</button>
-    //     </section>
-    //   </div>
-    // );
   }
 }
 
