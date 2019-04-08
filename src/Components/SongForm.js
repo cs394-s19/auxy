@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "../Styles/SongForm.css"
+import Search from "@material-ui/icons/Search";
 
 class SongForm extends Component {
   constructor(props) {
@@ -31,12 +33,12 @@ class SongForm extends Component {
       <div className="formWrapper">
         <input
           className="songInput"
-          placeholder="Write a new song"
+          placeholder="* SEARCH FOR A BANGER * . . . !"
           value={this.state.newsongName}
           onChange={this.handleUserInput}
         />
         <button className="songButton" onClick={this.handleSubmit}>
-          Add song
+          <Search />
         </button>
       </div>
     );

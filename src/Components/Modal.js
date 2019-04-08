@@ -31,8 +31,12 @@ class Modal extends Component {
 
   render(){
     let showHideClassName = this.state.show ? "modal display-block" : "modal display-none";
+    let searchList = this.state.searchNames.map(songName => {
+      return <li>{songName}</li>;
+    });
     return (
       <div className={showHideClassName}>
+        <ui>{searchList}</ui>
         <section className="modal-main">
           {this.children}
           <button onClick={this.state.handleClose}>close</button>
