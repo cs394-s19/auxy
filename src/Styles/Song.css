@@ -25,7 +25,8 @@ body {
   text-align: right;
   color: white;
   padding: 0em 0em;
-  height: 20%;
+  height: 34%;
+  width:22px;
 }
 
 .upvote{
@@ -42,6 +43,10 @@ body {
   text-align: left !important;
   position: absolute;
   top:15px;
+  background-color: black;
+  background: hide;
+  border-width: 0px;
+
 }
 
 .score{
