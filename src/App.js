@@ -11,14 +11,15 @@ import confidential from "./confidential.json"
 import Table from "./Components/Table";
 // import Modal from "./Components/Modal"
 import "./Styles/modal.css"
+import "./"
 
-var SpotifyWebApi = require('spotify-web-api-node');
+var Spotify = require('spotify-web-api-js');
 
 
 var clientId = 'c6c554d53a714986b9f3141786a18bd3',
 clientSecret = '3fe07453c2474370a5a5c54ba30738b7';
 
-var spotifyApi = new SpotifyWebApi({
+var spotifyApi = new Spotify({
   clientId : clientId,
   clientSecret : clientSecret
 });
@@ -127,9 +128,10 @@ class App extends Component {
   getTracks(input) {
     spotifyApi.setAccessToken("BQBZcIiqABNVP8JwrcYAha6z_C1Xiovlt1ypZx95XLM8Ug4CpGuoMd10VZegWJ5BSHrqzubs3rDZ6zU74jC9rMn35_CiA6UsPodFpZHLnSHbaeAUB0DDVtbMZozg2uHnsZmRQC_6hYP7k-U13d-U2zsRqmTwDxYvKTucZ4Sl");
     var input1 = input
+    console.log(input1)
     var artists = []
-    var name = []
-    spotifyApi.searchTracks(input1.value, {market: ["IN"]})
+    var names = []
+    spotifyApi.searchTracks(input1, {market: ["US"]})
       .then(function(data) {
         console.log('Search by what u type', data.tracks.items);
         if(data.tracks.items.length!=0){
@@ -139,7 +141,7 @@ class App extends Component {
           // li = document.getElementsByTagName("a");
           for(let i=0;i<data.tracks.items.length;i++){
             artists[i] = data.tracks.items[i].artists
-            name[i] = data.tracks.items[i].name
+            names[i] = data.tracks.items[i].name
             // li[i].innerHTML=data.tracks.items[i].name+='&nbsp&nbsp&nbsp Artist: '
             // artists=data.tracks.items[i].artists
 
@@ -155,8 +157,9 @@ class App extends Component {
       }, function(err) {
         console.error(err);
       });
+      console.log(names)
       this.setState({
-        searchNames: name
+        searchNames: names
       })
   }
 
