@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import "./App.css";
+import "./Styles/Song.css"
 import Song from "./Components/Song";
 import SongForm from "./Components/SongForm";
 import NowPlaying from "./Components/NowPlaying";
@@ -100,7 +101,7 @@ class App extends Component {
     this.database
       .child("songs")
       .push()
-      .set({ songName: song, songScore: 0 });
+      .set({ songName: song, songScore: 0 ,songArtist: 'artist'});
   }
 
   // Remove song by ID (triggered by button in Song.js)
@@ -165,7 +166,7 @@ class App extends Component {
     return (
       <div className="songsWrapper">
         <div className="songsHeader">
-          <div className="heading">Auxy Song List v1</div>
+          <div className="heading">auxy playlist v1</div>
           <NowPlaying songName={this.state.currSong.name} />
 
           {/* <input
@@ -181,6 +182,7 @@ class App extends Component {
               <Song
                 songName={song.songName}
                 songScore={song.songScore}
+                songArtist={song.songArtist}
                 songId={song.songId}
                 key={song.songId}
                 removeSong={this.removeSong}

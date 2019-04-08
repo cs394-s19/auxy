@@ -1,5 +1,91 @@
+body {
+  font-family: 'Roboto';
+  text-align: left;
+}
+
+.song{
+  border-style: solid;
+  border-color: black;
+  background-color: black;
+  height: 70px;
+  position: relative;
+  overflow:hidden;
+}
+
+.song .songName {
+  color: white;
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 24px;
+  font-weight: 400;
+  font-size: 18px;
+}
+
 .song button{
-  width: 4%;
-  height: 4%;
-  text-align: center;
+  /* width: 100%; */
+  text-align: right;
+  color: white;
+  padding: 0em 0em;
+  height: 20%;
+}
+
+.upvote{
+  position: absolute;
+  right:10px;
+  top:22px;
+  background-color: black;
+  border-width: 0px;
+  width: 24px !important;
+}
+
+.trash{
+  color:green !important;
+  text-align: left !important;
+  position: absolute;
+  top:15px;
+}
+
+.score{
+  color: white;
+  position: absolute;
+  right:25px;
+  top:10px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.songArtist{
+  color:#d1d1d1;
+  margin-left: 24px;
+  font-weight: 200;
+  font-size: 13px;
+  margin-top: -14px;
+}
+.squareTop{
+  background-color: black;
+  height: 21px;
+  width: 30px;
+  position: absolute;
+  right:1px;
+  top:1px;
+}
+
+.squareBottom{
+  background-color: black;
+  height: 31px;
+  width: 30px;
+  position: absolute;
+  right:1px;
+  bottom:1px;
+}
+
+/* need to fix ellipsis for different length songs */
+.songMax{
+  width: 254px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
