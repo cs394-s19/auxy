@@ -275,9 +275,7 @@ class App extends Component {
         <div className="songsFooter">
           <SongForm addSong={this.addSong} showModal={this.showModal} getTracks={this.getTracks}/>
         </div>
-        <Modal show={this.state.show} handleClose={this.hideModal} names={this.state.searchNames}>
-          {this.state.searchNames}
-        </Modal>
+        <Modal show={this.state.show} handleClose={this.hideModal} names={this.state.searchNames} />
         <button type="button" onClick={this.showModal}>
           Search
         </button>
