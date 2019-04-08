@@ -4,8 +4,22 @@ html {
 }
 
 body {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto';
   text-align: center;
+  background-color: black;
+}
+
+.heading{
+  color:white;
+  text-align: center;
+  font-weight: 900;
+  font-size: 25px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.nowPlaying{
+  color:white;
 }
 
 .song .songName {
@@ -15,10 +29,11 @@ body {
 }
 
 .songsFooter {
-  position:absolute;
-left:0;
-bottom:0;
-right:0;
+position:absolute;
+left:8px;
+bottom:8px;
+right:8px;
+background-color: black;
 }
 
 .song button{
