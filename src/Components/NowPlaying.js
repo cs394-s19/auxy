@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import starboycover from "../Images/starboy-cover.jpg";
 
 import "../Styles/NowPlaying.css";
 
@@ -16,8 +17,16 @@ class NowPlaying extends Component {
 
   render(){
       return(
-        <div class="container">
-          {this.state.songName}
+        <div className="container">
+          <div className="song-info">
+            <div className="song-name">{this.state.songName}</div>
+            <div className="song-artist">{this.state.songArtist}</div>
+          </div>
+            <div className="song-cover-container">
+              <img className="song-cover" src={starboycover} alt="starboycover" />
+            </div>
+          <div>
+          </div>
         </div>
       )  
   }

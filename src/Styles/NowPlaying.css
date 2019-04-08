@@ -5,5 +5,35 @@ body {
 .container {
     padding: 20px;
     margin: 0px;
-    background-color: red;
+    background-image: linear-gradient(#383838, black);
+    width: 375px;
+    margin-left: -10px;
+    height: 250px;
+}
+
+.song-info {
+    color: white;
+}
+
+.song-name {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.song-artist {
+    font-weight: 100;
+    color: #d1d1d1;
+}
+
+.song-cover-container{
+    text-align: center;
+    width: 375px;
+    height: 220px;
+    margin-left: -20px;
+}
+
+.song-cover {
+    margin-top: 10px;
+    height: 200px;
+    width: 200px;
 }
