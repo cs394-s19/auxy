@@ -16,7 +16,7 @@ class Modal extends Component {
   }
 
   render(){
-    let resultList = this.state.searchResults.map((result, i) => {
+    var resultList = this.state.searchResults.map((result, i) => {
       return <li key={i}>{result}</li>;
     });
 

@@ -1,5 +1,5 @@
 UPCOMING TODO:
 
-Host site on Firebase
+Dynamically change the searchResult
 
-Add a refresh button that rechecks scores (cant be live?)
+Enable addSong from the searchResults
