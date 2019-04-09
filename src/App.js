@@ -127,7 +127,7 @@ class App extends Component {
   }
 
   getTracks(input) {
-    spotifyApi.setAccessToken("BQBRR7vMrp2XeD8FQTwxr-BLuvPckg19CAGRjgMxpuHzKUePP1SbGUIoCI8bCKbFiJ8dnVW_8CqQWBQMEP6TBVowPcPxTXbae6u8Uwmy8uVHXNBfnFyQIbixU-OxLwcL2Mb-UTI-RyWXPh_HsqrxzKewvNBmNbEbI8MlmPhQuLG7vvJFYSBzxfIs");
+    spotifyApi.setAccessToken("BQDEdUS6Q42o8pWfJxtrKHeGFPyx4gR9p5T2Kih0oN4CGiaJFRnHEg32gH86eJ7NkmAS7Kx5rRMEJrUPIXR_uaH9KpkARHdK-SX2FrtZoJw2wMhOVl4gQmhF-fstahpwjZr6gmvHPQP4KqbryXhRBC-ZE_8CrXqUjcrXaT7P");
     var input1 = input
     console.log(input1)
     var artists = []
