@@ -56,7 +56,7 @@ class Song extends Component {
         <div className="squareBottom"></div>
         <div className="songArtist">
           {this.state.songArtist}
-          ILLENIUM
+          ARTIST
         </div>
         <button className = "trash" onClick={() => this.handleremoveSong(this.state.songId)}>
           <Delete />
