@@ -127,7 +127,7 @@ class App extends Component {
   }
 
   getTracks(input) {
-    spotifyApi.setAccessToken("BQCuhgmG5uy4OdSDmJsEp3b10bRZJ2n_zyWc8pSTbOuQgCogb9PsOlRkLUvZ3EhY9BuOHj0Xc6l_RLKz5-BJsQfr7RIUXdyp7IMN_0j_XcGfBm7E-nAlEM5oUZ_spFwZ78YxpW3El5_Gdy5DAXVtLFS94imHc5gNwwMYRVPI-FyHtPf80adc1nQ9"); 
+    spotifyApi.setAccessToken("BQCuhgmG5uy4OdSDmJsEp3b10bRZJ2n_zyWc8pSTbOuQgCogb9PsOlRkLUvZ3EhY9BuOHj0Xc6l_RLKz5-BJsQfr7RIUXdyp7IMN_0j_XcGfBm7E-nAlEM5oUZ_spFwZ78YxpW3El5_Gdy5DAXVtLFS94imHc5gNwwMYRVPI-FyHtPf80adc1nQ9");
     var input1 = input
     console.log(input1)
     var artists = []
@@ -137,7 +137,7 @@ class App extends Component {
         console.log('Search by what u type', data.tracks.items);
         if(data.tracks.items.length!=0){
           // for(i=0;i<data.tracks.items.length;i++){
-          //   document.getElementById("myUL").innerHTML+="<li><a href='#'></a></li>"   
+          //   document.getElementById("myUL").innerHTML+="<li><a href='#'></a></li>"
           // }
           // li = document.getElementsByTagName("a");
           for(let i=0;i<data.tracks.items.length;i++){
@@ -151,7 +151,7 @@ class App extends Component {
             //   if(j<artists.length-1)  {
             //     li[i].innerHTML+=', '
             //   }
-              
+
             // }
           }
       }
@@ -283,9 +283,6 @@ class App extends Component {
         <div className="songsFooter">
           <SongForm addSong={this.addSong} getTracks={this.getTracks} setSearchResults={this.setSearchResults} showResult={this.showModal} hideResult={this.hideModal} />
         </div>
-        <button type="button">
-          Search
-        </button>
       </div>
 
     );
