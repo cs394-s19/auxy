@@ -1,17 +1,29 @@
 import React, { Component } from "react";
-
 import "./App.css";
 import "./Styles/Song.css"
 import Song from "./Components/Song";
 import NowPlaying from "./Components/NowPlaying";
 import SongForm from "./Components/SongForm";
+import Table from "./Components/Table";
+import Modal from "./Components/Modal";
+import "./Styles/modal.css"
 
 
 import { DB_CONFIG } from "./Config/config";
 import firebase from "firebase/app";
 import "firebase/database";
+// import confidential from "./confidential.json"
+import "./"
 
-import Table from "./Components/Table";
+var Spotify = require('spotify-web-api-js');
+var clientId = 'c6c554d53a714986b9f3141786a18bd3',
+clientSecret = '3fe07453c2474370a5a5c54ba30738b7';
+
+var spotifyApi = new Spotify({
+  clientId : clientId,
+  clientSecret : clientSecret
+});
+
 
 class App extends Component {
   constructor(props) {
@@ -32,7 +44,9 @@ class App extends Component {
         name: "Starboy",
         artist: "The Weeknd",
         id: "1234"
-      }
+      },
+      show: false,
+      searchResults: [],
     };
 
     // binding to be able to refer to "this"
@@ -42,6 +56,24 @@ class App extends Component {
     this.updateSearch = this.updateSearch.bind(this);
     this.reSort = this.reSort.bind(this);
   }
+
+  // authenticate() {
+
+  //   //authenticate api
+  //   var spotifyApi = new SpotifyWebApi({
+  //     clientId : confidential.id,
+  //     clientSecret : confidential.secret,
+  //     redirectUri : 'http://www.example.com/callback'
+  //   });
+
+  //   //get Elvis's Albums
+  //   spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
+  //     .then(function(data) {
+  //       console.log('Artist albums', data.body);
+  //     }, function(err) {
+  //       console.error(err);
+  //     });
+  // }
 
   componentWillMount() {
     const previousSongs = this.state.songs;
@@ -92,6 +124,42 @@ class App extends Component {
         songs: sortedSongs
       });
     });
+  }
+
+  getTracks(input) {
+    spotifyApi.setAccessToken("BQCuhgmG5uy4OdSDmJsEp3b10bRZJ2n_zyWc8pSTbOuQgCogb9PsOlRkLUvZ3EhY9BuOHj0Xc6l_RLKz5-BJsQfr7RIUXdyp7IMN_0j_XcGfBm7E-nAlEM5oUZ_spFwZ78YxpW3El5_Gdy5DAXVtLFS94imHc5gNwwMYRVPI-FyHtPf80adc1nQ9");
+    var input1 = input
+    console.log(input1)
+    var artists = []
+    var names = []
+    spotifyApi.searchTracks(input1, {market: ["US"]})
+      .then(function(data) {
+        console.log('Search by what u type', data.tracks.items);
+        if(data.tracks.items.length!=0){
+          // for(i=0;i<data.tracks.items.length;i++){
+          //   document.getElementById("myUL").innerHTML+="<li><a href='#'></a></li>"
+          // }
+          // li = document.getElementsByTagName("a");
+          for(let i=0;i<data.tracks.items.length;i++){
+            artists[i] = data.tracks.items[i].artists
+            names[i] = data.tracks.items[i].name
+            // li[i].innerHTML=data.tracks.items[i].name+='&nbsp&nbsp&nbsp Artist: '
+            // artists=data.tracks.items[i].artists
+
+            // for (j=0;j<artists.length;j++){
+            //   li[i].innerHTML+=artists[j].name
+            //   if(j<artists.length-1)  {
+            //     li[i].innerHTML+=', '
+            //   }
+
+            // }
+          }
+      }
+      }, function(err) {
+        console.error(err);
+      });
+    console.log(names);
+    return names;
   }
 
   updateSearch(e) {
@@ -156,6 +224,18 @@ class App extends Component {
     });
   }
 
+  setSearchResults = results => {
+    this.setState({ searchResults: results});
+  }
+
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+
   render() {
     // Current classNames dont do anything -- no styling
     let filteredSongs = this.state.songs.filter(song => {
@@ -169,7 +249,7 @@ class App extends Component {
       <div className="songsWrapper">
         <div className="songsHeader">
           <div className="heading">auxy playlist v1</div>
-          <NowPlaying songName={this.state.currSong.name} 
+          <NowPlaying songName={this.state.currSong.name}
                       songArtist={this.state.currSong.artist}/>
 
           {/* <input
@@ -197,10 +277,14 @@ class App extends Component {
         </div>
         {/* Optional Table formatting -- barely implemented */}
         {/* <Table songList={this.state.songs} handleLike /> */}
+        <div className="songsSearchResults">
+          {this.state.show ? <Modal searchResults={this.state.searchResults} /> : null}
+        </div>
         <div className="songsFooter">
-          <SongForm addSong={this.addSong} />
+          <SongForm addSong={this.addSong} getTracks={this.getTracks} setSearchResults={this.setSearchResults} showResult={this.showModal} hideResult={this.hideModal} />
         </div>
       </div>
+
     );
   }
 }

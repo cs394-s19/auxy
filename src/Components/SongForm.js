@@ -6,7 +6,8 @@ class SongForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newsongName: ""
+      newsongName: "",
+      results: [],
     };
 
     this.handleUserInput = this.handleUserInput.bind(this);
@@ -15,8 +16,18 @@ class SongForm extends Component {
 
   handleUserInput(e) {
     this.setState({
-      newsongName: e.target.value
+      newsongName: e.target.value,
     });
+
+    let searchResults = this.props.getTracks(e.target.value);
+    if (e.target.value != null && e.target.value != '') {
+      this.setState({results: searchResults});
+      this.props.setSearchResults(searchResults);
+      this.props.showResult();
+    }
+    else {
+      this.props.hideResult();
+    }
   }
 
   handleSubmit(e) {
@@ -25,6 +36,7 @@ class SongForm extends Component {
       newsongName: ""
     });
   }
+
   render() {
     return (
       <div className="formWrapper">
@@ -41,5 +53,22 @@ class SongForm extends Component {
     );
   }
 }
+
+// const Modal = ({ handleClose, show, children }) => {
+//   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
+
+//   return (
+//     <div className={showHideClassName}>
+//       <section className='modal-main'>
+//         {children}
+//         <button
+//           onClick={handleClose}
+//         >
+//           Close
+//         </button>
+//       </section>
+//     </div>
+//   );
+// };
 
 export default SongForm;
