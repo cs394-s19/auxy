@@ -31,11 +31,12 @@ body {
     text-align: center;
     width: 375px;
     height: 220px;
-    margin-left: -20px;
+    margin-left: -10px;
 }
 
 .song-cover {
     margin-top: 10px;
     height: 200px;
     width: 200px;
+    box-shadow: 5px 10px 10px;
 }

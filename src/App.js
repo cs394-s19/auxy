@@ -17,11 +17,11 @@ import "./"
 
 var Spotify = require('spotify-web-api-js');
 var clientId = 'c6c554d53a714986b9f3141786a18bd3',
-clientSecret = '3fe07453c2474370a5a5c54ba30738b7';
+  clientSecret = '3fe07453c2474370a5a5c54ba30738b7';
 
 var spotifyApi = new Spotify({
-  clientId : clientId,
-  clientSecret : clientSecret
+  clientId: clientId,
+  clientSecret: clientSecret
 });
 
 
@@ -132,15 +132,15 @@ class App extends Component {
     console.log(input1)
     var artists = []
     var names = []
-    spotifyApi.searchTracks(input1, {market: ["US"]})
-      .then(function(data) {
+    spotifyApi.searchTracks(input1, { market: ["US"] })
+      .then(function (data) {
         console.log('Search by what u type', data.tracks.items);
-        if(data.tracks.items.length!=0){
+        if (data.tracks.items.length != 0) {
           // for(i=0;i<data.tracks.items.length;i++){
           //   document.getElementById("myUL").innerHTML+="<li><a href='#'></a></li>"
           // }
           // li = document.getElementsByTagName("a");
-          for(let i=0;i<data.tracks.items.length;i++){
+          for (let i = 0; i < data.tracks.items.length; i++) {
             artists[i] = data.tracks.items[i].artists
             names[i] = data.tracks.items[i].name
             // li[i].innerHTML=data.tracks.items[i].name+='&nbsp&nbsp&nbsp Artist: '
@@ -154,8 +154,8 @@ class App extends Component {
 
             // }
           }
-      }
-      }, function(err) {
+        }
+      }, function (err) {
         console.error(err);
       });
     console.log(names);
@@ -171,7 +171,7 @@ class App extends Component {
     this.database
       .child("songs")
       .push()
-      .set({ songName: song, songScore: 0 ,songArtist: 'artist'});
+      .set({ songName: song, songScore: 0, songArtist: 'artist' });
   }
 
   // Remove song by ID (triggered by button in Song.js)
@@ -225,7 +225,7 @@ class App extends Component {
   }
 
   setSearchResults = results => {
-    this.setState({ searchResults: results});
+    this.setState({ searchResults: results });
   }
 
   showModal = () => {
@@ -246,11 +246,11 @@ class App extends Component {
     });
 
     return (
-      <div className="songsWrapper">
+      <div className="container">
         <div className="songsHeader">
           <div className="heading">auxy playlist v1</div>
           <NowPlaying songName={this.state.currSong.name}
-                      songArtist={this.state.currSong.artist}/>
+            songArtist={this.state.currSong.artist} />
 
           {/* <input
             type="text"
@@ -258,32 +258,35 @@ class App extends Component {
             onChange={this.updateSearch}
           /> */}
         </div>
-        <div className="songsBody">
-          {/* USE this.state.songs INSTEAD of filteredSongs to ignore filter */}
-          {filteredSongs.map(song => {
-            return (
-              <Song
-                songName={song.songName}
-                songScore={song.songScore}
-                songArtist={song.songArtist}
-                songId={song.songId}
-                key={song.songId}
-                removeSong={this.removeSong}
-                likeSong={this.likeSong}
-                reSort={this.reSort}
-              />
-            );
-          })}
-        </div>
-        {/* Optional Table formatting -- barely implemented */}
-        {/* <Table songList={this.state.songs} handleLike /> */}
-        <div className="songsSearchResults">
-          {this.state.show ? <Modal searchResults={this.state.searchResults} /> : null}
-        </div>
-        <div className="songsFooter">
-          <SongForm addSong={this.addSong} getTracks={this.getTracks} setSearchResults={this.setSearchResults} showResult={this.showModal} hideResult={this.hideModal} />
+        <div className="songsWrapper">
+          <div className="songsBody">
+            {/* USE this.state.songs INSTEAD of filteredSongs to ignore filter */}
+            {filteredSongs.map(song => {
+              return (
+                <Song
+                  songName={song.songName}
+                  songScore={song.songScore}
+                  songArtist={song.songArtist}
+                  songId={song.songId}
+                  key={song.songId}
+                  removeSong={this.removeSong}
+                  likeSong={this.likeSong}
+                  reSort={this.reSort}
+                />
+              );
+            })}
+          </div>
+          {/* Optional Table formatting -- barely implemented */}
+          {/* <Table songList={this.state.songs} handleLike /> */}
+          <div className="songsSearchResults">
+            {this.state.show ? <Modal searchResults={this.state.searchResults} /> : null}
+          </div>
+          <div className="songsFooter">
+            <SongForm addSong={this.addSong} getTracks={this.getTracks} setSearchResults={this.setSearchResults} showResult={this.showModal} hideResult={this.hideModal} />
+          </div>
         </div>
       </div>
+
 
     );
   }
