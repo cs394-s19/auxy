@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spotify Web Playback SDK Quick Start Tutorial</title>
+</head>
+<body>
+  <h1>Spotify Web Playback SDK Quick Start Tutorial</h1>
+  <h2>Open your console log: <code>View > Developer > JavaScript Console</code></h2>
+
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
+  <script>
+    // window.onSpotifyWebPlaybackSDKReady = () => {
+    //   const token = 'BQAN0qXMmD5sU-Weoa2qtK6NoctBxz245C2dzC2487hRMYgejVGxRZh46DLJ82lDfZlrBD6kn3h4__SdNKHaZvTfVKL64InaD4QXXNkLzYm_kMzLXkiT-LsSaNRthpTJMJW3wt0tc-_EE48TUWPC6W1dHqS28sa1TAz7fhQN';
+    //   const player = new Spotify.Player({
+    //     name: 'Web Playback SDK Quick Start Player',
+    //     getOAuthToken: cb => { cb(token); }
+    //   });
+    //   var device = "137d92647fe8002b6724400904ba480c05458c0c";
+    //   // Error handling
+    //   player.addListener('initialization_error', ({ message }) => { console.error(message); });
+    //   player.addListener('authentication_error', ({ message }) => { console.error(message); });
+    //   player.addListener('account_error', ({ message }) => { console.error(message); });
+    //   player.addListener('playback_error', ({ message }) => { console.error(message); });
+
+    //   // Playback status updates
+    //   player.addListener('player_state_changed', state => { console.log(state); });
+
+    //   // Ready
+    //   player.addListener('ready', ({ device_id }) => {
+    //     console.log('Ready with Device ID', device_id);
+    //     // device = device_id;
+    //   });
+    //   // console.log(device)
+    //   // Not Ready
+    //   player.addListener('not_ready', ({ device_id }) => {
+    //     console.log('Device ID has gone offline', device_id);
+    //   });
+
+    //   // Connect to the player!
+    //   player.connect();
+    //   let _token = "BQAN0qXMmD5sU-Weoa2qtK6NoctBxz245C2dzC2487hRMYgejVGxRZh46DLJ82lDfZlrBD6kn3h4__SdNKHaZvTfVKL64InaD4QXXNkLzYm_kMzLXkiT-LsSaNRthpTJMJW3wt0tc-_EE48TUWPC6W1dHqS28sa1TAz7fhQN"
+
+    //   $.ajax({
+    //     url: `https://api.spotify.com/v1/me/player/play?device_id=${device}`,
+    //     type: "PUT",
+    //     data: {"uris": ["spotify:track:5ya2gsaIhTkAuWYEMB0nw5"]},
+    //     beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + _token );},
+    //     success: function(data) { 
+    //       console.log(data)
+    //     }
+    //   });
+    // };
+
+        // Called when the Spotify Web Playback SDK is ready to use
+    window.onSpotifyWebPlaybackSDKReady = () => {
+
+      // Define the Spotify Connect device, getOAuthToken has an actual token 
+      // hardcoded for the sake of simplicity
+      var player = new Spotify.Player({
+        name: 'A Spotify Web SDK Player',
+        getOAuthToken: callback => {
+          callback('BQDLnhJ4B7TtCrEFCQv1orT-d2pFe4IOMil-iDZqznNAzcEdDn3sb1Ol8JuZ0kLQBStY7A65MEVVGORP2sUSg_5XTb7e0mS7wDejWeOXIeZOrOBAsmLjMJxOlOI_juFn1IWSyK9_fg4PLOCgNzH8l0lFLqD81UXgoTL1P12v');
+        },
+        volume: 0.1
+      });
+
+      // Called when connected to the player created beforehand successfully
+      player.addListener('ready', ({ device_id }) => {
+        console.log('Ready with Device ID', device_id);
+
+        const play = ({
+          spotify_uri,
+          playerInstance: {
+            _options: {
+              getOAuthToken,
+              id
+            }
+          }
+        }) => {
+          getOAuthToken(access_token => {
+            fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+              method: 'PUT',
+              body: JSON.stringify({ uris: [spotify_uri] }),
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${access_token}`
+              },
+            });
+          });
+        };
+
+        play({
+          playerInstance: player,
+          spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
+        });
+      });
+
+      // Connect to the player created beforehand, this is equivalent to 
+      // creating a new device which will be visible for Spotify Connect
+      player.connect();
+    };
+  </script>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</html>
+
