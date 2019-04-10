@@ -9,10 +9,17 @@ body {
   background-color: white;
 }
 
+.container{
+  display: flex;
+  flex-direction: row;
+}
+
 .songsHeader{
-  margin-left: -10px;
-  margin-top: -20px;
-  margin-right: -10px;
+  flex: 2;
+}
+
+.songsWrapper{
+  flex: 1.2;
 }
 
 .heading{
@@ -48,4 +55,53 @@ background-color: black;
   width: 4%;
   height: 4%;
   text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  
+  .songsHeader{
+    margin-left: -10px;
+    margin-top: -20px;
+    margin-right: -10px;
+  }
+
+  .container{
+    display: block;
+  }
+  
+  .heading{
+    color:white;
+    text-align: center;
+    font-weight: 900;
+    font-size: 25px;
+    background-color: #383838;
+    height: 50px;
+    padding-top: 30px;
+    width: 100%;
+  }
+  
+  .nowPlaying{
+    color:white;
+  }
+  
+  .song .songName {
+    display:inline-block;
+    margin-right:10px;
+    margin-left: 10px;
+  }
+  
+  .songsFooter {
+  position:absolute;
+  left:8px;
+  bottom:8px;
+  right:8px;
+  background-color: black;
+  }
+  
+  .song button{
+    width: 4%;
+    height: 4%;
+    text-align: center;
+  }
+  
 }
