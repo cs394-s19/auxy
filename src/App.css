@@ -27,7 +27,7 @@ body {
   text-align: center;
   font-weight: 900;
   font-size: 25px;
-  background-color: #383838;
+  /* background-color: #383838; */
   height: 50px;
   padding-top: 30px;
   width: 100%;
@@ -67,6 +67,16 @@ background-color: black;
 
   .container{
     display: block;
+  }
+
+  .now-playing-container {
+    padding: 20px;
+    margin: 0px;
+    background-image: linear-gradient(#383838, black);
+    background-color: rgba(0, 0, 0, 0);
+    margin-left: -10px;
+    height: 250px;
+    display: block !important;
   }
   
   .heading{
