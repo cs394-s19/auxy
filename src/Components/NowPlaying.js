@@ -13,7 +13,7 @@ class NowPlaying extends Component {
       songImage: props.songImage,
       songArtist: props.songArtist,
       deviceId: "",
-      token: "BQB7ei8lgv_HpapGj1DWkEo8adAfFdGMYCvsJtG2MuVcF7v_PJmQNHFFYAEMCn-y16jYcn2owDCfi5mgI4b7ViI3qjf30kRqRRJ0qKl2yBJ75fpHMR63FAEEegRIMQjCG-Mpkd4ez80kMk4HYIgcOdAoAnGOqfmV7GbxTuPA",
+      token: "BQAeC37uYFS3_CsX2Xd5RBjc0gkRPVuX-8nQrn9tFXDdTHFJSkVzzCXavgRZSopBEkshScgscnFJ36rEyeGMeqGfFtV1DgakJUxYuu089NAzDV0fCX6uyWXSVX-vLzFfh8ntDqDC5O3u3bU1H_pybeRWsGrsi3NjX7DwMegn",
       loggedIn: false,
       playing: false,
       position: 0,
@@ -31,7 +31,7 @@ class NowPlaying extends Component {
       // clearInterval(this.playerCheckInterval);
       this.player = new window.Spotify.Player({
         name: "Auxy Spotify Player",
-        getOAuthToken: cb => { cb('BQB7ei8lgv_HpapGj1DWkEo8adAfFdGMYCvsJtG2MuVcF7v_PJmQNHFFYAEMCn-y16jYcn2owDCfi5mgI4b7ViI3qjf30kRqRRJ0qKl2yBJ75fpHMR63FAEEegRIMQjCG-Mpkd4ez80kMk4HYIgcOdAoAnGOqfmV7GbxTuPA'); },
+        getOAuthToken: cb => { cb('BQAeC37uYFS3_CsX2Xd5RBjc0gkRPVuX-8nQrn9tFXDdTHFJSkVzzCXavgRZSopBEkshScgscnFJ36rEyeGMeqGfFtV1DgakJUxYuu089NAzDV0fCX6uyWXSVX-vLzFfh8ntDqDC5O3u3bU1H_pybeRWsGrsi3NjX7DwMegn'); },
       });
       this.createEventHandlers();
   
