@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ResultSong from "./ResultSong";
 import spotifyApi from "../../Config/spotify";
+import '../../Styles/SearchForm.css'
 
 const sleep = milliseconds => {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -35,7 +36,7 @@ class SearchForm extends Component {
 
   getTracks(input) {
     spotifyApi.setAccessToken(
-      "BQDID3YAusev__fcUibbJi8GIFP8KdRAspWUCVQnZFT2L4hLv8UjQJJ7cehpbEPiSPoxOU8fzm5XssNPHb_t1FmD1OGrO7J6VQfDkWexWSNtIA-Bogp95y6Y88FF5rcgVRKBs2JBjrzb82lISgRx7IaSoyTEicJIgXP1_YCW_A"
+      "BQBxml1qXRIlqRlDExBFSj-y_mqOo-yIvP5aM28ybjLQQlFEnFhA_ve_6Vg6QbIGvGooW9_0VhRGtKsFO3El1Q3s3K3V3ZZnTyy2AHuIB6wfhcthRQyAs9G3Hu6fORNelDp9KOeqt8-lEc5S9KFMjq_pWwcwAAIcohalTqhEPRXknLTvj5LpWgWG"
     );
     var input1 = input;
     // console.log(input1)
