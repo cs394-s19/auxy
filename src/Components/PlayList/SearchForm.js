@@ -21,7 +21,7 @@ class SearchForm extends Component {
     var songList = [];
     if (e.target.value !== "") {
       songList = this.getTracks(e.target.value);
-      sleep(50).then(() => {
+      sleep(300).then(() => {
         this.setState({
           results: songList
         });
@@ -35,7 +35,7 @@ class SearchForm extends Component {
 
   getTracks(input) {
     spotifyApi.setAccessToken(
-      "BQCM3XbXj4H6Sc8ju_JoaVIHSWiUkobh5BrtmJeQElgWIOf7e07yy43XtaFzkMQFKc0WoHEp8HtNQjDHZ_GveuAyJ6rGZhP2slYUx9VomD5i54-kzmYGmzbgRvf0MT1Iflw5fkeZ9yxibupqVZVeSR5yat0bmaQSh7E9z-zt1A"
+      "BQDID3YAusev__fcUibbJi8GIFP8KdRAspWUCVQnZFT2L4hLv8UjQJJ7cehpbEPiSPoxOU8fzm5XssNPHb_t1FmD1OGrO7J6VQfDkWexWSNtIA-Bogp95y6Y88FF5rcgVRKBs2JBjrzb82lISgRx7IaSoyTEicJIgXP1_YCW_A"
     );
     var input1 = input;
     // console.log(input1)
