@@ -1,72 +1,55 @@
-import React, { Component } from 'react';
-import "./Styles/SearchForm.css"
+import React, { Component } from "react";
+import ResultSong from "./ResultSong";
+import spotifyApi from "../../Config/spotify";
 
-import "./"
-
-
-var Spotify = require("spotify-web-api-js");
-var clientId = "c6c554d53a714986b9f3141786a18bd3",
-  clientSecret = "3fe07453c2474370a5a5c54ba30738b7";
-
-var spotifyApi = new Spotify({
-  clientId: clientId,
-  clientSecret: clientSecret
-});
-const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
+const sleep = milliseconds => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+};
 
 class SearchForm extends Component {
-  constructor(props){
-    super(props)
-    this.state={
-      results:[1,2,3],
-      load:0, 
-      numberofBox:0 
- 
+  constructor(props) {
+    super(props);
+    this.state = {
+      results: []
+    };
+
+    this.renderResults = this.renderResults.bind(this);
+    this.renderSearchBox = this.renderSearchBox.bind(this);
   }
 
-  this.handleUserClick=this.handleUserClick.bind(this)
-  this.renderResults=this.renderResults.bind(this)
-  this.handle=this.handleUserClick.bind(this)
-  this.renderSearchBox=this.renderSearchBox.bind(this)
-  
-  }
-
-
-  handleUserInput(e){
-    var songList=[]
-    songList=this.getTracks(e.target.value)
-    sleep(300).then(()=>{
+  handleUserInput(e) {
+    var songList = [];
+    if (e.target.value !== "") {
+      songList = this.getTracks(e.target.value);
+      sleep(50).then(() => {
+        this.setState({
+          results: songList
+        });
+      });
+    } else {
       this.setState({
-      results:songList
-      
-    })
-
-    })
-
-
-  }
-
-  handleUserClick(e){
-      // related to play music or sth, when you choose a song...
+        results: songList
+      });
+    }
   }
 
   getTracks(input) {
     spotifyApi.setAccessToken(
-      "BQA7ipfvHnHbDDz59NEdtvgNGyMJFf2fTSPhigkizSRYBBuxDpZnCya59RbqO-3n5Mo3aOaaBZQUc7WbfGLZHsgh5tWhvMSZC7e-lRxY550wNP278b-ELHdi2tJIbjLniGLacxfO2i_ytZJ-CJQnPmEmejLawxko1lHYywb5NiSOTJfjiapRlHI3"
+      "BQCM3XbXj4H6Sc8ju_JoaVIHSWiUkobh5BrtmJeQElgWIOf7e07yy43XtaFzkMQFKc0WoHEp8HtNQjDHZ_GveuAyJ6rGZhP2slYUx9VomD5i54-kzmYGmzbgRvf0MT1Iflw5fkeZ9yxibupqVZVeSR5yat0bmaQSh7E9z-zt1A"
     );
     var input1 = input;
     // console.log(input1)
-    var artists = [];
-    var names = [];
+    var allSongInfo = [];
     spotifyApi.searchTracks(input1, { market: ["US"] }).then(
       function(data) {
         // console.log('Search by what u type', data.tracks.items);
-        if (data.tracks.items.length != 0) {
+        // Need better way of doing this. Tried splicing but scope was wrong and I'm too tired to think it through rn
+        if (data.tracks.items.length !== 0) {
           for (let i = 0; i < data.tracks.items.length; i++) {
-            artists[i] = data.tracks.items[i].artists;
-            names[i] = data.tracks.items[i].name;
+            allSongInfo[i] = data.tracks.items[i];
+            if (i === 9) {
+              break;
+            }
           }
         }
       },
@@ -74,50 +57,49 @@ class SearchForm extends Component {
         console.error(err);
       }
     );
-    // console.log(names);
-    return names;
+
+    return allSongInfo;
   }
 
-
-
-  renderSearchBox(){
-    return(
-      <div ><input className='myInput' onChange={(e)=>{this.handleUserInput(e)}}/></div>
-    )
-  }
-
-
-  renderResults(results){
-
-    return (
-    <div>
-      {results.map((result, index) => (
-        <div>
-          <button className='songResult' onClick={(e)=>{this.handleUserClick(e)}}>{result}</button>
-        </div>
-
-      ))
-    }
-    </div>
-    );
-
-  }
-
-  render(){
+  renderSearchBox() {
     return (
       <div>
-      <div>{this.renderSearchBox()}</div>
-      <div>{this.renderResults(this.state.results)}</div>
+        <input
+          className="myInput"
+          onChange={e => {
+            this.handleUserInput(e);
+          }}
+          placeholder="Search for a BANGER"
+        />
       </div>
-    )
+    );
   }
- 
+
+  renderResults(results) {
+    return (
+      <div>
+        {results.map((result, index) => {
+          return <ResultSong key={index} result={result} />;
+        })}
+      </div>
+    );
+  }
+
+  render() {
+    var header;
+    if (this.state.results.length > 0) {
+      header = <h3>Search Results</h3>;
+    }
+    return (
+      <div>
+        <div>{this.renderSearchBox()}</div>
+        <div>
+          {header}
+          {this.renderResults(this.state.results)}
+        </div>
+      </div>
+    );
+  }
 }
 
-
-
-export default App
-
-
-
-
+export default SearchForm;

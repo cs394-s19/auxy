@@ -1,4 +1,8 @@
-html {
+body {
+  text-align: center;
+}
+
+/* html {
   padding: 0;
   margin: 0;
   background-color: black;
@@ -48,4 +52,4 @@ background-color: black;
   width: 4%;
   height: 4%;
   text-align: center;
-}
+} */
