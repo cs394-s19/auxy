@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ResultSong from "./ResultSong";
-import spotifyApi from "../../Config/spotify";
+import {spotifyApi, spotifyApiToken} from "../../Config/spotify";
 import '../../Styles/SearchForm.css'
 
 const sleep = milliseconds => {
@@ -38,9 +38,7 @@ class SearchForm extends Component {
   }
 
   getTracks(input) {
-    spotifyApi.setAccessToken(
-      "BQBRJLqupFc7btBqYWcoZxywreqYfdbi5TQu13ZhgRvzLy2D0sMLfJkp4M5BZxa9MS3_LDklBkSoOEC7uPt9dSBxLNgNoHvH8D5xVEcKh5Zg0gKXUauuHomfQcXkNBFSdlBi8eypYWFBX9I2xw19tN2taCF5KFcjDAtsWt4Kp4SbrH-mhpCfPaJh"
-    );
+    spotifyApi.setAccessToken(spotifyApiToken);
     var input1 = input;
     // console.log(input1)
     var allSongInfo = [];
