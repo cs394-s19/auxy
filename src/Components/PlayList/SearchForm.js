@@ -28,15 +28,18 @@ class SearchForm extends Component {
         });
       });
     } else {
-      this.setState({
-        results: songList
+      sleep(300).then(() => {
+        this.setState({
+          results: []
+        });
       });
+
     }
   }
 
   getTracks(input) {
     spotifyApi.setAccessToken(
-      "BQBxml1qXRIlqRlDExBFSj-y_mqOo-yIvP5aM28ybjLQQlFEnFhA_ve_6Vg6QbIGvGooW9_0VhRGtKsFO3El1Q3s3K3V3ZZnTyy2AHuIB6wfhcthRQyAs9G3Hu6fORNelDp9KOeqt8-lEc5S9KFMjq_pWwcwAAIcohalTqhEPRXknLTvj5LpWgWG"
+      "BQBRJLqupFc7btBqYWcoZxywreqYfdbi5TQu13ZhgRvzLy2D0sMLfJkp4M5BZxa9MS3_LDklBkSoOEC7uPt9dSBxLNgNoHvH8D5xVEcKh5Zg0gKXUauuHomfQcXkNBFSdlBi8eypYWFBX9I2xw19tN2taCF5KFcjDAtsWt4Kp4SbrH-mhpCfPaJh"
     );
     var input1 = input;
     // console.log(input1)
