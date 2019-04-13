@@ -26,3 +26,6 @@ yarn-error.log*
 # confidential
 /confidential.json
 confidential.json
+
+# firebase
+.firebase/
