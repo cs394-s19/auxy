@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import starboycover from "../../Images/starboy-cover.jpg";
+import {spotifyApiToken} from "../../Config/spotify";
 
 import "../../Styles/NowPlaying.css";
 
@@ -8,12 +9,12 @@ class NowPlaying extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      songName: props.songName,
-      songId: props.songId,
-      songImage: props.songImage,
-      songArtist: props.songArtist,
+      songName: props.currSong.songName,
+      // songId: props.songId,
+      // songImage: props.songImage,
+      songArtist: props.currSong.artistName,
       deviceId: "",
-      token: "BQAeC37uYFS3_CsX2Xd5RBjc0gkRPVuX-8nQrn9tFXDdTHFJSkVzzCXavgRZSopBEkshScgscnFJ36rEyeGMeqGfFtV1DgakJUxYuu089NAzDV0fCX6uyWXSVX-vLzFfh8ntDqDC5O3u3bU1H_pybeRWsGrsi3NjX7DwMegn",
+      token: spotifyApiToken,
       loggedIn: false,
       playing: false,
       position: 0,
@@ -31,7 +32,7 @@ class NowPlaying extends Component {
       // clearInterval(this.playerCheckInterval);
       this.player = new window.Spotify.Player({
         name: "Auxy Spotify Player",
-        getOAuthToken: cb => { cb('BQAeC37uYFS3_CsX2Xd5RBjc0gkRPVuX-8nQrn9tFXDdTHFJSkVzzCXavgRZSopBEkshScgscnFJ36rEyeGMeqGfFtV1DgakJUxYuu089NAzDV0fCX6uyWXSVX-vLzFfh8ntDqDC5O3u3bU1H_pybeRWsGrsi3NjX7DwMegn'); },
+        getOAuthToken: cb => { cb(spotifyApiToken); },
       });
       this.createEventHandlers();
   
