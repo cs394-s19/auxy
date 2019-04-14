@@ -36,6 +36,7 @@ class SongList extends Component {
             songArtist={song.songArtist}
             songScore={song.songScore}
             songId={song.songId}
+            playlistKey={this.props.playlistKey}
           />
         );
       });

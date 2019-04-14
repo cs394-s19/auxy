@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Playlist key={1234} />
+        <Playlist playlistKey={123} />
       </div>
     );
   }

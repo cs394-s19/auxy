@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ResultSong from "./ResultSong";
 import spotifyApi from "../../Config/spotify";
-import '../../Styles/SearchForm.css'
+import "../../Styles/SearchForm.css";
 
 const sleep = milliseconds => {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -33,13 +33,12 @@ class SearchForm extends Component {
           results: []
         });
       });
-
     }
   }
 
   getTracks(input) {
     spotifyApi.setAccessToken(
-      "BQBRJLqupFc7btBqYWcoZxywreqYfdbi5TQu13ZhgRvzLy2D0sMLfJkp4M5BZxa9MS3_LDklBkSoOEC7uPt9dSBxLNgNoHvH8D5xVEcKh5Zg0gKXUauuHomfQcXkNBFSdlBi8eypYWFBX9I2xw19tN2taCF5KFcjDAtsWt4Kp4SbrH-mhpCfPaJh"
+      "BQCuANBA0TSaI702Zdbks1X6VO8ODiVXpRbnPYGwaVZHUsz85Vz7XuEPSbW3dXwkAiwbRo8_uoVm_D6b4jYrXwpL4HR2iJOPzI9ZyOyEoZA7e7yjTXE8uLbSG65F05nP0Wf7qsAmXqk7VfGK_DZIpgS1A7n_laf_s9pD50nhjQ"
     );
     var input1 = input;
     // console.log(input1)
@@ -83,7 +82,13 @@ class SearchForm extends Component {
     return (
       <div>
         {results.map((result, index) => {
-          return <ResultSong key={index} result={result} />;
+          return (
+            <ResultSong
+              playlistKey={this.props.playlistKey}
+              key={index}
+              result={result}
+            />
+          );
         })}
       </div>
     );

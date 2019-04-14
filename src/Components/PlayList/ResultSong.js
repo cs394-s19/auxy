@@ -9,7 +9,8 @@ class ResultSong extends Component {
   }
 
   addSong() {
-    db.child("songs")
+    db.ref(this.props.playlistKey)
+      .child("songs")
       .push()
       .set({
         songName: this.props.result.name,

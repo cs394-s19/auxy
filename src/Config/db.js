@@ -3,6 +3,6 @@ import firebase from "firebase/app";
 import "firebase/database";
 
 const app = firebase.initializeApp(DB_CONFIG);
-const database = app.database().ref();
+const database = app.database();
 
 export default database;
