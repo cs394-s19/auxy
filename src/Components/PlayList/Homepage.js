@@ -3,7 +3,7 @@ import PlayList from "./PlayList";
 import { withRouter, Route } from "react-router-dom";
 
 function NewHomepage(props) {
-  return <PlayList AccessKey={props.match.params.key} />;
+  return <PlayList playlistKey={props.match.params.key} />;
   //pass the accesskey to playlist
 }
 
