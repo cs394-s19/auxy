@@ -9,7 +9,12 @@ class Playlist extends Component {
     super(props);
 
     this.state = {
-      currSong: {},
+      currSong: {
+        songName: "N/A",
+        songArtist: "N/A",
+        songAlbum: "N/A",
+        songID: "N/A"
+      },
       songList: []
     };
 

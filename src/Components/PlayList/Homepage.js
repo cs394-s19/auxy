@@ -1,23 +1,37 @@
 import React, { Component } from "react";
 import PlayList from "./PlayList";
-import { withRouter, Route } from "react-router-dom";
+import { Link, withRouter, Route } from "react-router-dom";
+import db from "../../Config/db";
 
-function NewHomepage(props) {
-  return <PlayList playlistKey={props.match.params.key} />;
-  //pass the accesskey to playlist
-}
+// function NewHomepage(props) {
+//   console.log(props.location.query);
+
+//   return <PlayList playlistKey={props.location.query.key} />;
+//   //pass the accesskey to playlist
+// }
 
 class Homepage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      keys: ["123"],
-      key: 1234,
+      keys: [],
+      key: 0,
       visible: "block" //visible is used to control whether the host and user button show or not
     };
     this.handleHostClick = this.handleHostClick.bind(this);
     this.handleUserClick = this.handleUserClick.bind(this);
+  }
+
+  componentWillMount() {
+    var keys = [];
+
+    db.ref().on("child_added", snap => {
+      keys.push(snap.key);
+      this.setState({
+        keys: keys
+      });
+    });
   }
 
   handleUserInput(e) {
@@ -31,37 +45,26 @@ class Homepage extends Component {
   handleUserClick(e) {
     for (var i = 0; i < this.state.keys.length; i++) {
       if (this.state.keys[i] === this.state.key) {
-        this.setState({ visible: "none" });
-        this.props.history.push({
-          pathname: "NewHomepage",
-          params: { key: this.state.key }
-        });
-
+        this.props.joinPlaylist(this.state.key);
         return;
       }
     }
-
-    alert("Invalied key");
+    alert("Invalid Key");
   }
 
   handleHostClick(e) {
     for (var i = 0; i < this.state.keys.length; i++) {
       if (this.state.keys[i] === this.state.key) {
-        alert("Key Already Existed");
-        return null;
+        alert("Key Already Exists");
+        return;
       }
     }
-    this.setState({ visible: "none" });
-    this.props.history.push({
-      pathname: "NewHomepage",
-      params: { key: this.state.key }
-    });
+    this.props.joinPlaylist(this.state.key);
   }
 
   render() {
     return (
       <div>
-        <Route path="/NewHomepage" component={NewHomepage} />
         <div style={{ display: this.state.visible }}>
           <div>
             <input
@@ -97,4 +100,4 @@ class Homepage extends Component {
   }
 }
 
-export default withRouter(Homepage);
+export default Homepage;
