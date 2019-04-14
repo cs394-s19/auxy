@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import db from "../../Config/db";
 
 class SongBlock extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleLike(songId) {
     db.ref(this.props.playlistKey)
       .child("songs")

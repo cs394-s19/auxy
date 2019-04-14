@@ -28,7 +28,8 @@ class Playlist extends Component {
           songId: snap.key,
           songName: snap.val().songName,
           songArtist: snap.val().songArtist,
-          songScore: snap.val().songScore
+          songScore: snap.val().songScore,
+          songAlbum: snap.val().songAlbum
         });
 
         // Sort song rankings by score (need to refresh if multiple people on app)
@@ -101,11 +102,12 @@ class Playlist extends Component {
     db.ref(this.props.playlistKey)
       .child("currSong")
       .once("value", snapshot => {
+        var nextsong;
         if (this.state.songList.length > 0) {
-          var nextsong = this.state.songList[0];
+          nextsong = this.state.songList[0];
           this.popSongQueue();
         } else {
-          var nextsong = {
+          nextsong = {
             songArtist: "N/A",
             songName: "N/A",
             songAlbum: "N/A"
@@ -126,6 +128,7 @@ class Playlist extends Component {
   render() {
     return (
       <div>
+        <p>Playlist Key: {this.props.playlistKey}</p>
         <NowPlaying
           playlistKey={this.props.playlistKey}
           currSong={this.state.currSong}

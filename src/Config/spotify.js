@@ -8,4 +8,7 @@ var spotifyApi = new Spotify({
   clientSecret: clientSecret
 });
 
-export default spotifyApi;
+var spotifyApiToken =
+  "BQBo6vwoI1OC8mJMZrVrJoKVkJrdqnLyr206AQxFNWSZx421huU4rlDW4rxamEk532Fm6IrWlImEudBK4bCEbX-NmKWtVhnp20KzzMffQHYPEfR_LMXU7INrQJMRYIqDZSP-mEIWqyRUWi7HROO7JJqk97sekESiJh-fTqOYnw";
+
+export { spotifyApi, spotifyApiToken };

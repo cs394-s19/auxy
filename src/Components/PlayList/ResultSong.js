@@ -9,13 +9,15 @@ class ResultSong extends Component {
   }
 
   addSong() {
+    console.log(this.props.result);
     db.ref(this.props.playlistKey)
       .child("songs")
       .push()
       .set({
         songName: this.props.result.name,
         songScore: 0,
-        songArtist: this.props.result.artists[0].name
+        songArtist: this.props.result.artists[0].name,
+        songAlbum: this.props.result.album.images[0].url
       });
   }
 
