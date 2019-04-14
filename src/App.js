@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Playlist from "./Components/PlayList/PlayList";
 import "./App.css";
+import Homepage from "./Components/PlayList/Homepage";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Playlist key={1234} />
+        <Homepage/>
       </div>
     );
   }
