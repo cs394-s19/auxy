@@ -34,7 +34,8 @@ class Playlist extends Component {
           songName: snap.val().songName,
           songArtist: snap.val().songArtist,
           songScore: snap.val().songScore,
-          songAlbum: snap.val().songAlbum
+          songAlbum: snap.val().songAlbum,
+          spotifyId: snap.val().spotifyId
         });
 
         // Sort song rankings by score (need to refresh if multiple people on app)
