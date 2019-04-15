@@ -57,9 +57,16 @@ class Homepage extends Component {
     this.setState({ visible: "none",showPlayList:true });
 
   }
+  handleLogout(){
+    this.setState({visible:'block',showPlayList:false})
+  }
   generatePlayList(){
     if(this.state.showPlayList==true){
-      return(<PlayList playlistKey={this.state.key} />)
+      return(<div>
+        <button onClick={()=>this.handleLogout()}>logOut</button>
+        <PlayList playlistKey={this.state.key} />
+              
+            </div>                                            )
     }
 
   }
@@ -92,6 +99,7 @@ class Homepage extends Component {
           </div>
 
         </div>
+
         <div>{this.generatePlayList()}</div>
       </div>
     );
