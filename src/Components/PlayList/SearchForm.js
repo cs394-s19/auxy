@@ -3,6 +3,11 @@ import ResultSong from "./ResultSong";
 import { spotifyApi, spotifyApiToken } from "../../Config/spotify";
 import "../../Styles/SearchForm.css";
 
+import Modal from 'react-modal';
+import SlidingPane from 'react-sliding-pane';
+import 'react-sliding-pane/dist/react-sliding-pane.css';
+
+
 const sleep = milliseconds => {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 };
@@ -11,15 +16,19 @@ class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: []
+      results: [],
+      isSearchOpen: false,
     };
 
     this.renderResults = this.renderResults.bind(this);
     this.renderSearchBox = this.renderSearchBox.bind(this);
   }
 
+
+
   handleUserInput(e) {
     var songList = [];
+    console.log("herewego ")
     if (e.target.value !== "") {
       songList = this.getTracks(e.target.value);
       sleep(300).then(() => {
@@ -85,6 +94,7 @@ class SearchForm extends Component {
               playlistKey={this.props.playlistKey}
               key={index}
               result={result}
+              onClickSong={()=> this.setState({ isSearchOpen: false })}
             />
           );
         })}
@@ -99,11 +109,22 @@ class SearchForm extends Component {
     }
     return (
       <div>
-        <div>{this.renderSearchBox()}</div>
-        <div>
-          {header}
+        <SlidingPane
+          closeIcon={<div>x</div>}
+          isOpen={ this.state.isSearchOpen }
+          title='Add a Banger'
+          from='bottom'
+          width='100%'
+          onRequestClose={ () => this.setState({ isSearchOpen: false }) }
+          ariaHideApp={false}>
+          <div>
+          {this.renderSearchBox()}
           {this.renderResults(this.state.results)}
         </div>
+        </SlidingPane>
+        <button onClick={()=> this.setState({ isSearchOpen: true })}>Add a Banger</button>
+        {/* <div>{this.renderSearchBox()}</div> */}
+        
       </div>
     );
   }

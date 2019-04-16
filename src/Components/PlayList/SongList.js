@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import SongBlock from "./SongBlock";
+
+import "../../Styles/SongList.css"
+
 class SongList extends Component {
   constructor(props) {
     super(props);
@@ -30,14 +33,16 @@ class SongList extends Component {
     } else {
       return this.state.songList.map((song, id) => {
         return (
-          <SongBlock
-            key={id}
-            songName={song.songName}
-            songArtist={song.songArtist}
-            songScore={song.songScore}
-            songId={song.songId}
-            playlistKey={this.props.playlistKey}
-          />
+          <div className="sl-container">
+            <SongBlock
+              key={id}
+              songName={song.songName}
+              songArtist={song.songArtist}
+              songScore={song.songScore}
+              songId={song.songId}
+              playlistKey={this.props.playlistKey}
+            />
+          </div>
         );
       });
     }

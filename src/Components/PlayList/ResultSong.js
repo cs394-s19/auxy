@@ -10,7 +10,7 @@ class ResultSong extends Component {
 
   addSong() {
     var exists = false;
-
+    this.props.onClickSong();
     db.ref(this.props.playlistKey)
       .child("songs")
       .orderByChild("spotifyId")
