@@ -31,13 +31,13 @@ class SearchForm extends Component {
     console.log("herewego ")
     if (e.target.value !== "") {
       songList = this.getTracks(e.target.value);
-      sleep(300).then(() => {
+      sleep(800).then(() => {
         this.setState({
           results: songList
         });
       });
     } else {
-      sleep(300).then(() => {
+      sleep(500).then(() => {
         this.setState({
           results: []
         });
