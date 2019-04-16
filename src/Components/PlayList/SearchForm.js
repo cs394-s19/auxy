@@ -22,13 +22,13 @@ class SearchForm extends Component {
     var songList = [];
     if (e.target.value !== "") {
       songList = this.getTracks(e.target.value);
-      sleep(300).then(() => {
+      sleep(1000).then(() => {
         this.setState({
           results: songList
         });
       });
     } else {
-      sleep(300).then(() => {
+      sleep(500).then(() => {
         this.setState({
           results: []
         });
