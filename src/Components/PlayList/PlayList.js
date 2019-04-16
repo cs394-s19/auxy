@@ -4,7 +4,7 @@ import SongList from "./SongList";
 import SearchForm from "./SearchForm";
 import db from "../../Config/db";
 
-class Playlist extends Component {
+class PlayList extends Component {
   constructor(props) {
     super(props);
 
@@ -134,6 +134,7 @@ class Playlist extends Component {
   render() {
     return (
       <div>
+        <button onClick={this.props.onLogout}>logout</button>
         <p>Playlist Key: {this.props.playlistKey}</p>
         <NowPlaying
           playlistKey={this.props.playlistKey}
@@ -150,4 +151,4 @@ class Playlist extends Component {
   }
 }
 
-export default Playlist;
+export default PlayList;
