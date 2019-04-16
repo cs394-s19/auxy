@@ -2,39 +2,39 @@ body {
     font-family: 'Roboto';
   }
 
-.container {
-    padding: 20px;
-    margin: 0px;
+.np-container {
     background-image: linear-gradient(#383838, black);
     /* width: 100%; This was breaking front end */
-    margin-left: -10px;
-    height: 250px;
+    height: 285px;
+    margin-top: 40px;
 }
 
-.song-info {
+.np-info {
     color: white;
+    text-align: left;
+    padding: 10px;
 }
 
-.song-name {
+.np-info-songname {
     font-size: 18px;
     margin-bottom: 2px;
-    margin-left: 10px;
 }
 
-.song-artist {
-    font-weight: 100;
+.np-info-artist {
+    font-size: 14px;
     color: #d1d1d1;
-    margin-left: 10px;
 }
 
-.song-cover-container{
+.np-imagecontainer{
     text-align: center;
-    width: 375px;
-    height: 220px;
-    margin-left: -20px;
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+    background-color: lightpink;
+    margin-top: 20px;
 }
 
-.song-cover {
+.np-image {
     margin-top: 10px;
     height: 200px;
     width: 200px;
