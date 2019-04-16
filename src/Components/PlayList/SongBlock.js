@@ -2,23 +2,22 @@ import React, { Component } from "react";
 import db from "../../Config/db";
 
 class SongBlock extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleLike(songId) {
-    db.child("songs")
+    db.ref(this.props.playlistKey)
+      .child("songs")
       .child(songId)
       .once("value", snap => {
         var currScore = snap.val().songScore;
-        db.child("songs")
+        db.ref(this.props.playlistKey)
+          .child("songs")
           .child(songId)
           .update({ songScore: currScore + 1 });
       });
   }
 
   handleDelete(songId) {
-    db.child("songs")
+    db.ref(this.props.playlistKey)
+      .child("songs")
       .child(songId)
       .remove();
   }
