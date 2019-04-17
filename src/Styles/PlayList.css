@@ -1,0 +1,25 @@
+.pl-container {
+    background-color: black;
+    height: 100vh;
+}
+
+.pl-header {
+    background-color: #383838;
+    height: 40px;
+    color: white;
+    text-align: left;
+    position: sticky;
+}
+
+.pl-logout {
+    display: inline-block;
+    width: 10%;
+}
+
+.pl-key {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+    width: 80%;
+    
+}

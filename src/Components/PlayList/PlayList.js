@@ -4,6 +4,8 @@ import SongList from "./SongList";
 import SearchForm from "./SearchForm";
 import db from "../../Config/db";
 
+import "../../Styles/PlayList.css"
+
 class PlayList extends Component {
   constructor(props) {
     super(props);
@@ -134,9 +136,11 @@ class PlayList extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.props.onLogout}>logout</button>
-        <p>Playlist Key: {this.props.playlistKey}</p>
+      <div className="pl-container">
+        <div className="pl-header">
+          <button className = "pl-logout" onClick={this.props.onLogout}>logout</button>
+          <div className="pl-key"> {this.props.playlistKey}</div>
+        </div>
         <NowPlaying
           playlistKey={this.props.playlistKey}
           currSong={this.state.currSong}
