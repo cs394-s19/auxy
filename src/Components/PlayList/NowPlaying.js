@@ -66,6 +66,7 @@ class NowPlaying extends Component {
       // finally, connect!
       this.player.connect();
     }
+    console.log(`uri is ${this.props.currSong.spotifyURI}`)
   }
 
   handleLogin() {
@@ -124,6 +125,12 @@ class NowPlaying extends Component {
     });
   }
 
+  // shouldComponentUpdate(nextProps, nextState){
+  //   if (nextProps.currSong.songName !== this.state.songName){
+  //     console.log("UPDATE PLEASE");
+  //   }
+  // }
+
   onStateChanged(state) {
     // if we're no longer listening to music, we'll get a null state.
     if (state !== null) {
@@ -162,15 +169,15 @@ class NowPlaying extends Component {
         <div className="now-playing-container">
           <div className="np-imagecontainer">
             {" "}
-            {this.state.songAlbum !== "N/A" ? (
-              <img src={this.state.songAlbum} width="100%" aref="Song Album" />
+            {this.props.currSong.songAlbum !== "N/A" ? (
+              <img src={this.props.currSong.songAlbum} width="100%" aref="Song Album" />
             ) : (
               ""
             )}
           </div>
           <div className="np-info">
-            <div className="np-info-songname">{this.state.songName}</div>
-            <div className="np-info-artist">{this.state.songArtist}</div>
+            <div className="np-info-songname">{this.props.currSong.songName}</div>
+            <div className="np-info-artist">{this.props.currSong.songArtist}</div>
             <button style={{ marginBottom: "10px" }} onClick={this.props.nextSong}>
               Next Song
             </button>
@@ -184,7 +191,7 @@ class NowPlaying extends Component {
             </div> */}
           <div>
           <button onClick={() => this.checkForPlayer()}>Connect</button>
-          <button onClick={() => this.playsong('spotify:track:7xGfFoTpQ2E7fRF5lN10tr')}>Play!</button>
+          <button onClick={() => this.playsong(this.props.currSong.spotifyURI)}>Play!</button>
           </div>
         </div>
       )  
