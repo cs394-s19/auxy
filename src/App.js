@@ -21,6 +21,16 @@ class App extends Component {
   }
 
   componentWillMount() {
+    localStorage.getItem("key") &&
+      this.setState({
+        key: JSON.parse(localStorage.getItem("key")),
+        HomePage: JSON.parse(localStorage.getItem("HomePage")),
+        PlayList: JSON.parse(localStorage.getItem("PlayList")),
+        CreatePlayList: JSON.parse(localStorage.getItem("CreatePlayList"))
+      });
+  }
+
+  componentDidMount() {
     var keys = [];
 
     db.ref().on("child_added", snap => {
@@ -38,13 +48,21 @@ class App extends Component {
         return null;
       }
     }
-    this.setState({ key: key, HomePage: false, PlayList: true });
+    this.setState({ key: key, HomePage: false, PlayList: true }, () => {
+      localStorage.setItem("key", key);
+      localStorage.setItem("HomePage", false);
+      localStorage.setItem("PlayList", true);
+    });
   }
 
   handleUserClick(key) {
     for (var i = 0; i < this.state.keys.length; i++) {
       if (this.state.keys[i] === key) {
-        this.setState({ key: key, HomePage: false, PlayList: true});
+        this.setState({ key: key, HomePage: false, PlayList: true }, () => {
+          localStorage.setItem("key", key);
+          localStorage.setItem("HomePage", false);
+          localStorage.setItem("PlayList", true);
+        });
         return;
       }
     }
@@ -52,16 +70,26 @@ class App extends Component {
   }
 
   handleLogout() {
-    this.setState({ key: 0, HomePage: true, PlayList: false })
+    this.setState({ key: 0, HomePage: true, PlayList: false }, () => {
+      localStorage.setItem("key", 0);
+      localStorage.setItem("HomePage", true);
+      localStorage.setItem("PlayList", false);
+    });
   }
 
   render() {
     if (this.state.HomePage)
-      return <Homepage onUserClick={this.handleUserClick} onHostClick={this.handleHostClick} />;
+      return (
+        <Homepage
+          onUserClick={this.handleUserClick}
+          onHostClick={this.handleHostClick}
+        />
+      );
     else if (this.state.PlayList)
-      return <PlayList playlistKey={this.state.key} onLogout={this.handleLogout} />;
-    else
-      return;
+      return (
+        <PlayList playlistKey={this.state.key} onLogout={this.handleLogout} />
+      );
+    else return;
     // else if (this.state.JoinPlayList)
     //   return <JoinPlayList />;
     // else if (this.state.CreatePlayList)

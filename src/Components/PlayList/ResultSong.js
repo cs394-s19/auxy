@@ -39,7 +39,8 @@ class ResultSong extends Component {
         songScore: 0,
         songArtist: this.props.result.artists[0].name,
         songAlbum: this.props.result.album.images[0].url,
-        spotifyId: this.props.result.id
+        spotifyId: this.props.result.id,
+        spotifyURI: this.props.result.uri
       });
   }
 
