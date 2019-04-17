@@ -190,8 +190,8 @@ class NowPlaying extends Component {
               <img className="song-cover" src={starboycover} alt="starboycover" />
             </div> */}
           <div>
-          <button onClick={() => this.checkForPlayer()}>Connect</button>
-          <button onClick={() => this.playsong(this.props.currSong.spotifyURI)}>Play!</button>
+          <button className="connect" onClick={() => this.checkForPlayer()}>Connect</button>
+          <button className="play" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>Play!</button>
           </div>
         </div>
       )  
