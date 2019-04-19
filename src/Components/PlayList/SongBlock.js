@@ -5,16 +5,32 @@ import app from "../../Config/db";
 const db = app.database();
 
 class SongBlock extends Component {
+  //Like button is clicked
   handleLike(songId) {
-    db.ref("playlists/" + this.props.playlistKey)
-      .child("songs")
-      .child(songId)
-      .once("value", snap => {
-        var currScore = snap.val().songScore;
-        db.ref("playlists/" + this.props.playlistKey)
-          .child("songs")
-          .child(songId)
-          .update({ songScore: currScore + 1 });
+    db.ref("playlists/" + this.props.playlistKey + "/songs/" + songId)
+      .child("likedBy")
+      .orderByValue()
+      .equalTo(this.props.uid)
+      .once("value", snapshot => {
+        console.log(snapshot.exists());
+        if (!snapshot.exists()) {
+          // Add user to likedBy (like song)
+          db.ref("playlists/" + this.props.playlistKey + "/songs/" + songId)
+            .child("likedBy")
+            .push(this.props.uid);
+        } else {
+          // Remove user from likedBy (dislike song)
+          var keyToRemove = Object.keys(snapshot.val())[0];
+          db.ref(
+            "playlists/" +
+              this.props.playlistKey +
+              "/songs/" +
+              songId +
+              "/likedBy/"
+          )
+            .child(keyToRemove)
+            .remove();
+        }
       });
   }
 

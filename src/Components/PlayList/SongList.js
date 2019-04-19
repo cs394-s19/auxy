@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SongBlock from "./SongBlock";
 
-import "../../Styles/SongList.css"
+import "../../Styles/SongList.css";
 
 class SongList extends Component {
   constructor(props) {
@@ -41,6 +41,7 @@ class SongList extends Component {
               songScore={song.songScore}
               songId={song.songId}
               playlistKey={this.props.playlistKey}
+              uid={this.props.uid}
             />
           </div>
         );

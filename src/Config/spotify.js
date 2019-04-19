@@ -9,5 +9,5 @@ var spotifyApi = new Spotify({
 });
 
 var spotifyApiToken =
-  "BQDfEJiHZe53ZnudcJ_MnMHRxQ9Xk8TyZnD29vpSXBhGdU_1ZGM3zVzG8zNvsZ_ASmpOeUERS5AFbiEFdXFVIvHA3la3frZ70jh7jsDuZk5zu-QT3v1RhxCpma4CdE-UTSzt96eNuPnkFEv_lXeWTKl-U75bidsrXvjk5mO9Fg";
+  "BQAyqc1qA9WEHUWQbB4LKambDWdmsJyQOf9fmhsOcofwwDxBW2qvPbsIC2omnq1aUlrP6HE8dFBlUZE9af-LNRhGhZXjacgnj3Cr_obxHfTS7h-Oxe1oP7WRYpRzUQ0OOPXeKCnpZQe4Im32zEEh4MHK7XJb6dCSO8SquUvbJg";
 export { spotifyApi, spotifyApiToken };

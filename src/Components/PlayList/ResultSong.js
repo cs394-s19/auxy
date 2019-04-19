@@ -42,7 +42,8 @@ class ResultSong extends Component {
         songArtist: this.props.result.artists[0].name,
         songAlbum: this.props.result.album.images[0].url,
         spotifyId: this.props.result.id,
-        spotifyURI: this.props.result.uri
+        spotifyURI: this.props.result.uri,
+        likedBy: []
       });
   }
 
