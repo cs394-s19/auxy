@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import db from "../../Config/db";
+import "../../Styles/SongBlock.css";
+import app from "../../Config/db";
 
-import "../../Styles/SongBlock.css"
+const db = app.database();
 
 class SongBlock extends Component {
   handleLike(songId) {
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .child(songId)
       .once("value", snap => {
         var currScore = snap.val().songScore;
-        db.ref(this.props.playlistKey)
+        db.ref("playlists/" + this.props.playlistKey)
           .child("songs")
           .child(songId)
           .update({ songScore: currScore + 1 });
@@ -18,7 +19,7 @@ class SongBlock extends Component {
   }
 
   handleDelete(songId) {
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .child(songId)
       .remove();
@@ -35,7 +36,7 @@ class SongBlock extends Component {
           <div className="sb-info-songartist">{this.props.songArtist}</div>
         </div>
         <div className="sb-score">{this.props.songScore}</div>
-        
+
         <button onClick={() => this.handleLike(this.props.songId)}>Like</button>
       </div>
     );

@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import PlayList from "./Components/PlayList/PlayList";
 import "./App.css";
 import Homepage from "./Components/HomePage/Homepage";
-import db from "./Config/db";
+import app from "./Config/db";
+import "firebase/auth";
+
+const db = app.database();
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +16,8 @@ class App extends Component {
       HomePage: true,
       PlayList: false,
       CreatePlayList: false,
-      JoinPlayList: false
+      JoinPlayList: false,
+      uid: null
     };
     this.handleHostClick = this.handleHostClick.bind(this);
     this.handleUserClick = this.handleUserClick.bind(this);
@@ -21,19 +25,41 @@ class App extends Component {
   }
 
   componentWillMount() {
-    localStorage.getItem("key") &&
-      this.setState({
-        key: JSON.parse(localStorage.getItem("key")),
-        HomePage: JSON.parse(localStorage.getItem("HomePage")),
-        PlayList: JSON.parse(localStorage.getItem("PlayList")),
-        CreatePlayList: JSON.parse(localStorage.getItem("CreatePlayList"))
-      });
+    // localStorage.getItem("key") &&
+    //   this.setState({
+    //     key: JSON.parse(localStorage.getItem("key")),
+    //     HomePage: JSON.parse(localStorage.getItem("HomePage")),
+    //     PlayList: JSON.parse(localStorage.getItem("PlayList")),
+    //     CreatePlayList: JSON.parse(localStorage.getItem("CreatePlayList"))
+    //   });
+
+    app.auth().onAuthStateChanged(
+      function(user) {
+        if (user) {
+          var uid = user.uid;
+          console.log(uid);
+          this.setState({
+            uid: uid
+          });
+        } else {
+          app
+            .auth()
+            .signInAnonymously()
+            .catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // ...
+            });
+        }
+      }.bind(this)
+    );
   }
 
   componentDidMount() {
     var keys = [];
 
-    db.ref().on("child_added", snap => {
+    db.ref("playlists").on("child_added", snap => {
       keys.push(snap.key);
       this.setState({
         keys: keys
@@ -48,21 +74,29 @@ class App extends Component {
         return null;
       }
     }
-    this.setState({ key: key, HomePage: false, PlayList: true }, () => {
-      localStorage.setItem("key", key);
-      localStorage.setItem("HomePage", false);
-      localStorage.setItem("PlayList", true);
+
+    db.ref("playlists/" + key + "/host").set({
+      hostUID: this.state.uid
     });
+
+    this.setState({ key: key, HomePage: false, PlayList: true });
+
+    // this.setState({ key: key, HomePage: false, PlayList: true }, () => {
+    //   localStorage.setItem("key", key);
+    //   localStorage.setItem("HomePage", false);
+    //   localStorage.setItem("PlayList", true);
+    // });
   }
 
   handleUserClick(key) {
     for (var i = 0; i < this.state.keys.length; i++) {
       if (this.state.keys[i] === key) {
-        this.setState({ key: key, HomePage: false, PlayList: true }, () => {
-          localStorage.setItem("key", key);
-          localStorage.setItem("HomePage", false);
-          localStorage.setItem("PlayList", true);
-        });
+        this.setState({ key: key, HomePage: false, PlayList: true });
+        // this.setState({ key: key, HomePage: false, PlayList: true }, () => {
+        //   localStorage.setItem("key", key);
+        //   localStorage.setItem("HomePage", false);
+        //   localStorage.setItem("PlayList", true);
+        // });
         return;
       }
     }
@@ -70,11 +104,12 @@ class App extends Component {
   }
 
   handleLogout() {
-    this.setState({ key: 0, HomePage: true, PlayList: false }, () => {
-      localStorage.setItem("key", 0);
-      localStorage.setItem("HomePage", true);
-      localStorage.setItem("PlayList", false);
-    });
+    this.setState({ key: 0, HomePage: true, PlayList: false });
+    // this.setState({ key: 0, HomePage: true, PlayList: false }, () => {
+    //   localStorage.setItem("key", 0);
+    //   localStorage.setItem("HomePage", true);
+    //   localStorage.setItem("PlayList", false);
+    // });
   }
 
   render() {
@@ -87,7 +122,11 @@ class App extends Component {
       );
     else if (this.state.PlayList)
       return (
-        <PlayList playlistKey={this.state.key} onLogout={this.handleLogout} />
+        <PlayList
+          playlistKey={this.state.key}
+          onLogout={this.handleLogout}
+          uid={this.state.uid}
+        />
       );
     else return;
     // else if (this.state.JoinPlayList)
