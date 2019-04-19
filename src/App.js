@@ -34,6 +34,7 @@ class App extends Component {
     //   });
 
     app.auth().onAuthStateChanged(
+      // ANONYMOUS LOGIN HERE => Generates a new uid if not logged in (new user); otherwise uid=user's pre-existing uid
       function(user) {
         if (user) {
           var uid = user.uid;

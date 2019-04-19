@@ -5,7 +5,8 @@ import app from "../../Config/db";
 const db = app.database();
 
 class SongBlock extends Component {
-  //Like button is clicked
+  // Like button is clicked -> will either remove current uid from likedBy or add current uid to likedBy
+  // this will trigger the on_changed event in App.js
   handleLike(songId) {
     db.ref("playlists/" + this.props.playlistKey + "/songs/" + songId)
       .child("likedBy")
@@ -13,6 +14,7 @@ class SongBlock extends Component {
       .equalTo(this.props.uid)
       .once("value", snapshot => {
         console.log(snapshot.exists());
+        // Snapshot will exist if user has already liked the song before
         if (!snapshot.exists()) {
           // Add user to likedBy (like song)
           db.ref("playlists/" + this.props.playlistKey + "/songs/" + songId)

@@ -33,8 +33,8 @@ class PlayList extends Component {
     db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .on("child_added", snap => {
-        // newSongScore is {0 if likedBy is undefined => happens when no uids in likedBy}
-        // or {length of likedBy if uids are present}
+        // evaluate newSongScore to {0 if likedBy is undefined => happens when no uids in likedBy}
+        // or {likedBy.length if uids are present}
         var newSongScore =
           typeof snap.val().likedBy === "undefined"
             ? 0
@@ -74,12 +74,12 @@ class PlayList extends Component {
         });
       });
 
-    // If there is a change to one of the fields in songs => should only be triggered by a change in likedBy
+    // If there is a change to one of the fields in songs => should only be triggered by a change in likedBy array
     db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .on("child_changed", snap => {
         for (var i = 0; i < previousSongs.length; i++) {
-          // Find the song that was changed by comparing it to snapkey
+          // Find the song that was changed by comparing it's songId to snap.key
           if (previousSongs[i].songId === snap.key) {
             // Calculate new song score {0 if likedBy is undefined or 0 elements} {otherwise length of likedSongs}
             var newSongScore =
@@ -91,7 +91,7 @@ class PlayList extends Component {
           }
         }
 
-        // Resort songs and push to state
+        // Re-sort songs and push to state
         var sortedSongs = previousSongs;
         sortedSongs.sort((a, b) => b.songScore - a.songScore);
 
@@ -102,6 +102,7 @@ class PlayList extends Component {
 
     // THERE HAS TO BE A BETTER WAY TO GET THE CHILD OBJECT
     // MY NESTED DB.REFS IS PROBABLY NOT THE WAY TO GO
+    // When currSong is changed in database, changes the state to follow change
     db.ref("playlists/" + this.props.playlistKey)
       .child("currSong")
       .on("child_changed", snap => {
@@ -113,6 +114,7 @@ class PlayList extends Component {
           });
       });
 
+    //Similar to child_added of songlists, basically just fetches currSong from db
     db.ref("playlists/" + this.props.playlistKey)
       .child("currSong")
       .on("child_added", snap => {
@@ -124,7 +126,7 @@ class PlayList extends Component {
           });
       });
 
-    // On component mount -- check if userid matches hostid and change admin state depending on that
+    // On component mount -- check if userid matches hostid and change admin state depending on that result
     this.checkAdmin();
   }
 
@@ -133,6 +135,7 @@ class PlayList extends Component {
       .orderByChild("hostUID")
       .equalTo(this.props.uid)
       .once("value", snapshot => {
+        // Snapshot exists if hostUID is equalTo current user uid
         if (snapshot.exists()) {
           this.setState({ admin: true });
         } else {
