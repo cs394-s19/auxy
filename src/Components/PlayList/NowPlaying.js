@@ -160,7 +160,6 @@ class NowPlaying extends Component {
           <div className="np-info">
             <div className="np-info-songname">{this.props.currSong.songName}</div>
             <div className="np-info-artist">{this.props.currSong.songArtist}</div>
-            
           </div>
           <div className="np-button-container">
               <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button>

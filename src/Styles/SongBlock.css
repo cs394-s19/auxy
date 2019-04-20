@@ -30,3 +30,31 @@ body {
     margin-top: 20px;
 }
 
+.sb-delete {
+    color: white;
+    background-color: black;
+    margin-top: 14px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 50px;
+    border-width: 2px;
+    height: 30px;
+    font-weight: bolder;
+}
+
+.sb-upvote {
+    color: white;
+    background-color: black;
+    margin-top: 14px;
+    margin-right: 10px;
+    margin-left: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 50px;
+    border-width: 2px;
+    height: 30px; 
+    font-weight: bolder;
+}
+

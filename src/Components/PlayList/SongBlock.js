@@ -28,8 +28,8 @@ class SongBlock extends Component {
   render() {
     return (
       <div className="sb-container">
-        <button onClick={() => this.handleDelete(this.props.songId)}>
-          Delete
+        <button className="sb-delete" onClick={() => this.handleDelete(this.props.songId)}>
+          x
         </button>
         <div className="sb-info">
           <div className="sb-info-songname">{this.props.songName}</div>
@@ -37,7 +37,7 @@ class SongBlock extends Component {
         </div>
         <div className="sb-score">{this.props.songScore}</div>
 
-        <button onClick={() => this.handleLike(this.props.songId)}>Like</button>
+        <button className="sb-upvote" onClick={() => this.handleLike(this.props.songId)}>+</button>
       </div>
     );
   }

@@ -48,6 +48,8 @@ body {
 .np-button-container{
     margin-top: 5px;
     flex: 2;
+    text-align: right;
+    margin-right: 10px;
 }
 
 .np-button {
