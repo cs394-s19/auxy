@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import NowPlaying from "./NowPlaying";
 import SongList from "./SongList";
 import SearchForm from "./SearchForm";
-import db from "../../Config/db";
+import "../../Styles/PlayList.css";
+import app from "../../Config/db";
 
-import "../../Styles/PlayList.css"
+const db = app.database();
 
 class PlayList extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class PlayList extends Component {
         songAlbum: "N/A",
         songID: "N/A"
       },
-      songList: []
+      songList: [],
+      admin: false
     };
 
     this.nextSong = this.nextSong.bind(this);
@@ -28,7 +30,7 @@ class PlayList extends Component {
     const previousSongs = this.state.songList;
 
     // Gets called when reading firebase database or new entry is added
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .on("child_added", snap => {
         previousSongs.push({
@@ -51,7 +53,7 @@ class PlayList extends Component {
       });
 
     // Called everytime entry deleted from song branch in database
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .on("child_removed", snap => {
         for (var i = 0; i < previousSongs.length; i++) {
@@ -64,7 +66,7 @@ class PlayList extends Component {
         });
       });
 
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .on("child_changed", snap => {
         for (var i = 0; i < previousSongs.length; i++) {
@@ -82,10 +84,10 @@ class PlayList extends Component {
 
     // THERE HAS TO BE A BETTER WAY TO GET THE CHILD OBJECT
     // MY NESTED DB.REFS IS PROBABLY NOT THE WAY TO GO
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("currSong")
       .on("child_changed", snap => {
-        db.ref(this.props.playlistKey)
+        db.ref("playlists/" + this.props.playlistKey)
           .child("currSong")
           .once("value")
           .then(snap => {
@@ -93,22 +95,38 @@ class PlayList extends Component {
           });
       });
 
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("currSong")
       .on("child_added", snap => {
-        db.ref(this.props.playlistKey)
+        db.ref("playlists/" + this.props.playlistKey)
           .child("currSong")
           .once("value")
           .then(snap => {
             this.setState({ currSong: snap.val() });
           });
+      });
+
+    // On component mount -- check if userid matches hostid and change admin state depending on that
+    this.checkAdmin();
+  }
+
+  checkAdmin() {
+    db.ref("playlists/" + this.props.playlistKey)
+      .orderByChild("hostUID")
+      .equalTo(this.props.uid)
+      .once("value", snapshot => {
+        if (snapshot.exists()) {
+          this.setState({ admin: true });
+        } else {
+          this.setState({ admin: false });
+        }
       });
   }
 
   // Makes current song the first item in song queue and pops song queue
   // OR if no song left in queue makes current song an N/A
   nextSong() {
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("currSong")
       .once("value", snapshot => {
         var nextsong;
@@ -122,24 +140,34 @@ class PlayList extends Component {
             songAlbum: "N/A"
           };
         }
-        db.ref(this.props.playlistKey).update({ currSong: nextsong });
+        db.ref("playlists/" + this.props.playlistKey).update({
+          currSong: nextsong
+        });
       });
   }
 
   popSongQueue() {
     var songToPopId = this.state.songList[0].songId;
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .child(songToPopId)
       .remove();
   }
 
   render() {
+    var adminHa = this.state.admin ? (
+      <div>Admin: True</div>
+    ) : (
+      <div>Admin: False</div>
+    );
     return (
       <div className="pl-container">
         <div className="pl-header">
-          <button className = "pl-logout" onClick={this.props.onLogout}>logout</button>
+          <button className="pl-logout" onClick={this.props.onLogout}>
+            logout
+          </button>
           <div className="pl-key"> {this.props.playlistKey}</div>
+          {adminHa}
         </div>
         <NowPlaying
           playlistKey={this.props.playlistKey}

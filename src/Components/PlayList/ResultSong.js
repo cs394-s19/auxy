@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import db from "../../Config/db";
+import app from "../../Config/db";
+
+const db = app.database();
 
 class ResultSong extends Component {
   constructor(props) {
@@ -11,7 +13,7 @@ class ResultSong extends Component {
   addSong() {
     var exists = false;
     this.props.onClickSong();
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .orderByChild("spotifyId")
       .equalTo(this.props.result.id)
@@ -31,7 +33,7 @@ class ResultSong extends Component {
       return;
     }
 
-    db.ref(this.props.playlistKey)
+    db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .push()
       .set({
