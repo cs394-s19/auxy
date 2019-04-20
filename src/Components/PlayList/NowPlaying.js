@@ -135,17 +135,11 @@ class NowPlaying extends Component {
       const duration = currentTrack.duration_ms;
       const position = state.position
       const playing = !state.paused;
+      //This handles when a next song should be played. 
       if(!playing && (this.state.position !== 0 && state.position === 0)) {
         this.props.nextSong()
       }
-      console.log(`current position is ${state.position} & stored position is ${this.state.position}`)
-      console.log(currentTrack); // Position still isn't working. Need to figure this out.
-      console.log(duration);
-      //This line below will print when a state change causes the music to stop playing, aka when the song finishes.
-      //This can hopefully be used in the future to trigger the next song.
-      if (!playing) {
-        console.log("Stopped playing!");
-      }
+      console.log(currentTrack);
       this.setState({
         position,
         duration,
