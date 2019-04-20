@@ -4,6 +4,7 @@ body {
 
 .np-container {
     background-image: linear-gradient(#383838, black);
+    text-align: center;
     /* width: 100%; This was breaking front end */
 }
 

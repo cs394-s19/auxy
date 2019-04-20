@@ -108,7 +108,7 @@ class SearchForm extends Component {
       header = <h3>Search Results</h3>;
     }
     return (
-      <div>
+      <div className="search-container">
         <SlidingPane
           closeIcon={<div>x</div>}
           isOpen={ this.state.isSearchOpen }
@@ -122,9 +122,9 @@ class SearchForm extends Component {
           {this.renderResults(this.state.results)}
         </div>
         </SlidingPane>
-        <button onClick={()=> this.setState({ isSearchOpen: true })}>Add a Banger</button>
-        {/* <div>{this.renderSearchBox()}</div> */}
+        <button className="search-button" onClick={()=> this.setState({ isSearchOpen: true })}>ADD A BANGER</button>
         
+        {/* <div>{this.renderSearchBox()}</div> */} 
       </div>
     );
   }
