@@ -5,13 +5,19 @@ body {
 .np-container {
     background-image: linear-gradient(#383838, black);
     /* width: 100%; This was breaking front end */
-    height: 285px;
+}
+
+.np-addons{
+    display: flex;
+
 }
 
 .np-info {
     color: white;
     text-align: left;
     padding: 10px;
+    height: 60px;
+    flex: 1;
 }
 
 .np-info-songname {
@@ -39,10 +45,22 @@ body {
     width: 200px;
 }
 
-.connect {
-    background-color: white;
+.np-button-container{
+    margin-top: 5px;
+    flex: 2;
+    text-align: right;
+    margin-right: 10px;
 }
 
-.play {
-    background-color: white;
+.np-button {
+    color: white;
+    margin-top: 10px;
+    background-color: black;
+    margin-right: 2px;
+    margin-left: 2px;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 50px;
+    border-width: 2px;
 }

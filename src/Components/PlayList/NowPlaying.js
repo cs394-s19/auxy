@@ -142,7 +142,7 @@ class NowPlaying extends Component {
 
   render() {
     return (
-      <div className="now-playing-container">
+      <div className="np-container">
         <div className="np-imagecontainer">
           {" "}
           {this.props.currSong.songAlbum !== "N/A" ? (
@@ -155,15 +155,18 @@ class NowPlaying extends Component {
             ""
           )}
         </div>
-        <div className="np-info">
-          <div className="np-info-songname">{this.props.currSong.songName}</div>
-          <div className="np-info-artist">{this.props.currSong.songArtist}</div>
-          <button
-            style={{ marginBottom: "10px" }}
-            onClick={this.props.nextSong}
-          >
-            Next Song
-          </button>
+        
+        <div className="np-addons">
+          <div className="np-info">
+            <div className="np-info-songname">{this.props.currSong.songName}</div>
+            <div className="np-info-artist">{this.props.currSong.songArtist}</div>
+          </div>
+          <div className="np-button-container">
+              <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button>
+              <button className="np-button" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>Play</button>
+              <button className="np-button" onClick={this.props.nextSong}> Next
+            </button>
+          </div>
         </div>
         {/* <div className="song-info">
             <div className="song-name">{this.state.songName}</div>
@@ -172,12 +175,7 @@ class NowPlaying extends Component {
             <div className="song-cover-container">
               <img className="song-cover" src={starboycover} alt="starboycover" />
             </div> */}
-        <div>
-          <button onClick={() => this.checkForPlayer()}>Connect</button>
-          <button onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
-            Play!
-          </button>
-        </div>
+        
       </div>
     );
   }
