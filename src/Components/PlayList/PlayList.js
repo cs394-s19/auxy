@@ -173,6 +173,7 @@ class PlayList extends Component {
           playlistKey={this.props.playlistKey}
           currSong={this.state.currSong}
           nextSong={this.nextSong}
+          admin={this.state.admin}
         />
         <SongList
           playlistKey={this.props.playlistKey}

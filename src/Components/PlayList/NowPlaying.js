@@ -21,7 +21,8 @@ class NowPlaying extends Component {
       playing: false,
       position: -1,
       duration: 0,
-      connected: false
+      connected: false,
+      admin: props.admin
     };
     this.playerCheckInterval = null;
   }
@@ -36,7 +37,7 @@ class NowPlaying extends Component {
       this.player = new window.Spotify.Player({
         name: "Auxy Spotify Player",
         getOAuthToken: cb => {
-          cb(spotifyApiToken);
+          cb(this.state.token);
         }
       });
       this.createEventHandlers();

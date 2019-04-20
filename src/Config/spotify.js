@@ -8,6 +8,11 @@ var spotifyApi = new Spotify({
   clientSecret: clientSecret
 });
 
+var redirect_urls = {
+  development_url: "localhost:3000/",
+  pruduction_url: "https://auxy-8d8d5.firebaseapp.com/"
+}
+
 var spotifyApiToken =
   "BQBOaUJXhHbwPmKYRXf7BgMXkikZlWBxAnuuEa8iBAVhuqFK-10NaaSXwzYs0y_goaRnyM6Kq7utNC0Hh8dQ-Su0-GiMJt4USMpZU6n2282BN7yLmdUtCPwBUWshA1Kt4STgWm4CG9MvmGMIV5Oo6nXQDWaTLyQ7--stzk9I";
-export { spotifyApi, spotifyApiToken };
+export { spotifyApi, spotifyApiToken, redirect_urls };
