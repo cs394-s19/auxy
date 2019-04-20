@@ -24,6 +24,10 @@ body {
 .np-info-songname {
     font-size: 18px;
     margin-bottom: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 170px;
 }
 
 .np-info-artist {
