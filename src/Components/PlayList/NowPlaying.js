@@ -19,8 +19,9 @@ class NowPlaying extends Component {
       token: spotifyApiToken,
       loggedIn: false,
       playing: false,
-      position: 0,
-      duration: 0
+      position: -1,
+      duration: 0,
+      connected: false
     };
     this.playerCheckInterval = null;
   }
@@ -42,6 +43,7 @@ class NowPlaying extends Component {
 
       // finally, connect!
       this.player.connect();
+      this.setState({connected: true})
     }
     console.log(`uri is ${this.props.currSong.spotifyURI}`);
   }
@@ -111,21 +113,36 @@ class NowPlaying extends Component {
   //   }
   // }
 
+  componentWillReceiveProps(nextProps) {
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.currSong.spotifyURI !== this.state.uri) {
+      this.setState({ uri: nextProps.currSong.spotifyURI });
+      if(this.state.connected){
+        this.playsong(nextProps.currSong.spotifyURI)
+      }
+    }
+  }
+
   onStateChanged(state) {
     // if we're no longer listening to music, we'll get a null state.
     if (state !== null) {
-      const { current_track: currentTrack, position } = state.track_window;
+      const { current_track: currentTrack } = state.track_window;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
       const artistName = currentTrack.artists
         .map(artist => artist.name)
         .join(", ");
       const duration = currentTrack.duration_ms;
+      const position = state.position
       const playing = !state.paused;
-      console.log(position, currentTrack);
+      if(!playing && (this.state.position !== 0 && state.position === 0)) {
+        this.props.nextSong()
+      }
+      console.log(`current position is ${state.position} & stored position is ${this.state.position}`)
+      console.log(currentTrack); // Position still isn't working. Need to figure this out.
       console.log(duration);
       //This line below will print when a state change causes the music to stop playing, aka when the song finishes.
-      //This can hopefully be used in the future to trigger the nnext song.
+      //This can hopefully be used in the future to trigger the next song.
       if (!playing) {
         console.log("Stopped playing!");
       }
