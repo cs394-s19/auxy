@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../../Styles/Homepage.css";
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-
+import Auxy from "./Auxy.js";
 
 // import { Link,withRouter, Route } from "react-router-dom";
 
@@ -38,32 +38,28 @@ class Homepage extends Component {
   render() {
     return (
       <div className='background'>
-      <div className='top-circle'></div>
-      <div className='bottom-circle'></div>
+        <div className='top-circle'></div>
+        <div className='bottom-circle'></div>
         <div className='welcome-container'>
-        <div className='meet-text'>MEET</div>
-          <div className='auxy-text'>AUXY</div>
+          <div className='meet-text'>MEET</div>
+          <Auxy transform="scale(3.7,3.7)" className = "auxy-text"
+           /> 
+          
           <div className='sub-text'>a playlist for your occasion, by your occasion</div>
           <StyledButton onClick={this.handleHostClick}>Host</StyledButton>
           <StyledButton onClick={this.handleUserClick}>join</StyledButton>
-          </div>
-         
-          <div>
-            {/* <input onChange={e => {this.handleHostInput(e);}}/> */}
-            {/* <button onClick={this.handleHostClick}>Host</button> */}
-          </div>
-          <div>
-            {/* <input onChange={e => {this.handleUserInput(e);}}/> */}
-            {/* <button onClick={this.handleUserClick}>Join</button> */}
-          </div>
+        </div>
       </div>
     );
   }
 }
 
+{/* <input onChange={e => {this.handleHostInput(e);}}/> */ }
+{/* <input onChange={e => {this.handleUserInput(e);}}/> */ }
+
 const StyledButton = withStyles({
   root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    background: 'linear-gradient(45deg, rgba(252, 109, 139,0.8) 30%, rgba(253, 141, 91 ,0.8) 90%)',
     borderRadius: 48,
     border: 0,
     color: 'white',
@@ -71,9 +67,9 @@ const StyledButton = withStyles({
     padding: '0 30px',
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     width: '120px',
-    marginTop: '15px',  
-    marginRight: '18px',  
-    zIndex:'2',
+    marginTop: '15px',
+    marginRight: '18px',
+    zIndex: '2',
   },
   label: {
     textTransform: 'lowercase',

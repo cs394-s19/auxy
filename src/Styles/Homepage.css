@@ -14,7 +14,7 @@
 }
 
 .welcome-container{
-    color: white;
+    color: rgba(256,256,256,0.7);
     text-align: left;
     /* margin-left: 180px;
     margin-top: 170px;     */
@@ -27,11 +27,10 @@
     font-weight: 400;
     margin-bottom: -60px;
 }
+
 .auxy-text{
-    font-weight: 400;
-    font-size: 125px;
-    margin-bottom: -10px;
-    /* text-shadow: 2px 2px 1px black; */
+    font-weight:bold;
+
 }
 
 .sub-text
