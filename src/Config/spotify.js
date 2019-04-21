@@ -1,7 +1,7 @@
 var Spotify = require("spotify-web-api-js");
 
-var clientId = "c6c554d53a714986b9f3141786a18bd3",
-  clientSecret = "3fe07453c2474370a5a5c54ba30738b7";
+var clientId = "21132691864e495baeae18c21df7f579",
+  clientSecret = "2388108510ef4b1b92bc2b701635b972";
 
 var spotifyApi = new Spotify({
   clientId: clientId,
@@ -9,10 +9,10 @@ var spotifyApi = new Spotify({
 });
 
 var redirect_urls = {
-  development_url: "localhost:3000/",
+  development_url: "http://localhost:3000/",
   pruduction_url: "https://auxy-8d8d5.firebaseapp.com/"
 }
 
 var spotifyApiToken =
-  "BQBOaUJXhHbwPmKYRXf7BgMXkikZlWBxAnuuEa8iBAVhuqFK-10NaaSXwzYs0y_goaRnyM6Kq7utNC0Hh8dQ-Su0-GiMJt4USMpZU6n2282BN7yLmdUtCPwBUWshA1Kt4STgWm4CG9MvmGMIV5Oo6nXQDWaTLyQ7--stzk9I";
-export { spotifyApi, spotifyApiToken, redirect_urls };
+  "BQDP4ikE_kEzIZ-0pASKdIHSttQ2rKpwwgR4tBt3ZFaAWGqjyLdOwUeJAfbp_Y8rWz5-LxKLfg0TnHv3BwiokG08oaiV8NGzhMXD7-9h0QXZ5JLtty7knMrOXETJrY45NYKMszZ0kh95GBN1DvZ-ybKx5VLWipSS-cEJlhzQ";
+export { spotifyApi, spotifyApiToken, redirect_urls, clientId };

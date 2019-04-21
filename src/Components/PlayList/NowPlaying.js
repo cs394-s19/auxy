@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../../Styles/NowPlaying.css";
 import { spotifyApiToken } from "../../Config/spotify";
 import PropTypes from "prop-types";
-
+import * as SpotifyFunctions from './spotifyFunctions'
 // import "../Styles/NowPlaying.css";
 
 class NowPlaying extends Component {
@@ -26,6 +26,13 @@ class NowPlaying extends Component {
     };
     this.playerCheckInterval = null;
   }
+
+  componentDidMount(){
+    //will check URL for accessToken hash. If it's not there, it will show the connect-spotify-button as a link
+    //which will then redirect back to your site with the hash. If there is a hash, then we will jump right into the player
+        const accessToken = SpotifyFunctions.checkUrlForSpotifyAccessToken();
+        accessToken ? this.setState({token: accessToken}) : this.setState({token: null});
+    }
 
   //this checks that the Spotify Player is Loaded. Notice in Public/index.html we load the Spotify Web Player.
   // Once it loads in the window, we can initialize an instance with a current Host token.
@@ -174,6 +181,9 @@ class NowPlaying extends Component {
             <div className="np-info-artist">{this.props.currSong.songArtist}</div>
           </div>
           <div className="np-button-container">
+              <a href={SpotifyFunctions.redirectUrlToSpotifyForLogin()}>
+                <button className="np-button">Token</button>
+              </a>
               <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button>
               <button className="np-button" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>Play</button>
               <button className="np-button" onClick={this.props.nextSong}> Next

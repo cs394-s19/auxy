@@ -2,20 +2,20 @@ import Spotify from 'spotify-web-api-js';
 import uniq from 'lodash.uniq';
 import flatten from 'lodash.flatten';
 import chunk from 'lodash.chunk';
+import { redirect_urls, clientId } from '../../Config/spotify.js'
 
 export function redirectUrlToSpotifyForLogin(){
-    const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-    const REDIRECT_URI =
-		process.env.NODE_ENV === "production"
-			? process.env.REACT_APP_SPOTIFY_PRODUCTION_REDIRECT_URI
-			: process.env.REACT_APP_SPOTIFY_DEVELOPMENT_REDIRECT_URI;
+    const CLIENT_ID = clientId;
+    const REDIRECT_URI = redirect_urls.development_url
     const scopes = [
     "user-modify-playback-state",
-    "user-library-read",
-    "user-library-modify",
+    "user-read-playback-state",
+    "user-read-private",
+    "user-read-currently-playing",
     "playlist-read-private",
     "playlist-modify-public",
-    "playlist-modify-private"];
+    "streaming",
+    "app-remote-control",];
     return 'https://accounts.spotify.com/authorize?client_id=' + CLIENT_ID +
       '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) +
       '&scope=' + encodeURIComponent(scopes.join(' ')) +
