@@ -161,7 +161,15 @@ class NowPlaying extends Component {
 
   render() {
     return (
-      <div className="np-container">
+      <div className="np-container" style={{zIndex: '100'}} >
+        
+        <div className="np-header">
+          <button className="np-logout" onClick={this.props.onLogout}>
+            logout
+          </button>
+          <div className="np-key"> {this.props.playlistKey}</div>
+        </div>
+
         <div className="np-imagecontainer">
           {this.props.currSong.songAlbum !== "N/A" ? (
             <img
@@ -173,10 +181,6 @@ class NowPlaying extends Component {
         </div>
         
         <div className="np-addons">
-          <div className="np-info">
-            <div className="np-info-songname">{this.props.currSong.songName}</div>
-            <div className="np-info-artist">{this.props.currSong.songArtist}</div>
-          </div>
           <div className="np-button-container">
               <a href={SpotifyFunctions.redirectUrlToSpotifyForLogin()}>
                 <button className="np-button">Token</button>

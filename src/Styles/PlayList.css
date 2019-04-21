@@ -1,14 +1,13 @@
 .pl-container {
     background-color: black;
     height: 100vh;
+    overflow: scroll;
 }
 
 .pl-header {
-    background-color: #383838;
     height: 40px;
     color: white;
     text-align: left;
-    position: sticky;
 }
 
 .pl-logout {
@@ -22,4 +21,8 @@
     margin-top: 10px;
     width: 80%;
     
+}
+
+.songlist-container {
+    padding-top: 400px;
 }

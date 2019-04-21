@@ -162,25 +162,34 @@ class PlayList extends Component {
     );
     return (
       <div className="pl-container">
-        <div className="pl-header">
+        {/* <div className="pl-header">
           <button className="pl-logout" onClick={this.props.onLogout}>
             logout
           </button>
           <div className="pl-key"> {this.props.playlistKey}</div>
           {adminHa}
-        </div>
+        </div> */}
         <NowPlaying
+          onLogout={this.props.onLogout}
+          playlistKey={this.props.playlistKey}
           playlistKey={this.props.playlistKey}
           currSong={this.state.currSong}
           nextSong={this.nextSong}
           admin={this.state.admin}
         />
-        {/* <SongList
+        <div className="songlist-container">
+          <div className="np-info">
+            <div className="np-info-songname">{this.state.currSong.songName}</div>
+            <div className="np-info-artist">{this.state.currSong.songArtist}</div>
+          </div>
+          <SongList
           playlistKey={this.props.playlistKey}
           songList={this.state.songList}
           currSong={this.state.currSong}
-        />
-        <SearchForm playlistKey={this.props.playlistKey} /> */}
+          />
+        </div>
+        <SearchForm playlistKey={this.props.playlistKey} />
+        
       </div>
     );
   }

@@ -4,20 +4,17 @@ body {
 
 .np-container {
     text-align: center;
-    position: fixed;
-    height: 60%;
+    height: 385px;
     width: 100%;
-    z-index: 0;
     background: linear-gradient(224deg, #ff8a19, #ff40e7, #f71919);
     background-size: 600% 600%;
-    border-top-left-radius: 200px;
+    position: absolute;
     border-bottom-right-radius: 200px;
     -webkit-animation: gradient 30s ease infinite;
     -moz-animation: gradient 30s ease infinite;
     animation: gradient 30s ease infinite;
-    border-top: 2px solid white;
     border-bottom: 2px solid white;
-    /* width: 100%; This was breaking front end */
+    box-shadow: 0 20px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 2);
 }
 
 @-webkit-keyframes gradient {
@@ -39,13 +36,8 @@ body {
 
 .np-addons{
     display: flex;
-    flex-direction: column;
-    background-color: white;
     color: black;
-    border-radius: 200px;
-    width: 90%;
     margin: auto;
-    margin-top: 20px;
 }
 
 .np-info {
@@ -61,7 +53,8 @@ body {
     margin-bottom: 2px;
     white-space: nowrap;
     overflow-x: scroll;
-    width: 165px;
+    width: 100%;
+    color: white;
 }
 
 .np-info-artist {
@@ -75,7 +68,7 @@ body {
     height: 300px;
     width: 300px;
     background-color: white;
-    margin-top: 100px;
+    margin-top: 10px;
     border-radius: 400px;
     box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -89,10 +82,10 @@ body {
 }
 
 .np-button-container{
-    margin-top: 5px;
+    margin-top: 10px;
     flex: 2;
-    text-align: right;
-    margin-right: 10px;
+    text-align: left;
+    margin-left: 5px;
 }
 
 .np-button {
