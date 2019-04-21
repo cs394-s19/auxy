@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+html {
+  background-color: black;
+}
+
 /* html {
   padding: 0;
   margin: 0;

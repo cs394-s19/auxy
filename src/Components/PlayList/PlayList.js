@@ -169,6 +169,7 @@ class PlayList extends Component {
           <div className="pl-key"> {this.props.playlistKey}</div>
           {adminHa}
         </div> */}
+      
         <NowPlaying
           onLogout={this.props.onLogout}
           playlistKey={this.props.playlistKey}
@@ -177,7 +178,7 @@ class PlayList extends Component {
           nextSong={this.nextSong}
           admin={this.state.admin}
         />
-        <div className="songlist-container">
+        <div style={{zIndex: '1000'}} className="songlist-container">
           <div className="np-info">
             <div className="np-info-songname">{this.state.currSong.songName}</div>
             <div className="np-info-artist">{this.state.currSong.songArtist}</div>
@@ -189,6 +190,8 @@ class PlayList extends Component {
           />
         </div>
         <SearchForm playlistKey={this.props.playlistKey} />
+
+        
         
       </div>
     );

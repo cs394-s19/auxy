@@ -161,13 +161,12 @@ class NowPlaying extends Component {
 
   render() {
     return (
-      <div className="np-container" style={{zIndex: '100'}} >
-        
+      <div className="np-container" style={{zIndex: '0'}} >
         <div className="np-header">
           <button className="np-logout" onClick={this.props.onLogout}>
-            logout
+            &lt;
           </button>
-          <div className="np-key"> {this.props.playlistKey}</div>
+          <div className="np-key"> JOIN: {this.props.playlistKey}</div>
         </div>
 
         <div className="np-imagecontainer">

@@ -20,9 +20,11 @@
     text-align: center;
     margin-top: 10px;
     width: 80%;
-    
 }
 
 .songlist-container {
-    padding-top: 400px;
+    padding-top: 420px;
+    background-color: black;
+    height: 92%;
+    overflow: scroll;
 }

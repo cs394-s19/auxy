@@ -108,7 +108,7 @@ class SearchForm extends Component {
       header = <h3>Search Results</h3>;
     }
     return (
-      <div className="search-container">
+      <div style={{zIndex: '4'}} className="search-container">
         <SlidingPane
           closeIcon={<div>x</div>}
           isOpen={ this.state.isSearchOpen }
