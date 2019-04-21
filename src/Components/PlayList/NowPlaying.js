@@ -163,16 +163,13 @@ class NowPlaying extends Component {
     return (
       <div className="np-container">
         <div className="np-imagecontainer">
-          {" "}
           {this.props.currSong.songAlbum !== "N/A" ? (
             <img
+              className="np-image"
               src={this.props.currSong.songAlbum}
               width="100%"
               aref="Song Album"
-            />
-          ) : (
-            ""
-          )}
+            />) : ("")}
         </div>
         
         <div className="np-addons">

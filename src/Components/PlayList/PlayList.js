@@ -175,11 +175,12 @@ class PlayList extends Component {
           nextSong={this.nextSong}
           admin={this.state.admin}
         />
-        <SongList
+        {/* <SongList
           playlistKey={this.props.playlistKey}
           songList={this.state.songList}
+          currSong={this.state.currSong}
         />
-        <SearchForm playlistKey={this.props.playlistKey} />
+        <SearchForm playlistKey={this.props.playlistKey} /> */}
       </div>
     );
   }
