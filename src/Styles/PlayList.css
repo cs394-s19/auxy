@@ -23,8 +23,14 @@
 }
 
 .songlist-container {
-    padding-top: 420px;
+    position: relative;
+    margin-top: 420px;
     background-color: black;
-    height: 92%;
-    overflow: scroll;
+    margin-bottom: 60px;
+}
+
+.searchform-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

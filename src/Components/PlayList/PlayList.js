@@ -178,7 +178,7 @@ class PlayList extends Component {
           nextSong={this.nextSong}
           admin={this.state.admin}
         />
-        <div style={{zIndex: '1000'}} className="songlist-container">
+        <div style={{zIndex: '2'}} className="songlist-container">
           <div className="np-info">
             <div className="np-info-songname">{this.state.currSong.songName}</div>
             <div className="np-info-artist">{this.state.currSong.songArtist}</div>
@@ -189,9 +189,9 @@ class PlayList extends Component {
           currSong={this.state.currSong}
           />
         </div>
-        <SearchForm playlistKey={this.props.playlistKey} />
-
-        
+        <div style={{zIndex: '3'}} className="searchform-container">
+          <SearchForm playlistKey={this.props.playlistKey} />
+        </div>
         
       </div>
     );
