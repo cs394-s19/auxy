@@ -33,14 +33,22 @@ class PlayList extends Component {
     db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .on("child_added", snap => {
+        // evaluate newSongScore to {0 if likedBy is undefined => happens when no uids in likedBy}
+        // or {likedBy.length if uids are present}
+        var newSongScore =
+          typeof snap.val().likedBy === "undefined"
+            ? 0
+            : Object.values(snap.val().likedBy).length;
+
         previousSongs.push({
           songId: snap.key,
           songName: snap.val().songName,
           songArtist: snap.val().songArtist,
-          songScore: snap.val().songScore,
+          songScore: newSongScore,
           songAlbum: snap.val().songAlbum,
           spotifyId: snap.val().spotifyId,
-          spotifyURI: snap.val().spotifyURI
+          spotifyURI: snap.val().spotifyURI,
+          likedBy: snap.val().likedBy
         });
 
         // Sort song rankings by score (need to refresh if multiple people on app)
@@ -66,14 +74,24 @@ class PlayList extends Component {
         });
       });
 
+    // If there is a change to one of the fields in songs => should only be triggered by a change in likedBy array
     db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .on("child_changed", snap => {
         for (var i = 0; i < previousSongs.length; i++) {
+          // Find the song that was changed by comparing it's songId to snap.key
           if (previousSongs[i].songId === snap.key) {
-            previousSongs[i].songScore++;
+            // Calculate new song score {0 if likedBy is undefined or 0 elements} {otherwise length of likedSongs}
+            var newSongScore =
+              typeof snap.val().likedBy === "undefined"
+                ? 0
+                : Object.values(snap.val().likedBy).length;
+            // Update previous songs with new score
+            previousSongs[i].songScore = newSongScore;
           }
         }
+
+        // Re-sort songs and push to state
         var sortedSongs = previousSongs;
         sortedSongs.sort((a, b) => b.songScore - a.songScore);
 
@@ -84,6 +102,7 @@ class PlayList extends Component {
 
     // THERE HAS TO BE A BETTER WAY TO GET THE CHILD OBJECT
     // MY NESTED DB.REFS IS PROBABLY NOT THE WAY TO GO
+    // When currSong is changed in database, changes the state to follow change
     db.ref("playlists/" + this.props.playlistKey)
       .child("currSong")
       .on("child_changed", snap => {
@@ -95,6 +114,7 @@ class PlayList extends Component {
           });
       });
 
+    //Similar to child_added of songlists, basically just fetches currSong from db
     db.ref("playlists/" + this.props.playlistKey)
       .child("currSong")
       .on("child_added", snap => {
@@ -106,7 +126,7 @@ class PlayList extends Component {
           });
       });
 
-    // On component mount -- check if userid matches hostid and change admin state depending on that
+    // On component mount -- check if userid matches hostid and change admin state depending on that result
     this.checkAdmin();
   }
 
@@ -115,6 +135,7 @@ class PlayList extends Component {
       .orderByChild("hostUID")
       .equalTo(this.props.uid)
       .once("value", snapshot => {
+        // Snapshot exists if hostUID is equalTo current user uid
         if (snapshot.exists()) {
           this.setState({ admin: true });
         } else {
@@ -132,6 +153,13 @@ class PlayList extends Component {
         var nextsong;
         if (this.state.songList.length > 0) {
           nextsong = this.state.songList[0];
+
+          // SHIT CODE ALERT [2am and I cant think]:
+          // likedBy was being passed as undefined (issue changing state on update) causing an error in firebase
+          // so I made it not be undefined (anyways score doesnt matter in nowplaying)
+          if (typeof nextsong.likedBy === "undefined") {
+            nextsong.likedBy = "EMPTY";
+          }
           this.popSongQueue();
         } else {
           nextsong = {
@@ -140,6 +168,7 @@ class PlayList extends Component {
             songAlbum: "N/A"
           };
         }
+        // console.log(nextsong);
         db.ref("playlists/" + this.props.playlistKey).update({
           currSong: nextsong
         });
@@ -186,13 +215,10 @@ class PlayList extends Component {
           <SongList
           playlistKey={this.props.playlistKey}
           songList={this.state.songList}
-          currSong={this.state.currSong}
-          />
-        </div>
-        <div style={{zIndex: '3'}} className="searchform-container">
-          <SearchForm playlistKey={this.props.playlistKey} />
-        </div>
-        
+          uid={this.props.uid}
+        />
+        <SearchForm playlistKey={this.props.playlistKey} />
+      </div>
       </div>
     );
   }
