@@ -88,11 +88,13 @@ body {
     overflow-x: scroll;
     width: 100%;
     color: black;
+    font-weight: 500;
 }
 
 .np-info-artist {
     font-size: 14px;
     color: black;
+    font-weight: 300;
 }
 
 .np-imagecontainer{
