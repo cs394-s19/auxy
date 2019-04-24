@@ -42,6 +42,7 @@ class SongList extends Component {
               songId={song.songId}
               playlistKey={this.props.playlistKey}
               uid={this.props.uid}
+              admin={this.props.admin}
             />
           </div>
         );

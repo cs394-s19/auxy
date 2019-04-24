@@ -64,9 +64,11 @@ class SongBlock extends Component {
   render() {
     return (
       <div className="sb-container">
-        <button className="sb-delete" onClick={() => this.handleDelete(this.props.songId)}>
-          x
-        </button>
+        {this.props.admin ? (
+          <button className="sb-delete" onClick={() => this.handleDelete(this.props.songId)}>
+            x
+          </button>
+        ) : null}
         <div className="sb-info">
           <div className="sb-info-songname">{this.props.songName}</div>
           <div className="sb-info-songartist">{this.props.songArtist}</div>

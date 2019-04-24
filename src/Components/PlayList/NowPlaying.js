@@ -179,17 +179,20 @@ class NowPlaying extends Component {
             />) : ("")}
         </div>
         
-        <div className="np-addons">
-          <div className="np-button-container">
-              <a href={SpotifyFunctions.redirectUrlToSpotifyForLogin()}>
-                <button className="np-button">Token</button>
-              </a>
-              <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button>
-              <button className="np-button" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>Play</button>
-              <button className="np-button" onClick={this.props.nextSong}> Next
-            </button>
+        {this.state.admin ? (
+          <div className="np-addons">
+            <div className="np-button-container">
+                <a href={SpotifyFunctions.redirectUrlToSpotifyForLogin()}>
+                  <button className="np-button">Token</button>
+                </a>
+                <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button>
+                <button className="np-button" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>Play</button>
+                <button className="np-button" onClick={this.props.nextSong}> Next
+              </button>
+            </div>
           </div>
-        </div>
+          ) : null}
+
         {/* <div className="song-info">
             <div className="song-name">{this.state.songName}</div>
             <div className="song-artist">{this.state.songArtist}</div>
