@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../../Styles/SongBlock.css";
 import app from "../../Config/db";
 
+import upvotestencil from "../../Images/upvotestencil.svg"
+
 const db = app.database();
 
 class SongBlock extends Component {
@@ -20,7 +22,7 @@ class SongBlock extends Component {
           db.ref("playlists/" + this.props.playlistKey + "/songs/" + songId)
             .child("likedBy")
             .push(this.props.uid);
-        } else {
+        } else { 
           // Remove user from likedBy (dislike song)
           var keyToRemove = Object.keys(snapshot.val())[0];
           db.ref(
@@ -73,7 +75,9 @@ class SongBlock extends Component {
         </div>
         <div className="sb-score">{this.props.songScore}</div>
 
-        <button className="sb-upvote" onClick={() => this.handleLike(this.props.songId)}>+</button>
+        <button className="sb-upvote" onClick={() => this.handleLike(this.props.songId)}>
+          <img className="sb-upvote-stencil" src={upvotestencil} alt="+" />
+        </button>
       </div>
     );
   }
