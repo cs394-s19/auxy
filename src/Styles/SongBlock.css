@@ -3,19 +3,24 @@ body {
 }
 
 .sb-container {
-    color: white;
+    color: black;
     text-align: left;
     height: 60px;
     display: flex;
+    border-top: 1px solid lightgrey;
+    padding-top: 5px;
+    margin-bottom: 5px;
 }
 
 .sb-info {
     flex: 4;
+    
 }
 
 .sb-info-songartist {
     font-size: 14px;
-    color: #d1d1d1;
+    font-weight: 300;
+    color: black;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -23,6 +28,7 @@ body {
 
 .sb-info-songname {
     font-size: 18px;
+    font-weight: 500;
     margin-bottom: 2px;
     margin-top: 8px;
     text-overflow: ellipsis;
