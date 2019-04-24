@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PlayList from "./Components/PlayList/PlayList";
 import "./App.css";
 import Homepage from "./Components/HomePage/Homepage";
+import Host from "./Components/Host/Host";
+import Join from "./Components/Join/Join";
 import app from "./Config/db";
 import "firebase/auth";
 
@@ -15,10 +17,14 @@ class App extends Component {
       key: 0,
       HomePage: true,
       PlayList: false,
-      CreatePlayList: false,
-      JoinPlayList: false,
+      Host: false,
+      Join: false,
       uid: null
     };
+
+    this.handleClickHost = this.handleClickHost.bind(this);
+    this.handleClickJoin = this.handleClickJoin.bind(this);
+
     this.handleHostClick = this.handleHostClick.bind(this);
     this.handleUserClick = this.handleUserClick.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -64,6 +70,20 @@ class App extends Component {
       this.setState({
         keys: keys
       });
+    });
+  }
+
+  handleClickHost() {
+    this.setState({
+      HomePage: false,
+      Host: true
+    });
+  }
+
+  handleClickJoin() {
+    this.setState({
+      HomePage: false,
+      Join: true
     });
   }
 
@@ -116,10 +136,23 @@ class App extends Component {
     if (this.state.HomePage)
       return (
         <Homepage
-          onUserClick={this.handleUserClick}
-          onHostClick={this.handleHostClick}
+          onClickHost={this.handleClickHost}
+          onClickJoin={this.handleClickJoin}
         />
       );
+
+    else if (this.state.Host)
+      return (
+        <Host 
+        />
+      );
+
+    else if (this.state.Join)
+      return (
+        <Join 
+        />
+      );
+
     else if (this.state.PlayList)
       return (
         <PlayList
@@ -129,10 +162,6 @@ class App extends Component {
         />
       );
     else return;
-    // else if (this.state.JoinPlayList)
-    //   return <JoinPlayList />;
-    // else if (this.state.CreatePlayList)
-    //   return <CreatePlayList />;
   }
 }
 

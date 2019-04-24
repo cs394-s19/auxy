@@ -46,16 +46,13 @@ class Homepage extends Component {
            /> 
           
           <div className='sub-text'>a playlist for your occasion, by your occasion</div>
-          <StyledButton onClick={this.handleHostClick}>Host</StyledButton>
-          <StyledButton onClick={this.handleUserClick}>join</StyledButton>
+          <StyledButton onClick={this.props.onClickHost}>Host</StyledButton>
+          <StyledButton onClick={this.props.onClickJoin}>join</StyledButton>
         </div>
       </div>
     );
   }
 }
-
-{/* <input onChange={e => {this.handleHostInput(e);}}/> */ }
-{/* <input onChange={e => {this.handleUserInput(e);}}/> */ }
 
 const StyledButton = withStyles({
   root: {
