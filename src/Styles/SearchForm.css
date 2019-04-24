@@ -9,7 +9,7 @@
   width: auto;
   font-size: 16px;
   padding: 12px 20px 12px 40px;
-  /*border: 1px solid #ddd;*/
+  border: 1px solid #ddd;
   margin-bottom: 12px;
   background-size: 30px 25px;
 }
@@ -44,6 +44,6 @@
   padding: 10px 10px !important;
   -webkit-flex: 1 1 auto;
   flex: 1 1 auto;
-  background-color: black;
-  color: white;
+  background-color:white;
+  color: snow;
 }
