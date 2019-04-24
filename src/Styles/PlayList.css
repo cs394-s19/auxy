@@ -1,12 +1,12 @@
 .pl-container {
-    background-color: black;
+    background-color: white;
     height: 100vh;
     overflow: scroll;
 }
 
 .pl-header {
     height: 40px;
-    color: white;
+    color: black;
     text-align: left;
 }
 
@@ -25,7 +25,7 @@
 .songlist-container {
     position: relative;
     margin-top: 420px;
-    background-color: black;
+    background-color: white;
     min-height: 100%;
 }
 
