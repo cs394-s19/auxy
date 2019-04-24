@@ -50,8 +50,8 @@ class ResultSong extends Component {
   render() {
     return (
       <div onClick={() => this.addSong()}>
-        Song: {this.props.result.name} <br />
-        Artists: {this.props.result.artists[0].name}
+        <span style={{fontSize: "120%"}}> {this.props.result.name} </span><br />
+        {this.props.result.artists[0].name}
         <br />
         <br />
       </div>

@@ -6,7 +6,7 @@
   background-image:url('searchicon.png');
   background-position: 10px 12px;
   background-repeat: no-repeat;
-  width: 20%;
+  width: auto;
   font-size: 16px;
   padding: 12px 20px 12px 40px;
   /*border: 1px solid #ddd;*/
@@ -36,4 +36,14 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+.slide-pane__content {
+  position: relative;
+  overflow-y: auto;
+  padding: 10px 10px !important;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  background-color: black;
+  color: white;
 }
