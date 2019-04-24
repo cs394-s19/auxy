@@ -44,8 +44,8 @@ body {
 }
 
 .sb-delete {
-    color: white;
-    background-color: black;
+    color: lightgrey;
+    background-color: whitesmoke;
     margin-top: 14px;
     margin-right: 10px;
     margin-left: 10px;
@@ -55,11 +55,13 @@ body {
     border-width: 2px;
     height: 30px;
     font-weight: bolder;
+    border: none;
 }
 
 .sb-upvote {
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
+    border: 1px solid whitesmoke;
     margin-top: 14px;
     margin-right: 10px;
     margin-left: 5px;
