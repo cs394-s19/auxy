@@ -9,6 +9,7 @@ body {
     display: flex;
     padding-top: 5px;
     margin-bottom: 5px;
+    padding-left: 10px;
 }
 
 .sb-info {
@@ -47,7 +48,6 @@ body {
     background-color: whitesmoke;
     margin-top: 14px;
     margin-right: 10px;
-    margin-left: 10px;
     padding-right: 10px;
     padding-left: 10px;
     border-radius: 50px;
