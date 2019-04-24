@@ -14,5 +14,5 @@ var redirect_urls = {
 }
 
 var spotifyApiToken =
-  "BQBx2-e8B4YUyolHCV0iOroKu-KJ3I30hkowdwL27qmD8XkFip606KvxY9wmAbwJElP0wPlh-REvShNOXe5jQ4BWyOSx-Et2PFdCmLVPoQ-PUraDbKovMrmPh8mrLE2iLHl7FWlPJYakQV69Fa1v7Zv1nOczUXFX7go0CIV3";
+  "BQAHW1t9WG0qQ7sLzVYApTiBjg6rYmhDY6QCpULQr0WbKoF2P7-mAeO35X9l43evBPviS223AOhGNFXoegqha5bBzgT9awRiJNGCzaMkfdXWFkKH0GIc6v-n-a97LGrRhCpuE7txpYbDPa-ssnyp4tSrpQLfkqBT67OYhZCa48jBFxK6qptj9NAt";
 export { spotifyApi, spotifyApiToken, redirect_urls, clientId };
