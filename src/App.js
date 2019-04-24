@@ -25,8 +25,8 @@ class App extends Component {
     this.handleClickHost = this.handleClickHost.bind(this);
     this.handleClickJoin = this.handleClickJoin.bind(this);
 
-    this.handleHostClick = this.handleHostClick.bind(this);
-    this.handleUserClick = this.handleUserClick.bind(this);
+    this.handleHostKey = this.handleHostKey.bind(this);
+    this.handleJoinKey = this.handleJoinKey.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
 
@@ -87,7 +87,7 @@ class App extends Component {
     });
   }
 
-  handleHostClick(key) {
+  handleHostKey(key) {
     for (var i = 0; i < this.state.keys.length; i++) {
       if (this.state.keys[i] === key) {
         alert("Key Already Exists");
@@ -99,7 +99,7 @@ class App extends Component {
       hostUID: this.state.uid
     });
 
-    this.setState({ key: key, HomePage: false, PlayList: true });
+    this.setState({ key: key, HomePage: false, Host: false, Join: false, PlayList: true });
 
     // this.setState({ key: key, HomePage: false, PlayList: true }, () => {
     //   localStorage.setItem("key", key);
@@ -108,10 +108,10 @@ class App extends Component {
     // });
   }
 
-  handleUserClick(key) {
+  handleJoinKey(key) {
     for (var i = 0; i < this.state.keys.length; i++) {
       if (this.state.keys[i] === key) {
-        this.setState({ key: key, HomePage: false, PlayList: true });
+        this.setState({ key: key, HomePage: false, Host: false, Join: false, PlayList: true });
         // this.setState({ key: key, HomePage: false, PlayList: true }, () => {
         //   localStorage.setItem("key", key);
         //   localStorage.setItem("HomePage", false);
@@ -124,7 +124,7 @@ class App extends Component {
   }
 
   handleLogout() {
-    this.setState({ key: 0, HomePage: true, PlayList: false });
+    this.setState({ key: 0, HomePage: true, Host: false, Join: false, PlayList: false });
     // this.setState({ key: 0, HomePage: true, PlayList: false }, () => {
     //   localStorage.setItem("key", 0);
     //   localStorage.setItem("HomePage", true);
@@ -144,12 +144,16 @@ class App extends Component {
     else if (this.state.Host)
       return (
         <Host 
+          onHostKey={this.handleHostKey}
+          onBack={this.handleLogout}
         />
       );
 
     else if (this.state.Join)
       return (
         <Join 
+          onJoinKey={this.handleJoinKey}
+          onBack={this.handleLogout}
         />
       );
 
