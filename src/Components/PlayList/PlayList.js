@@ -216,6 +216,7 @@ class PlayList extends Component {
           playlistKey={this.props.playlistKey}
           songList={this.state.songList}
           uid={this.props.uid}
+          admin={this.state.admin}
         />
         <SearchForm playlistKey={this.props.playlistKey} />
       </div>
