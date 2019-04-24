@@ -207,7 +207,7 @@ class PlayList extends Component {
           nextSong={this.nextSong}
           admin={this.state.admin}
         />
-        <div style={{zIndex: '2'}} className="songlist-container">
+        <div className="songlist-container">
           <div className="np-info">
             <div className="np-info-songname">{this.state.currSong.songName}</div>
             <div className="np-info-artist">{this.state.currSong.songArtist}</div>
