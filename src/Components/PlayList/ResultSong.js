@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import app from "../../Config/db";
-
+import {ListGroupItem,CardColumns, Card} from 'react-bootstrap'
+import "../../Styles/PlayList.css";
 const db = app.database();
 
 class ResultSong extends Component {
@@ -49,11 +50,10 @@ class ResultSong extends Component {
 
   render() {
     return (
-      <div onClick={() => this.addSong()}>
-        <span style={{fontSize: "120%"}}> {this.props.result.name} </span><br />
-        {this.props.result.artists[0].name}
-        <br />
-        <br />
+      <div className='sb-container' onClick={() => this.addSong()}>
+       <div className="np-info-songname">{this.props.result.name} </div> 
+       <div className="np-info-artist">{this.props.result.artists[0].name}</div>
+        
       </div>
     );
   }
