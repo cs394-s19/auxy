@@ -8,6 +8,7 @@ class Join extends Component {
     };
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleUserClick = this.handleUserClick.bind(this);
+    this.enterPressed = this.enterPressed.bind(this);
   }
 
   handleUserInput(e) {
@@ -16,6 +17,12 @@ class Join extends Component {
 
   handleUserClick() {
     this.props.onJoinKey(this.state.userKey);
+  }
+
+  enterPressed(e) {
+    if (e.key === 'Enter') {
+      this.handleUserClick();
+    }
   }
 
   render() {
@@ -27,8 +34,11 @@ class Join extends Component {
           </button>
         </div>
         <div>
-          <input onChange={e => {this.handleUserInput(e);}}/>
-          <button onClick={this.handleUserClick}>Join</button>
+          <input
+            onChange={e => {this.handleUserInput(e);}}
+            onKeyPress={this.enterPressed}
+          />
+          <button onClick={this.handleUserClick}>JOIN</button>
         </div>
       </div>
     );
