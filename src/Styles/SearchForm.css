@@ -38,6 +38,10 @@
   width: 100%;
 }
 
+.slide-pane__header{
+  display:none !important;
+  
+}
 .slide-pane__content {
   position: relative;
   overflow-y: auto;
@@ -46,4 +50,10 @@
   flex: 1 1 auto;
   background-color:white;
   color: snow;
+  height:30vh !important;
+}
+
+.ReactModal__Content {
+  height: 60vh !important;
+  margin-top: 36vh !important;
 }
