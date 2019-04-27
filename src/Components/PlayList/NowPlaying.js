@@ -24,7 +24,6 @@ class NowPlaying extends Component {
       position: -1,
       duration: 0,
       connected: false,
-      admin: props.admin
     };
     this.playerCheckInterval = null;
   }
@@ -34,7 +33,7 @@ class NowPlaying extends Component {
     //which will then redirect back to your site with the hash. If there is a hash, then we will jump right into the player
 
     const accessToken = SpotifyFunctions.checkUrlForSpotifyAccessToken();
-    if (accessToken && this.props.admin) {
+    if (accessToken) {
       this.setState({ token: accessToken });
       db.ref("playlists/" + this.props.playlistKey + "/spotifyToken").set({
         token: accessToken
@@ -228,14 +227,6 @@ class NowPlaying extends Component {
             </div>
           </div>
         ) : null}
-
-        {/* <div className="song-info">
-            <div className="song-name">{this.state.songName}</div>
-            <div className="song-artist">{this.state.songArtist}</div>
-          </div>
-            <div className="song-cover-container">
-              <img className="song-cover" src={starboycover} alt="starboycover" />
-            </div> */}
       </div>
     );
   }
