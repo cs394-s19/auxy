@@ -116,7 +116,15 @@ class SearchForm extends Component {
       </div>
     );
   }
-
+  handleSearchButton()
+{
+  if (this.state.isSearchOpen==false){
+  this.setState({ isSearchOpen: true })
+  }
+  else{
+    this.setState({ isSearchOpen: false })
+  }
+}
   renderResults(results) {
     return (
       <div>
@@ -139,7 +147,6 @@ class SearchForm extends Component {
       <div style={{ zIndex: "6" }} className="search-container">
         <SlidingPane
           style={{ backgroundcolor: "white" }}
-          closeIcon={<div>x</div>}
           isOpen={this.state.isSearchOpen}
           title="Add a Banger"
           from="bottom"
@@ -154,7 +161,7 @@ class SearchForm extends Component {
         </SlidingPane>
         <button
           className="search-button"
-          onClick={() => this.setState({ isSearchOpen: true })}
+          onClick={()=>this.handleSearchButton()}
         >
           ADD A BANGER
         </button>
