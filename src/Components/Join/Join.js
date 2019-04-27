@@ -4,7 +4,7 @@ class Join extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hostKey: 0,
+      hostKey: null,
     };
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleUserClick = this.handleUserClick.bind(this);

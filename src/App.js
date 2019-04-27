@@ -14,7 +14,7 @@ class App extends Component {
     super(props);
     this.state = {
       keys: [],
-      key: 0,
+      key: null,
       HomePage: true,
       PlayList: false,
       Host: false,

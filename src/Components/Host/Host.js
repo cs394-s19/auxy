@@ -4,7 +4,7 @@ class Host extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hostKey: 0,
+      hostKey: null,
     };
     this.handleHostInput = this.handleHostInput.bind(this);
     this.handleHostClick = this.handleHostClick.bind(this);
@@ -16,7 +16,12 @@ class Host extends Component {
   }
 
   handleHostClick() {
-    this.props.onHostKey(this.state.hostKey);
+    if (this.state.hostKey === null || this.state.hostKey === '') {
+      alert("No Key Detected");
+    }
+    else {
+      this.props.onHostKey(this.state.hostKey);
+    }
   }
 
   enterPressed(e) {
