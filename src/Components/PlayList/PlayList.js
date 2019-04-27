@@ -131,19 +131,20 @@ class PlayList extends Component {
   }
 
   checkAdmin() {
-    db.ref("playlists/" + this.props.playlistKey)
-      .orderByChild("hostUID")
-      .equalTo(this.props.uid)
-      .once("value", snapshot => {
+    db.ref("playlists/" + this.props.playlistKey + "/host").once(
+      "value",
+      snapshot => {
         // Snapshot exists if hostUID is equalTo current user uid
         if (snapshot.exists()) {
+          if (Object.values(snapshot.val())[0] !== this.props.uid) return;
+          console.log(snapshot.val());
           this.setState({ admin: true });
         } else {
           this.setState({ admin: false });
         }
-      });
+      }
+    );
   }
-
   // Makes current song the first item in song queue and pops song queue
   // OR if no song left in queue makes current song an N/A
   nextSong() {
@@ -198,7 +199,7 @@ class PlayList extends Component {
           <div className="pl-key"> {this.props.playlistKey}</div>
           {adminHa}
         </div> */}
-      
+
         <NowPlaying
           onLogout={this.props.onLogout}
           playlistKey={this.props.playlistKey}
@@ -209,17 +210,21 @@ class PlayList extends Component {
         />
         <div className="songlist-container">
           <div className="np-info">
-            <div className="np-info-songname">{this.state.currSong.songName}</div>
-            <div className="np-info-artist">{this.state.currSong.songArtist}</div>
+            <div className="np-info-songname">
+              {this.state.currSong.songName}
+            </div>
+            <div className="np-info-artist">
+              {this.state.currSong.songArtist}
+            </div>
           </div>
           <SongList
-          playlistKey={this.props.playlistKey}
-          songList={this.state.songList}
-          uid={this.props.uid}
-          admin={this.state.admin}
-        />
-        <SearchForm playlistKey={this.props.playlistKey} />
-      </div>
+            playlistKey={this.props.playlistKey}
+            songList={this.state.songList}
+            uid={this.props.uid}
+            admin={this.state.admin}
+          />
+          <SearchForm playlistKey={this.props.playlistKey} />
+        </div>
       </div>
     );
   }

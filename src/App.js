@@ -31,13 +31,15 @@ class App extends Component {
   }
 
   componentWillMount() {
-    // localStorage.getItem("key") &&
-    //   this.setState({
-    //     key: JSON.parse(localStorage.getItem("key")),
-    //     HomePage: JSON.parse(localStorage.getItem("HomePage")),
-    //     PlayList: JSON.parse(localStorage.getItem("PlayList")),
-    //     CreatePlayList: JSON.parse(localStorage.getItem("CreatePlayList"))
-    //   });
+    localStorage.getItem("key") &&
+      this.setState({
+        key: JSON.parse(localStorage.getItem("key")),
+        HomePage: JSON.parse(localStorage.getItem("HomePage")),
+        PlayList: JSON.parse(localStorage.getItem("PlayList")),
+        CreatePlayList: JSON.parse(localStorage.getItem("CreatePlayList")),
+        Host: JSON.parse(localStorage.getItem("Host")),
+        Join: JSON.parse(localStorage.getItem("Join"))
+      });
 
     app.auth().onAuthStateChanged(
       // ANONYMOUS LOGIN HERE => Generates a new uid if not logged in (new user); otherwise uid=user's pre-existing uid
@@ -75,17 +77,39 @@ class App extends Component {
   }
 
   handleClickHost() {
-    this.setState({
-      HomePage: false,
-      Host: true
-    });
+    // this.setState({
+    //   HomePage: false,
+    //   Host: true
+    // });
+
+    this.setState(
+      {
+        HomePage: false,
+        Host: true
+      },
+      () => {
+        localStorage.setItem("HomePage", false);
+        localStorage.setItem("Host", true);
+      }
+    );
   }
 
   handleClickJoin() {
-    this.setState({
-      HomePage: false,
-      Join: true
-    });
+    // this.setState({
+    //   HomePage: false,
+    //   Join: true
+    // });
+
+    this.setState(
+      {
+        HomePage: false,
+        Join: true
+      },
+      () => {
+        localStorage.setItem("HomePage", false);
+        localStorage.setItem("Join", true);
+      }
+    );
   }
 
   handleHostKey(key) {
@@ -100,24 +124,52 @@ class App extends Component {
       hostUID: this.state.uid
     });
 
-    this.setState({ key: key, HomePage: false, Host: false, Join: false, PlayList: true });
-
-    // this.setState({ key: key, HomePage: false, PlayList: true }, () => {
-    //   localStorage.setItem("key", key);
-    //   localStorage.setItem("HomePage", false);
-    //   localStorage.setItem("PlayList", true);
+    // this.setState({
+    //   key: key,
+    //   HomePage: false,
+    //   Host: false,
+    //   Join: false,
+    //   PlayList: true
     // });
+
+    this.setState(
+      { key: key, HomePage: false, PlayList: true, Join: false, Host: false },
+      () => {
+        localStorage.setItem("key", key);
+        localStorage.setItem("HomePage", false);
+        localStorage.setItem("PlayList", true);
+        localStorage.setItem("Host", false);
+        localStorage.setItem("Join", false);
+      }
+    );
   }
 
   handleJoinKey(key) {
     for (var i = 0; i < this.state.keys.length; i++) {
       if (this.state.keys[i] === key) {
-        this.setState({ key: key, HomePage: false, Host: false, Join: false, PlayList: true });
-        // this.setState({ key: key, HomePage: false, PlayList: true }, () => {
-        //   localStorage.setItem("key", key);
-        //   localStorage.setItem("HomePage", false);
-        //   localStorage.setItem("PlayList", true);
+        // this.setState({
+        //   key: key,
+        //   HomePage: false,
+        //   Host: false,
+        //   Join: false,
+        //   PlayList: true
         // });
+        this.setState(
+          {
+            key: key,
+            HomePage: false,
+            PlayList: true,
+            Join: false,
+            Host: false
+          },
+          () => {
+            localStorage.setItem("key", key);
+            localStorage.setItem("HomePage", false);
+            localStorage.setItem("PlayList", true);
+            localStorage.setItem("Host", false);
+            localStorage.setItem("Join", false);
+          }
+        );
         return;
       }
     }
@@ -125,12 +177,23 @@ class App extends Component {
   }
 
   handleLogout() {
-    this.setState({ key: 0, HomePage: true, Host: false, Join: false, PlayList: false });
-    // this.setState({ key: 0, HomePage: true, PlayList: false }, () => {
-    //   localStorage.setItem("key", 0);
-    //   localStorage.setItem("HomePage", true);
-    //   localStorage.setItem("PlayList", false);
-    // });
+    this.setState({
+      key: 0,
+      HomePage: true,
+      Host: false,
+      Join: false,
+      PlayList: false
+    });
+    this.setState(
+      { key: 0, HomePage: true, PlayList: false, Join: false, Host: false },
+      () => {
+        localStorage.setItem("key", 0);
+        localStorage.setItem("HomePage", true);
+        localStorage.setItem("PlayList", false);
+        localStorage.setItem("Host", false);
+        localStorage.setItem("Join", false);
+      }
+    );
   }
 
   render() {
@@ -141,23 +204,10 @@ class App extends Component {
           onClickJoin={this.handleClickJoin}
         />
       );
-
     else if (this.state.Host)
-      return (
-        <Host 
-          onHostKey={this.handleHostKey}
-          onBack={this.handleLogout}
-        />
-      );
-
+      return <Host onHostKey={this.handleHostKey} onBack={this.handleLogout} />;
     else if (this.state.Join)
-      return (
-        <Join 
-          onJoinKey={this.handleJoinKey}
-          onBack={this.handleLogout}
-        />
-      );
-
+      return <Join onJoinKey={this.handleJoinKey} onBack={this.handleLogout} />;
     else if (this.state.PlayList)
       return (
         <PlayList
