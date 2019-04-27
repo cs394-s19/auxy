@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 import * as SpotifyFunctions from './spotifyFunctions'
 // import "../Styles/NowPlaying.css";
 
+import app from "../../Config/db";
+const db = app.database();
+
 class NowPlaying extends Component {
   constructor(props) {
     super(props);
@@ -30,9 +33,29 @@ class NowPlaying extends Component {
   componentDidMount(){
     //will check URL for accessToken hash. If it's not there, it will show the connect-spotify-button as a link
     //which will then redirect back to your site with the hash. If there is a hash, then we will jump right into the player
-        const accessToken = SpotifyFunctions.checkUrlForSpotifyAccessToken();
-        accessToken ? this.setState({token: accessToken}) : this.setState({token: null});
+      const accessToken = SpotifyFunctions.checkUrlForSpotifyAccessToken();
+      // accessToken ? this.setState({token: accessToken}) : this.setState({token: null});
+      if (accessToken) {
+        this.setState({ token: accessToken });
+        db.ref("playlists/" + this.props.playlistKey + "/spotifyToken").set({
+          token: accessToken
+        });
+      } else {
+        this.lookForToken();
+      }
     }
+  
+  lookForToken() {
+    db.ref("playlists/" + this.props.playlistKey + "/spotifyToken").once(
+      "value",
+      snapshot => {
+        if (snapshot.exists()) {
+          const foundToken = Object.values(snapshot.val())[0];
+          this.setState({ token: foundToken });
+        }
+      }
+    );
+  }
 
   //this checks that the Spotify Player is Loaded. Notice in Public/index.html we load the Spotify Web Player.
   // Once it loads in the window, we can initialize an instance with a current Host token.
