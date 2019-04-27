@@ -138,6 +138,7 @@ class SearchForm extends Component {
     return (
       <div style={{ zIndex: "6" }} className="search-container">
         <SlidingPane
+          style={{ backgroundcolor: "white" }}
           closeIcon={<div>x</div>}
           isOpen={this.state.isSearchOpen}
           title="Add a Banger"
