@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import app from "../../Config/db";
-import {ListGroupItem,CardColumns, Card} from 'react-bootstrap'
+import { ListGroupItem, CardColumns, Card } from "react-bootstrap";
 import "../../Styles/PlayList.css";
 const db = app.database();
 
@@ -39,7 +39,6 @@ class ResultSong extends Component {
       .push()
       .set({
         songName: this.props.result.name,
-        songScore: 0,
         songArtist: this.props.result.artists[0].name,
         songAlbum: this.props.result.album.images[0].url,
         spotifyId: this.props.result.id,
@@ -50,10 +49,11 @@ class ResultSong extends Component {
 
   render() {
     return (
-      <div className='sb-container1' onClick={() => this.addSong()}>
-       <div className="np-info-songname">{this.props.result.name} </div> 
-       <div className="np-info-artist">{this.props.result.artists[0].name}</div>
-        
+      <div className="sb-container1" onClick={() => this.addSong()}>
+        <div className="np-info-songname">{this.props.result.name} </div>
+        <div className="np-info-artist">
+          {this.props.result.artists[0].name}
+        </div>
       </div>
     );
   }
