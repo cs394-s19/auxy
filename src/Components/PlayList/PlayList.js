@@ -131,21 +131,20 @@ class PlayList extends Component {
   }
 
   checkAdmin() {
-    console.log("Checking admin");
-    db.ref("playlists/" + this.props.playlistKey + "/host")
-      .orderByChild("hostUID")
-      .equalTo(this.props.uid)
-      .once("value", snapshot => {
+    db.ref("playlists/" + this.props.playlistKey + "/host").once(
+      "value",
+      snapshot => {
+        // Snapshot exists if hostUID is equalTo current user uid
         if (snapshot.exists()) {
-          if (Object.values(snapshot.val())[0] !== this.props.uid) {
-            this.setState({ admin: false });
-          } else {
-            this.setState({ admin: true });
-          }
+          if (Object.values(snapshot.val())[0] !== this.props.uid) return;
+          console.log(snapshot.val());
+          this.setState({ admin: true });
+        } else {
+          this.setState({ admin: false });
         }
-      });
+      }
+    );
   }
-
   // Makes current song the first item in song queue and pops song queue
   // OR if no song left in queue makes current song an N/A
   nextSong() {
