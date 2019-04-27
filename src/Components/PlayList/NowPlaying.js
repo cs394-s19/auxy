@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import "../../Styles/NowPlaying.css";
 import { spotifyApiToken } from "../../Config/spotify";
 import PropTypes from "prop-types";
-import * as SpotifyFunctions from './spotifyFunctions'
+import * as SpotifyFunctions from "./spotifyFunctions";
 // import "../Styles/NowPlaying.css";
+import app from "../../Config/db";
+const db = app.database();
 
 class NowPlaying extends Component {
   constructor(props) {
@@ -22,18 +24,36 @@ class NowPlaying extends Component {
       position: -1,
       duration: 0,
       connected: false,
-      admin: props.admin
     };
     this.playerCheckInterval = null;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     //will check URL for accessToken hash. If it's not there, it will show the connect-spotify-button as a link
     //which will then redirect back to your site with the hash. If there is a hash, then we will jump right into the player
-        const accessToken = SpotifyFunctions.checkUrlForSpotifyAccessToken();
-        accessToken ? this.setState({token: accessToken}) : this.setState({token: null});
-    }
 
+    const accessToken = SpotifyFunctions.checkUrlForSpotifyAccessToken();
+    if (accessToken) {
+      this.setState({ token: accessToken });
+      db.ref("playlists/" + this.props.playlistKey + "/spotifyToken").set({
+        token: accessToken
+      });
+    } else {
+      this.lookForToken();
+    }
+  }
+
+  lookForToken() {
+    db.ref("playlists/" + this.props.playlistKey + "/spotifyToken").once(
+      "value",
+      snapshot => {
+        if (snapshot.exists()) {
+          const foundToken = Object.values(snapshot.val())[0];
+          this.setState({ token: foundToken });
+        }
+      }
+    );
+  }
   //this checks that the Spotify Player is Loaded. Notice in Public/index.html we load the Spotify Web Player.
   // Once it loads in the window, we can initialize an instance with a current Host token.
   checkForPlayer() {
@@ -51,7 +71,7 @@ class NowPlaying extends Component {
 
       // finally, connect!
       this.player.connect();
-      this.setState({connected: true})
+      this.setState({ connected: true });
     }
     console.log(`uri is ${this.props.currSong.spotifyURI}`);
   }
@@ -125,8 +145,8 @@ class NowPlaying extends Component {
     // You don't have to do this check first, but it can help prevent an unneeded render
     if (nextProps.currSong.spotifyURI !== this.state.uri) {
       this.setState({ uri: nextProps.currSong.spotifyURI });
-      if(this.state.connected){
-        this.playsong(nextProps.currSong.spotifyURI)
+      if (this.state.connected) {
+        this.playsong(nextProps.currSong.spotifyURI);
       }
     }
   }
@@ -141,11 +161,11 @@ class NowPlaying extends Component {
         .map(artist => artist.name)
         .join(", ");
       const duration = currentTrack.duration_ms;
-      const position = state.position
+      const position = state.position;
       const playing = !state.paused;
-      //This handles when a next song should be played. 
-      if(!playing && (this.state.position !== 0 && state.position === 0)) {
-        this.props.nextSong()
+      //This handles when a next song should be played.
+      if (!playing && (this.state.position !== 0 && state.position === 0)) {
+        this.props.nextSong();
       }
       console.log(currentTrack);
       this.setState({
@@ -161,7 +181,7 @@ class NowPlaying extends Component {
 
   render() {
     return (
-      <div className="np-container" style={{zIndex: '0'}} >
+      <div className="np-container" style={{ zIndex: "0" }}>
         <div className="np-header">
           <button className="np-logout" onClick={this.props.onLogout}>
             &lt;
@@ -176,31 +196,37 @@ class NowPlaying extends Component {
               src={this.props.currSong.songAlbum}
               width="100%"
               aref="Song Album"
-            />) : ("")}
+            />
+          ) : (
+            ""
+          )}
         </div>
-        
-        {this.state.admin ? (
+
+        {this.props.admin ? (
           <div className="np-addons">
             <div className="np-button-container">
-                <a href={SpotifyFunctions.redirectUrlToSpotifyForLogin()}>
-                  <button className="np-button">Token</button>
-                </a>
-                <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button>
-                <button className="np-button" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>Play</button>
-                <button className="np-button" onClick={this.props.nextSong}> Next
+              <a href={SpotifyFunctions.redirectUrlToSpotifyForLogin()}>
+                <button className="np-button">Token</button>
+              </a>
+              <button
+                className="np-button"
+                onClick={() => this.checkForPlayer()}
+              >
+                Connect
+              </button>
+              <button
+                className="np-button"
+                onClick={() => this.playsong(this.props.currSong.spotifyURI)}
+              >
+                Play
+              </button>
+              <button className="np-button" onClick={this.props.nextSong}>
+                {" "}
+                Next
               </button>
             </div>
           </div>
-          ) : null}
-
-        {/* <div className="song-info">
-            <div className="song-name">{this.state.songName}</div>
-            <div className="song-artist">{this.state.songArtist}</div>
-          </div>
-            <div className="song-cover-container">
-              <img className="song-cover" src={starboycover} alt="starboycover" />
-            </div> */}
-        
+        ) : null}
       </div>
     );
   }

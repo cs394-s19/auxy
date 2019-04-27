@@ -4,8 +4,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Auxy from "./Auxy.js";
 
-// import { Link,withRouter, Route } from "react-router-dom";
-
 
 class Homepage extends Component {
   render() {
@@ -46,5 +44,4 @@ const StyledButton = withStyles({
   },
 })(Button);
 
-// export default withRouter(Homepage);
 export default Homepage;
