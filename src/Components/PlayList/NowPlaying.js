@@ -34,7 +34,7 @@ class NowPlaying extends Component {
     //which will then redirect back to your site with the hash. If there is a hash, then we will jump right into the player
 
     const accessToken = SpotifyFunctions.checkUrlForSpotifyAccessToken();
-    if (accessToken) {
+    if (accessToken && this.props.admin) {
       this.setState({ token: accessToken });
       db.ref("playlists/" + this.props.playlistKey + "/spotifyToken").set({
         token: accessToken
