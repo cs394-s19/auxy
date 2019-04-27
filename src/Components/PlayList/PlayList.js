@@ -192,14 +192,6 @@ class PlayList extends Component {
     );
     return (
       <div className="pl-container">
-        {/* <div className="pl-header">
-          <button className="pl-logout" onClick={this.props.onLogout}>
-            logout
-          </button>
-          <div className="pl-key"> {this.props.playlistKey}</div>
-          {adminHa}
-        </div> */}
-
         <NowPlaying
           onLogout={this.props.onLogout}
           playlistKey={this.props.playlistKey}

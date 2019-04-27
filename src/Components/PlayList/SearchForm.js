@@ -41,17 +41,6 @@ class SearchForm extends Component {
         this.setState({ token: snap.val() });
       }
     );
-    //will check URL for accessToken hash. If it's not there, it will show the connect-spotify-button as a link
-    //which will then redirect back to your site with the hash. If there is a hash, then we will jump right into the player
-    // db.ref("playlists/" + this.props.playlistKey + "/spotifyToken").once(
-    //   "value",
-    //   snapshot => {
-    //     if (snapshot.exists()) {
-    //       const foundToken = Object.values(snapshot.val())[0];
-    //       this.setState({ token: foundToken });
-    //     }
-    //   }
-    // );
   }
 
   handleUserInput(e) {
@@ -158,7 +147,6 @@ class SearchForm extends Component {
         >
           ADD A BANGER
         </button>
-        {/* <div>{this.renderSearchBox()}</div> */}
       </div>
     );
   }

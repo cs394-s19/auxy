@@ -36,7 +36,6 @@ class App extends Component {
         key: JSON.parse(localStorage.getItem("key")),
         HomePage: JSON.parse(localStorage.getItem("HomePage")),
         PlayList: JSON.parse(localStorage.getItem("PlayList")),
-        CreatePlayList: JSON.parse(localStorage.getItem("CreatePlayList")),
         Host: JSON.parse(localStorage.getItem("Host")),
         Join: JSON.parse(localStorage.getItem("Join"))
       });
@@ -77,11 +76,6 @@ class App extends Component {
   }
 
   handleClickHost() {
-    // this.setState({
-    //   HomePage: false,
-    //   Host: true
-    // });
-
     this.setState(
       {
         HomePage: false,
@@ -95,11 +89,6 @@ class App extends Component {
   }
 
   handleClickJoin() {
-    // this.setState({
-    //   HomePage: false,
-    //   Join: true
-    // });
-
     this.setState(
       {
         HomePage: false,
@@ -124,14 +113,6 @@ class App extends Component {
       hostUID: this.state.uid
     });
 
-    // this.setState({
-    //   key: key,
-    //   HomePage: false,
-    //   Host: false,
-    //   Join: false,
-    //   PlayList: true
-    // });
-
     this.setState(
       { key: key, HomePage: false, PlayList: true, Join: false, Host: false },
       () => {
@@ -147,13 +128,6 @@ class App extends Component {
   handleJoinKey(key) {
     for (var i = 0; i < this.state.keys.length; i++) {
       if (this.state.keys[i] === key) {
-        // this.setState({
-        //   key: key,
-        //   HomePage: false,
-        //   Host: false,
-        //   Join: false,
-        //   PlayList: true
-        // });
         this.setState(
           {
             key: key,
