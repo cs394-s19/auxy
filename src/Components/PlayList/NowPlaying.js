@@ -25,7 +25,6 @@ class NowPlaying extends Component {
       position: -1,
       duration: 0,
       connected: false,
-      admin: props.admin
     };
     this.playerCheckInterval = null;
   }
@@ -202,7 +201,7 @@ class NowPlaying extends Component {
             />) : ("")}
         </div>
         
-        {this.state.admin ? (
+        {this.props.admin ? (
           <div className="np-addons">
             <div className="np-button-container">
                 <a href={SpotifyFunctions.redirectUrlToSpotifyForLogin()}>
