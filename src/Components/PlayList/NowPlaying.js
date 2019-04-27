@@ -38,9 +38,9 @@ class NowPlaying extends Component {
       db.ref("playlists/" + this.props.playlistKey + "/spotifyToken").set({
         token: accessToken
       });
+    } else {
+      this.lookForToken();
     }
-
-    this.lookForToken();
   }
 
   lookForToken() {
