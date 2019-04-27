@@ -23,13 +23,21 @@
   height: 60px;
   width: 100%;
   background-color: white;
-  border-top: .5px solid lightgrey;
   border-right: none;
   border-left: none;
   border-bottom: none;
   position: absolute;
   bottom: 0;
   font-size: 14px;
+  box-shadow: 0px 14px 25px;
+}
+
+.search-button {
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+}
+
+.search-button:hover {
+  background-position: right center; /* change the direction of the change here */
 }
 
 .search-container {
@@ -47,3 +55,19 @@
   background-color:white;
   color: snow;
 }
+
+.imageLoading {
+  height: 40px;
+  vertical-align: middle;
+}
+
+.buttonTag {
+  display: inline;
+  position: absolute;
+  vertical-align: middle;
+  padding-left: 10px;
+  bottom: 10px;
+  font-size: 18px;
+}
+
+

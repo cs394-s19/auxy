@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ResultSong from "./ResultSong";
 import { spotifyApi, spotifyApiToken } from "../../Config/spotify";
 import "../../Styles/SearchForm.css";
-
 import Modal from 'react-modal';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
@@ -122,7 +121,12 @@ class SearchForm extends Component {
           {this.renderResults(this.state.results)}
         </div>
         </SlidingPane>
-        <button className="search-button" onClick={()=> this.setState({ isSearchOpen: true })}>ADD A BANGER</button>
+        <button className="search-button" onClick={()=> this.setState({ isSearchOpen: true })}> 
+        <div style={{margin: "0 auto"}}> 
+          ADD A BANGER
+          {/* <img className="imageLoading" src={require('../../Images/loading.svg')}></img> */}
+        </div>
+        </button>
         {/* <div>{this.renderSearchBox()}</div> */} 
       </div>
     );
