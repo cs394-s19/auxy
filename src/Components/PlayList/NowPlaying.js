@@ -7,9 +7,6 @@ import * as SpotifyFunctions from "./spotifyFunctions";
 import app from "../../Config/db";
 const db = app.database();
 
-import app from "../../Config/db";
-const db = app.database();
-
 class NowPlaying extends Component {
   constructor(props) {
     super(props);
