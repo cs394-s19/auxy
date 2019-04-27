@@ -34,3 +34,7 @@
     bottom: 0;
     width: 100%;
 }
+
+.sb-upvote:focus {
+    outline: none;
+  }
