@@ -10,7 +10,6 @@
     min-width:100vw;
     overflow:hidden;
     z-index: 0;
-    
 }
 
 .welcome-container{
@@ -97,3 +96,4 @@
         transform: translatey(0px);
     }
 }
+
