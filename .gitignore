@@ -29,3 +29,5 @@ confidential.json
 
 # firebase
 .firebase/
+
+.vscode/*

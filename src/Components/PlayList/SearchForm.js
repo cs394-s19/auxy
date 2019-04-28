@@ -18,7 +18,7 @@ class SearchForm extends Component {
     this.state = {
       results: [],
       isSearchOpen: false,
-      token: null
+      token: "."
     };
 
     this.renderResults = this.renderResults.bind(this);
@@ -105,15 +105,13 @@ class SearchForm extends Component {
       </div>
     );
   }
-  handleSearchButton()
-{
-  if (this.state.isSearchOpen==false){
-  this.setState({ isSearchOpen: true })
+  handleSearchButton() {
+    if (this.state.isSearchOpen == false) {
+      this.setState({ isSearchOpen: true });
+    } else {
+      this.setState({ isSearchOpen: false });
+    }
   }
-  else{
-    this.setState({ isSearchOpen: false })
-  }
-}
   renderResults(results) {
     return (
       <div>
@@ -150,7 +148,7 @@ class SearchForm extends Component {
         </SlidingPane>
         <button
           className="search-button"
-          onClick={()=>this.handleSearchButton()}
+          onClick={() => this.handleSearchButton()}
         >
           ADD A BANGER
         </button>
