@@ -4,8 +4,6 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Auxy from "./Auxy.js";
 
-// import { Link,withRouter, Route } from "react-router-dom";
-
 
 class Homepage extends Component {
   render() {
@@ -19,8 +17,8 @@ class Homepage extends Component {
            /> 
           
           <div className='sub-text'>a playlist for your occasion, by your occasion</div>
-          <StyledButton onClick={this.props.onClickHost}>Host</StyledButton>
-          <StyledButton onClick={this.props.onClickJoin}>join</StyledButton>
+          <StyledButton onClick={this.props.onClickHost}>HOST</StyledButton>
+          <StyledButton onClick={this.props.onClickJoin}>JOIN</StyledButton>
         </div>
       </div>
     );
@@ -41,10 +39,9 @@ const StyledButton = withStyles({
     marginRight: '18px',
     zIndex: '2',
   },
-  label: {
-    textTransform: 'lowercase',
-  },
+  // label: {
+  //   textTransform: 'lowercase',
+  // },
 })(Button);
 
-// export default withRouter(Homepage);
 export default Homepage;

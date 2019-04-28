@@ -4,10 +4,11 @@ class Host extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hostKey: 0,
+      hostKey: null,
     };
     this.handleHostInput = this.handleHostInput.bind(this);
     this.handleHostClick = this.handleHostClick.bind(this);
+    this.enterPressed = this.enterPressed.bind(this);
   }
 
   handleHostInput(e) {
@@ -15,7 +16,18 @@ class Host extends Component {
   }
 
   handleHostClick() {
-    this.props.onHostKey(this.state.hostKey);
+    if (this.state.hostKey === null || this.state.hostKey === '') {
+      alert("No Key Detected");
+    }
+    else {
+      this.props.onHostKey(this.state.hostKey);
+    }
+  }
+
+  enterPressed(e) {
+    if (e.key === 'Enter') {
+      this.handleHostClick();
+    }
   }
 
   render() {
@@ -27,8 +39,11 @@ class Host extends Component {
           </button>
         </div>
         <div>
-          <input onChange={e => {this.handleHostInput(e);}}/>
-          <button onClick={this.handleHostClick}>Host</button>
+          <input
+            onChange={e => {this.handleHostInput(e);}}
+            onKeyPress={this.enterPressed}
+          />
+          <button onClick={this.handleHostClick}>HOST</button>
         </div>
       </div>
     );

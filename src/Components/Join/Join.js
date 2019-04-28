@@ -9,9 +9,11 @@ class Join extends Component {
     super(props);
     this.state = {
       userKey: 0,
+      hostKey: null,
     };
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleUserClick = this.handleUserClick.bind(this);
+    this.enterPressed = this.enterPressed.bind(this);
   }
 
   handleUserInput(e) {
@@ -29,6 +31,12 @@ class Join extends Component {
     this.props.onJoinKey(this.state.userKey);
   }
 
+  enterPressed(e) {
+    if (e.key === 'Enter') {
+      this.handleUserClick();
+    }
+  }
+
   render() {
     return (
       <div className='background'>
@@ -40,7 +48,7 @@ class Join extends Component {
         <div className = 'join-loc'>
         <div className = 'title-text'>Join a playlist.</div>
         <div>
-          <input placeholder='ENTER KEY' className = 'text-input' onChange={this.handleUserInput}/>
+          <input placeholder='ENTER KEY' className = 'text-input' onChange={this.handleUserInput} onKeyPress={this.enterPressed}/>
         </div>
         <div>
           <StyledButton onClick={this.handleUserClick}>esketit</StyledButton>

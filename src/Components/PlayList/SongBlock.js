@@ -38,24 +38,6 @@ class SongBlock extends Component {
       });
   }
 
-  // handleLike(songId) {
-  //   db.ref("playlists/" + this.props.playlistKey + "/songs/" + songId)
-  //     .child("likedBy")
-  //     .orderByChild("uid")
-  //     .equalTo(this.props.uid)
-  //     .once("value", snapshot => {
-  //       if (!snapshot.exists()) {
-  //         db.ref("playlists/" + this.props.playlistKey + "/songs/" + songId + "/likedBy")
-  //           .push()
-  //           .set({
-  //             uid: this.props.uid
-  //           });
-  //       } else {
-  //         alert('You already voted');
-  //       }
-  //     });
-  // }
-
   handleDelete(songId) {
     db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
