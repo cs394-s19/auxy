@@ -111,6 +111,10 @@ class NowPlaying extends Component {
   }
 
   playsong(uri) {
+    if(this.state.connected === false){
+      this.checkForPlayer();
+      this.props.nextSong();
+    }
     const play = ({
       spotify_uri,
       playerInstance: {
@@ -205,19 +209,8 @@ class NowPlaying extends Component {
         {this.props.admin ? (
           <div className="np-addons">
             <div className="np-button-container">
-              <a href={SpotifyFunctions.redirectUrlToSpotifyForLogin()}>
-                <button className="np-button">Token</button>
-              </a>
-              <button
-                className="np-button"
-                onClick={() => this.checkForPlayer()}
-              >
-                Connect
-              </button>
-              <button
-                className="np-button"
-                onClick={() => this.playsong(this.props.currSong.spotifyURI)}
-              >
+              {/* <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button> */}
+              <button className="np-button" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
                 Play
               </button>
               <button className="np-button" onClick={this.props.nextSong}>

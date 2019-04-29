@@ -3,6 +3,7 @@ import "../../Styles/Join.css";
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Auxy from "../HomePage/Auxy.js";
+import * as SpotifyFunctions from "../PlayList/spotifyFunctions";
 
 
 class Host extends Component {
@@ -25,6 +26,7 @@ class Host extends Component {
       alert("No Key Detected");
     }
     else {
+      this.redirectSpotify();
       this.props.onHostKey(this.state.hostKey);
     }
   }
@@ -33,6 +35,10 @@ class Host extends Component {
     if (e.key === 'Enter') {
       this.handleHostClick();
     }
+  }
+
+  redirectSpotify(){
+    window.location = SpotifyFunctions.redirectUrlToSpotifyForLogin();
   }
 
 render() {
