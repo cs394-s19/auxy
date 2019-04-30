@@ -59,7 +59,7 @@ class SongBlock extends Component {
         </div>
         <div className="sb-score">{this.props.songScore}</div>
 
-        <button className="sb-upvote" onClick={() => this.handleLike(this.props.songId)}>
+        <button className="sb-upvote-notliked" onClick={() => this.handleLike(this.props.songId)}>
           <img className="sb-upvote-stencil" src={upvotestencil} alt="+" />
         </button>
       </div>

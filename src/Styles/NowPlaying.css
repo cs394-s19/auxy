@@ -78,7 +78,6 @@ body {
     padding: 10px;
     height: 65px;
     flex: 1;
-   
 }
 
 .np-info-songname {
@@ -136,4 +135,78 @@ body {
     padding-left: 10px;
     border-radius: 50px;
     border-width: 2px;
+}
+
+@media (min-width: 768px) { 
+    .np-container {
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        padding-top: 60px;
+        background: linear-gradient(224deg, #89dffd, #3c70ff, #cf31ff);
+        background-size: 600% 600%;
+        position: relative;
+        border-bottom-right-radius: 200px;
+        -webkit-animation: gradient 30s ease infinite;
+        -moz-animation: gradient 30s ease infinite;
+        animation: gradient 30s ease infinite;
+        border-bottom: 2px solid whitesmoke;
+        flex: 1;
+    }
+    .np-imagecontainer{
+        text-align: center;
+        display: inline-block;
+        height: 500px;
+        width: 500px;
+        background-color: white;
+        margin-top: 50px;
+        border-radius: 100%;
+        margin-left: -180px;
+        box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+    }
+    .np-imagecontainer:hover{
+        animation-name: pulse;
+        animation-duration: .4s;
+        animation-iteration-count: infinite;
+    }
+    .np-image {
+        height: 490px;
+        width: 490px;
+        border: 1px solid white;
+        margin-top: 5px;
+        border-radius: 400px;
+    }
+    
+    .np-info {
+        text-align: left;
+        padding: 10px;
+        height: 65px;
+        flex: 1;
+        position: fixed;
+        top: 300px;
+        left: 700px;
+    }
+    .np-info-songname {
+        margin-top: 5px;
+        font-size: 34px;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow-x: scroll;
+        width: 100%;
+        color: white;
+        font-weight: 500;
+    }
+    
+    .np-info-artist {
+        font-size: 18px;
+        color: white;
+        font-weight: 300;
+    }
+
+    @keyframes pulse {
+        from { transform: scale(1); }
+        50% { transform: scale(1.01); }
+        to { transform: scale(1); }
+      }
 }

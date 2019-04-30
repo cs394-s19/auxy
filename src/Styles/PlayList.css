@@ -35,6 +35,28 @@
     width: 100%;
 }
 
-.sb-upvote:focus {
-    outline: none;
-  }
+@media (min-width: 768px) { 
+    .pl-container {
+        display: flex;
+        flex-direction: row;
+        background-color: white;
+        height: 100.2vh;
+        overflow: scroll;
+    }
+    .pl-np-container{
+        flex: 1;
+    }
+    .songlist-container {
+        flex: .4;
+        position: relative;
+        margin-top: 0px;
+        margin-bottom: 70px;
+        padding-right: 20px;
+        padding-left: 20px;
+        background-color: white;
+        max-height: 100%;
+        min-height: 0%;
+        overflow: scroll;
+    }
+    
+}

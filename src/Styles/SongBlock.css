@@ -23,7 +23,6 @@ body {
 }
 .sb-info {
     flex: 4;
-    
 }
 
 .sb-info-songartist {
@@ -66,7 +65,20 @@ body {
     border: none;
 }
 
-.sb-upvote {
+.sb-upvote-liked {
+    background-color: orange;
+    border: none;
+    margin-top: 14px;
+    margin-right: 10px;
+    margin-left: 5px;
+    border-width: 2px;
+    height: 25px; 
+    font-weight: bolder;
+    overflow: hidden;
+    width: 24px;
+}
+
+.sb-upvote-notliked {
     background-color: grey;
     border: none;
     margin-top: 14px;
