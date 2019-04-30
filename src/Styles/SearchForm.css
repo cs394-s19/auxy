@@ -47,3 +47,13 @@
   background-color:white;
   color: snow;
 }
+
+
+@media (min-width: 768px) { 
+  .search-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+  }
+}
