@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "../../Styles/SongBlock.css";
 import app from "../../Config/db";
-import LikeButton from "./LikeButton";
-import DeleteButton from "./DeleteButton";
 import upvotestencil from "../../Images/upvotestencil.svg";
+import ThumbUp from "@material-ui/icons/KeyboardArrowUp";
+import DeleteIcon from "@material-ui/icons/Delete";
+import SongButton from "../Buttons/SongButton";
 
 const db = app.database();
 
@@ -59,14 +60,38 @@ class SongBlock extends Component {
     return (
       <div className="sb-container">
         {this.props.admin ? (
-          <DeleteButton handleDelete={this.handleDelete} />
+          <SongButton
+            icon={
+              <DeleteIcon
+                style={{
+                  maxWidth: "60%",
+                  maxHeight: "60%",
+                  minWidth: "60%",
+                  minHeight: "60%"
+                }}
+              />
+            }
+            handleFunction={this.handleDelete}
+          />
         ) : null}
         <div className="sb-info">
           <div className="sb-info-songname">{this.props.songName}</div>
           <div className="sb-info-songartist">{this.props.songArtist}</div>
         </div>
         <div className="sb-score">{this.props.songScore}</div>
-        <LikeButton handleLike={this.handleLike} />
+        <SongButton
+          icon={
+            <ThumbUp
+              style={{
+                maxWidth: "60%",
+                maxHeight: "60%",
+                minWidth: "60%",
+                minHeight: "60%"
+              }}
+            />
+          }
+          handleFunction={this.handleLike}
+        />
       </div>
     );
   }

@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
-import DeleteIcon from "@material-ui/icons/Delete";
 
 const styles = theme => ({
   fab: {
@@ -18,7 +17,7 @@ function FloatingActionButtons(props) {
   return (
     <div>
       <Fab
-        onClick={() => props.handleDelete()}
+        onClick={() => props.handleFunction()}
         size="small"
         style={{
           maxWidth: "60%",
@@ -30,14 +29,7 @@ function FloatingActionButtons(props) {
         aria-label="Add"
         className={classes.fab}
       >
-        <DeleteIcon
-          style={{
-            maxWidth: "60%",
-            maxHeight: "60%",
-            minWidth: "60%",
-            minHeight: "60%"
-          }}
-        />
+        {props.icon}
       </Fab>
     </div>
   );

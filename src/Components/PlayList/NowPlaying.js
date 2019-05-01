@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import * as SpotifyFunctions from "./spotifyFunctions";
 // import "../Styles/NowPlaying.css";
 import app from "../../Config/db";
+import Logout from "../Buttons/Logout";
 const db = app.database();
 
 class NowPlaying extends Component {
@@ -23,7 +24,7 @@ class NowPlaying extends Component {
       playing: false,
       position: -1,
       duration: 0,
-      connected: false,
+      connected: false
     };
     this.playerCheckInterval = null;
   }
@@ -111,7 +112,7 @@ class NowPlaying extends Component {
   }
 
   playsong(uri) {
-    if(this.state.connected === false){
+    if (this.state.connected === false) {
       this.checkForPlayer();
       this.props.nextSong();
     }
@@ -187,9 +188,10 @@ class NowPlaying extends Component {
     return (
       <div className="np-container" style={{ zIndex: "0" }}>
         <div className="np-header">
-          <button className="np-logout" onClick={this.props.onLogout}>
-            &lt;
-          </button>
+          <div className="np-logout">
+            <Logout handleLogout={this.props.onLogout} />
+          </div>
+
           <div className="np-key"> JOIN: {this.props.playlistKey}</div>
         </div>
 
@@ -210,7 +212,10 @@ class NowPlaying extends Component {
           <div className="np-addons">
             <div className="np-button-container">
               {/* <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button> */}
-              <button className="np-button" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
+              <button
+                className="np-button"
+                onClick={() => this.playsong(this.props.currSong.spotifyURI)}
+              >
                 Play
               </button>
               <button className="np-button" onClick={this.props.nextSong}>
