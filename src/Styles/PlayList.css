@@ -58,5 +58,7 @@
         min-height: 0%;
         overflow: scroll;
     }
+    .songlist-container::-webkit-scrollbar { width: 0 !important }
+    .songlist-container::-webkit-scrollbar { height: 0 !important }
     
 }

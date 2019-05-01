@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import "../../Styles/SongBlock.css";
 import app from "../../Config/db";
-
-import upvotestencil from "../../Images/upvotestencil.svg"
+import LikeButton from "./LikeButton";
+import DeleteButton from "./DeleteButton";
+import upvotestencil from "../../Images/upvotestencil.svg";
 
 const db = app.database();
 
 class SongBlock extends Component {
   // Like button is clicked -> will either remove current uid from likedBy or add current uid to likedBy
   // this will trigger the on_changed event in App.js
-  handleLike(songId) {
+  constructor(props) {
+    super(props);
+
+    this.handleLike = this.handleLike.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+  handleLike() {
+    const songId = this.props.songId;
     db.ref("playlists/" + this.props.playlistKey + "/songs/" + songId)
       .child("likedBy")
       .orderByValue()
@@ -22,7 +30,7 @@ class SongBlock extends Component {
           db.ref("playlists/" + this.props.playlistKey + "/songs/" + songId)
             .child("likedBy")
             .push(this.props.uid);
-        } else { 
+        } else {
           // Remove user from likedBy (dislike song)
           var keyToRemove = Object.keys(snapshot.val())[0];
           db.ref(
@@ -38,7 +46,9 @@ class SongBlock extends Component {
       });
   }
 
-  handleDelete(songId) {
+  handleDelete() {
+    const songId = this.props.songId;
+
     db.ref("playlists/" + this.props.playlistKey)
       .child("songs")
       .child(songId)
@@ -49,19 +59,14 @@ class SongBlock extends Component {
     return (
       <div className="sb-container">
         {this.props.admin ? (
-          <button className="sb-delete" onClick={() => this.handleDelete(this.props.songId)}>
-            x
-          </button>
+          <DeleteButton handleDelete={this.handleDelete} />
         ) : null}
         <div className="sb-info">
           <div className="sb-info-songname">{this.props.songName}</div>
           <div className="sb-info-songartist">{this.props.songArtist}</div>
         </div>
         <div className="sb-score">{this.props.songScore}</div>
-
-        <button className="sb-upvote-notliked" onClick={() => this.handleLike(this.props.songId)}>
-          <img className="sb-upvote-stencil" src={upvotestencil} alt="+" />
-        </button>
+        <LikeButton handleLike={this.handleLike} />
       </div>
     );
   }
