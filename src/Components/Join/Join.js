@@ -51,7 +51,7 @@ class Join extends Component {
           <input placeholder='ENTER KEY' className = 'text-input' onChange={this.handleUserInput} onKeyPress={this.enterPressed}/>
         </div>
         <div>
-          <StyledButton onClick={this.handleUserClick}>esketit</StyledButton>
+          <StyledButton onClick={this.handleUserClick}>enter</StyledButton>
        </div>
         </div>
       </div>

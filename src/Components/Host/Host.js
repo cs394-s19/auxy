@@ -55,7 +55,7 @@ render() {
         <input placeholder='ENTER KEY' className = 'text-input' onChange={this.handleHostInput} onKeyPress={this.enterPressed}/>
       </div>
       <div>
-        <StyledButton onClick={this.handleHostClick}>sicko mode</StyledButton>
+        <StyledButton onClick={this.handleHostClick}>start</StyledButton>
      </div>
       </div>
     </div>
