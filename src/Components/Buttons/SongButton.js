@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = theme => ({
   fab: {
@@ -16,21 +16,19 @@ function FloatingActionButtons(props) {
   const { classes } = props;
   return (
     <div>
-      <Fab
+      <IconButton
         onClick={() => props.handleFunction()}
-        size="small"
+        size="medium"
         style={{
-          maxWidth: "60%",
-          maxHeight: "60%",
-          minWidth: "60%",
-          minHeight: "60%"
+          margin: 0,
         }}
+        variant={props.variant}
         color="primary"
         aria-label="Add"
         className={classes.fab}
       >
         {props.icon}
-      </Fab>
+      </IconButton>
     </div>
   );
 }

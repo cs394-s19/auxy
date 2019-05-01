@@ -5,6 +5,7 @@ import upvotestencil from "../../Images/upvotestencil.svg";
 import ThumbUp from "@material-ui/icons/KeyboardArrowUp";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SongButton from "../Buttons/SongButton";
+import IconButton from '@material-ui/core/IconButton';
 
 const db = app.database();
 
@@ -64,10 +65,7 @@ class SongBlock extends Component {
             icon={
               <DeleteIcon
                 style={{
-                  maxWidth: "60%",
-                  maxHeight: "60%",
-                  minWidth: "60%",
-                  minHeight: "60%"
+                  margin: "none !important"
                 }}
               />
             }
@@ -81,15 +79,9 @@ class SongBlock extends Component {
         <div className="sb-score">{this.props.songScore}</div>
         <SongButton
           icon={
-            <ThumbUp
-              style={{
-                maxWidth: "60%",
-                maxHeight: "60%",
-                minWidth: "60%",
-                minHeight: "60%"
-              }}
-            />
+            <ThumbUp/>
           }
+          variant="outlined"
           handleFunction={this.handleLike}
         />
       </div>
