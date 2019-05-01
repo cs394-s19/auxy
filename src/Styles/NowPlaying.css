@@ -75,9 +75,13 @@ body {
 
 .np-info {
     text-align: left;
-    padding: 10px;
+    margin: 10px;
+    margin-top: 20px;
+    padding-top: 10px;
     height: 65px;
-    flex: 1;
+    -webkit-flex: 1 1;
+    flex: 1 1;
+    border-bottom: 1px solid lightgrey;
 }
 
 .np-info-songname {
@@ -206,6 +210,7 @@ body {
         position: fixed;
         top: 300px;
         left: 650px;
+        border-bottom: none !important;
     }
     .np-info-songname {
         margin-top: 5px;
@@ -229,4 +234,12 @@ body {
         50% { transform: scale(1.01); }
         to { transform: scale(1); }
       }
+}
+
+.playPause {
+    background-color: white !important;
+    text-transform: none !important;
+    z-index: 3;
+    margin: 5px !important;
+    margin-top: 0;
 }

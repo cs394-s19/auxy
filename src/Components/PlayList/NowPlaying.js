@@ -5,6 +5,12 @@ import PropTypes from "prop-types";
 import * as SpotifyFunctions from "./spotifyFunctions";
 // import "../Styles/NowPlaying.css";
 import app from "../../Config/db";
+import Fab from '@material-ui/core/Fab';
+import PlayArrow from '@material-ui/icons/PlayArrow';
+import Pause from '@material-ui/icons/Pause';
+import Skip from '@material-ui/icons/SkipNext';
+
+
 const db = app.database();
 
 class NowPlaying extends Component {
@@ -24,6 +30,7 @@ class NowPlaying extends Component {
       position: -1,
       duration: 0,
       connected: false,
+      currentTrack: null
     };
     this.playerCheckInterval = null;
   }
@@ -113,30 +120,61 @@ class NowPlaying extends Component {
   playsong(uri) {
     if(this.state.connected === false){
       this.checkForPlayer();
-      this.props.nextSong();
-    }
-    const play = ({
-      spotify_uri,
-      playerInstance: {
-        _options: { getOAuthToken, id }
+      if(this.props.currSong.songName === "N/A") {
+        this.props.nextSong();
       }
-    }) => {
-      getOAuthToken(access_token => {
-        fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
-          method: "PUT",
-          body: JSON.stringify({ uris: [spotify_uri] }),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${access_token}`
-          }
-        });
-      });
-    };
+    }
 
-    play({
-      playerInstance: this.player,
-      spotify_uri: uri
-    });
+    if(this.state.currentTrack === null) {
+      const play = ({
+        spotify_uri,
+        playerInstance: {
+          _options: { getOAuthToken, id }
+        }
+      }) => {
+        getOAuthToken(access_token => {
+          fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+            method: "PUT",
+            body: JSON.stringify({ uris: [spotify_uri] }),
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${access_token}`
+            }
+          });
+        });
+      };
+  
+      play({
+        playerInstance: this.player,
+        spotify_uri: uri
+      });
+    }
+
+    else if(this.state.playing) {
+      const pause = ({
+        playerInstance: {
+          _options: { getOAuthToken}
+        }
+      }) => {
+        getOAuthToken(access_token => {
+          fetch(`https://api.spotify.com/v1/me/player/pause`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${access_token}`
+            }
+          });
+        });
+      };
+      this.player.pause().then(() => {
+        console.log('Paused!');
+      });
+    }
+    else{
+      this.player.resume().then(() => {
+        console.log('Resumed!');
+      });
+    }
   }
 
   // shouldComponentUpdate(nextProps, nextState){
@@ -178,7 +216,8 @@ class NowPlaying extends Component {
         trackName,
         albumName,
         artistName,
-        playing
+        playing,
+        currentTrack
       });
     }
   }
@@ -210,13 +249,20 @@ class NowPlaying extends Component {
           <div className="np-addons">
             <div className="np-button-container">
               {/* <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button> */}
-              <button className="np-button" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
+              {this.state.playing ? 
+                <Fab variant="extended" size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
+                  <Pause />
+                  Pause
+                </Fab> :
+              <Fab variant="extended" size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
+                <PlayArrow />
                 Play
-              </button>
-              <button className="np-button" onClick={this.props.nextSong}>
-                {" "}
-                Next
-              </button>
+              </Fab>
+            }
+              <Fab variant="extended" size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
+                <Skip />
+                Skip
+              </Fab>
             </div>
           </div>
         ) : null}
