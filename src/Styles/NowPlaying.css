@@ -7,7 +7,7 @@ body {
     height: 405px;
     width: 100%;
     padding-top: 60px;
-    background: linear-gradient(224deg, #89dffd, #3c70ff, #cf31ff);
+    background: linear-gradient(224deg, rgba(137, 223, 253, 0.5), rgba(60, 112, 255, 0.5),rgba(207, 49, 255, 0.5));
     background-size: 600% 600%;
     position: fixed;
     border-bottom-right-radius: 200px;
@@ -38,15 +38,15 @@ body {
     position: absolute;
     top: 10px;
     left: 10px;
-    width: 40px;
-    height: 40px;
+    /* width: 40px;
+    height: 40px; */
     border-radius: 100%;
-    background-color: white;
-    border: 2px solid white;
+    /* background-color: white;
+    border: 2px solid white; */
     color: black;
     font-weight: bolder;
     font-size: 20px;
-    box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.5);
+    /* box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.5); */
 }
 
 .np-key {
@@ -167,7 +167,7 @@ body {
         margin-bottom: 0px;
         padding-bottom: 0px;
         box-sizing: border-box;
-        background: linear-gradient(224deg, #89dffd, #3c70ff, #cf31ff);
+        /* background: linear-gradient(224deg, #89dffd, #3c70ff, #cf31ff); */
         background-size: 600% 600%;
         position: relative;
         border-bottom-right-radius: 200px;

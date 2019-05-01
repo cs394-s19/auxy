@@ -11,6 +11,7 @@ import Pause from '@material-ui/icons/Pause';
 import Skip from '@material-ui/icons/SkipNext';
 
 
+import Logout from "../Buttons/Logout";
 const db = app.database();
 
 class NowPlaying extends Component {
@@ -118,7 +119,7 @@ class NowPlaying extends Component {
   }
 
   playsong(uri) {
-    if(this.state.connected === false){
+    if (this.state.connected === false) {
       this.checkForPlayer();
       if(this.props.currSong.songName === "N/A") {
         this.props.nextSong();
@@ -226,9 +227,10 @@ class NowPlaying extends Component {
     return (
       <div className="np-container" style={{ zIndex: "0" }}>
         <div className="np-header">
-          <button className="np-logout" onClick={this.props.onLogout}>
-            &lt;
-          </button>
+          <div className="np-logout">
+            <Logout handleLogout={this.props.onLogout} />
+          </div>
+
           <div className="np-key"> JOIN: {this.props.playlistKey}</div>
         </div>
 

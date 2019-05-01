@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
-import ThumbUp from "@material-ui/icons/KeyboardArrowUp";
+import Logout from "@material-ui/icons/ArrowBackIosRounded";
 
 const styles = theme => ({
   fab: {
@@ -18,26 +18,13 @@ function FloatingActionButtons(props) {
   return (
     <div>
       <Fab
-        onClick={() => props.handleLike()}
-        size="small"
-        style={{
-          maxWidth: "60%",
-          maxHeight: "60%",
-          minWidth: "60%",
-          minHeight: "60%"
-        }}
-        color="primary"
+        onClick={() => props.handleLogout()}
+        size="medium"
+        color="white"
         aria-label="Add"
         className={classes.fab}
       >
-        <ThumbUp
-          style={{
-            maxWidth: "60%",
-            maxHeight: "60%",
-            minWidth: "60%",
-            minHeight: "60%"
-          }}
-        />
+        <Logout />
       </Fab>
     </div>
   );
