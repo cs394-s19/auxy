@@ -7,7 +7,7 @@ body {
     height: 405px;
     width: 100%;
     padding-top: 60px;
-    background: linear-gradient(224deg, #89dffd, #3c70ff, #cf31ff);
+    background: linear-gradient(224deg, rgba(137, 223, 253, 0.5), rgba(60, 112, 255, 0.5),rgba(207, 49, 255, 0.5));
     background-size: 600% 600%;
     position: fixed;
     border-bottom-right-radius: 200px;
@@ -78,6 +78,7 @@ body {
     padding: 10px;
     height: 65px;
     flex: 1;
+    color:black;
 }
 
 .np-info-songname {
@@ -163,7 +164,7 @@ body {
         margin-bottom: 0px;
         padding-bottom: 0px;
         box-sizing: border-box;
-        background: linear-gradient(224deg, #89dffd, #3c70ff, #cf31ff);
+        /* background: linear-gradient(224deg, #89dffd, #3c70ff, #cf31ff); */
         background-size: 600% 600%;
         position: relative;
         border-bottom-right-radius: 200px;

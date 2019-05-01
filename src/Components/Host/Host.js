@@ -57,9 +57,7 @@ class Host extends Component {
             />
           </div>
           <div>
-            <StyledButton onClick={this.handleHostClick}>
-              sicko mode
-            </StyledButton>
+            <StyledButton onClick={this.handleHostClick}>start</StyledButton>
           </div>
         </div>
       </div>

@@ -56,7 +56,7 @@ class Join extends Component {
             />
           </div>
           <div>
-            <StyledButton onClick={this.handleUserClick}>esketit</StyledButton>
+            <StyledButton onClick={this.handleUserClick}>enter</StyledButton>
           </div>
         </div>
       </div>
