@@ -98,7 +98,9 @@ class NowPlaying extends Component {
     });
     this.player.on("authentication_error", e => {
       console.error(e);
-      this.setState({ loggedIn: false });
+      console.log("this fucking triggered")
+      this.setState({ loggedIn: false, connected: false });
+      window.location = SpotifyFunctions.redirectUrlToSpotifyForLogin()
     });
     this.player.on("account_error", e => {
       console.error(e);
