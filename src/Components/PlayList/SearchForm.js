@@ -135,7 +135,7 @@ class SearchForm extends Component {
         <SlidingPane
           style={{ backgroundcolor: "white" }}
           isOpen={this.state.isSearchOpen}
-          title="Add a Banger"
+          title="ADD A BANGER"
           from="bottom"
           width="100%"
           onRequestClose={() => this.setState({ isSearchOpen: false })}
