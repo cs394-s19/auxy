@@ -255,18 +255,18 @@ class NowPlaying extends Component {
             <div className="np-button-container">
               {/* <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button> */}
               {this.state.playing ? 
-                <Fab variant="extended" size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
+                <Fab size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
                   <Pause />
-                  Pause
+                  
                 </Fab> :
-              <Fab variant="extended" size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
+              <Fab size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
                 <PlayArrow />
-                Play
+                
               </Fab>
             }
-              <Fab variant="extended" size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
+              <Fab size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
                 <Skip />
-                Skip
+                
               </Fab>
             </div>
           </div>

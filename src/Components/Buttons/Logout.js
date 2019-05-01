@@ -6,7 +6,8 @@ import Logout from "@material-ui/icons/ArrowBackIosRounded";
 
 const styles = theme => ({
   fab: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    backgroundColor: "white !important"
   },
   extendedIcon: {
     marginRight: theme.spacing.unit
@@ -19,9 +20,8 @@ function FloatingActionButtons(props) {
     <div>
       <Fab
         onClick={() => props.handleLogout()}
-        size="medium"
+        size="small"
         color="white"
-        aria-label="Add"
         className={classes.fab}
       >
         <Logout />
