@@ -117,6 +117,7 @@ class NowPlaying extends Component {
       let { device_id } = data;
       console.log("Let the music play on!");
       this.setState({ deviceId: device_id });
+      this.playsong(this.props.currSong.spotifyURI)
     });
   }
 
