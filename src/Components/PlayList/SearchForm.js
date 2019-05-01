@@ -100,7 +100,7 @@ class SearchForm extends Component {
           onChange={e => {
             this.handleUserInput(e);
           }}
-          placeholder="Search for a BANGER"
+          placeholder="search..."
         />
       </div>
     );
