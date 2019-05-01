@@ -10,6 +10,7 @@ const Auxy = ({
         return (<svg 
             width="300" height="160"
             transform={transform}
+            style={{WebkitTransform: "scale(3.7,3.7)"}}
             viewBox={viewBox}>
             <defs>
                 <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
