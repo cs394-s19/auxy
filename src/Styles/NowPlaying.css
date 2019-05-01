@@ -214,17 +214,17 @@ body {
     }
     .np-info-songname {
         margin-top: 5px;
-        font-size: 34px;
+        font-size: 28px;
         margin-bottom: 2px;
         white-space: nowrap;
         overflow-x: hidden;
-        width: 200px;
+        width: 220px;
         color: white;
         font-weight: 500;
     }
     
     .np-info-artist {
-        font-size: 18px;
+        font-size: 16px;
         color: white;
         font-weight: 300;
     }
