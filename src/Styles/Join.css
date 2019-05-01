@@ -66,3 +66,14 @@ opacity: 0;
   .text-input::placeholder {
     color: rgba(0, 0, 0 ,0.3);
   }
+
+  @media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+.title-text{
+  color: rgba(256,256,256,0.8);
+  font-size: 100px;
+  margin-bottom: 15px;
+}
+}
