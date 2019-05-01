@@ -50,8 +50,8 @@ class ResultSong extends Component {
   render() {
     return (
       <div className="sb-container1" onClick={() => this.addSong()}>
-        <div className="np-info-songname">{this.props.result.name} </div>
-        <div className="np-info-artist">
+        <div className="np-info-songname1">{this.props.result.name} </div>
+        <div className="np-info-artist1">
           {this.props.result.artists[0].name}
         </div>
       </div>

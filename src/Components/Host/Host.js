@@ -45,7 +45,7 @@ render() {
   return (
     <div className='background'>
       <div>
-      <button className="np-logout" onClick={this.props.onBack}>
+      <button className="np-logout1" onClick={this.props.onBack}>
           &lt;
       </button>
       </div>
