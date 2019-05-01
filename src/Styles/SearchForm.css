@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-.myInput{
+/* .myInput{
   width: 130px;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -22,6 +22,40 @@
 .myInput:focus {
   width: 100%;
   outline: none;
+} */
+
+.myInput {
+  background-image: url('searchicon.png');
+  background-position: 10px 14px; 
+  background-size: 20px;
+  background-repeat: no-repeat;
+
+  margin-bottom: 10px;
+  text-align: left;
+  padding: 8px 38px;
+  box-sizing: border-box;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  font-size:20px;
+  font-family: 'Oswald', sans-serif;
+  color: black;    
+  background-color: rgba(0, 0, 0 ,0.1);
+  border: white;
+  /* border: 2px solid rgba(0, 0, 0,0.6); */
+  border-radius: 5px;
+  width: 100%
+}
+
+.myInput:focus {
+  border: 1px solid rgba(0, 0, 0,0.1);
+}
+
+.myInput:focus::-webkit-input-placeholder {
+opacity: 0;
+}
+.myInput::placeholder {
+  color: rgba(0, 0, 0 ,0.6);
 }
 
 .songResult{
