@@ -25,7 +25,7 @@ class SongList extends Component {
   render() {
     if (this.state.songList.length < 1) {
       return (
-        <div>
+        <div style={{marginTop: "20px"}}>
           No songs in queue <br />
           <br />
         </div>
