@@ -39,12 +39,14 @@
     margin-top: 5px;
     font-size: 18px;
     margin-bottom: 2px;
+    overflow-x: hidden;
 }
 
 .paneArtist {
     margin-top: 4px;
     font-size: 14px;
     color: black;
+    margin-bottom: 7px;
 }
 
 @media (min-width: 768px) { 
