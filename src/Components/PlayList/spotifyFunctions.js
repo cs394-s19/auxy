@@ -6,7 +6,7 @@ import { redirect_urls, clientId } from '../../Config/spotify.js'
 
 export function redirectUrlToSpotifyForLogin(){
     const CLIENT_ID = clientId;
-    const REDIRECT_URI = redirect_urls.development_url
+    const REDIRECT_URI = redirect_urls.pruduction_url
     const scopes = [
     "user-modify-playback-state",
     "user-read-playback-state",
