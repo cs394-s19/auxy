@@ -158,6 +158,11 @@ body {
     border-width: 2px;
 }
 
+.currSongDisplay {
+    visibility: hidden;
+    display:none;
+}
+
 @media (min-width: 768px) { 
     .np-container {
         text-align: center;
@@ -180,12 +185,11 @@ body {
     .np-imagecontainer{
         text-align: center;
         display: inline-block;
-        height: 500px;
-        width: 500px;
+        height: 360px;
+        width: 360px;
         background-color: white;
         margin-top: 50px;
         border-radius: 100%;
-        margin-left: -210px;
         box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         
     }
@@ -195,14 +199,15 @@ body {
         animation-iteration-count: infinite;
     }
     .np-image {
-        height: 490px;
-        width: 490px;
+        height: 350px;
+        width: 350px;
         border: 1px solid white;
         margin-top: 5px;
         border-radius: 400px;
     }
     
     .np-info {
+        visibility: hidden;
         text-align: left;
         padding: 10px;
         height: 65px;
@@ -222,11 +227,21 @@ body {
         color: white;
         font-weight: 500;
     }
+
+    .currSongDisplay {
+        visibility: visible;
+        display: inline-block;
+    }
     
     .np-info-artist {
         font-size: 16px;
         color: white;
         font-weight: 300;
+    }
+
+    .np-button-container {
+        margin-top: 25px;
+        margin-left: 130px;
     }
 
     @keyframes pulse {

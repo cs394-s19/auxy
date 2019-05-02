@@ -35,6 +35,18 @@
     width: 100%;
 }
 
+.paneName {
+    margin-top: 5px;
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.paneArtist {
+    margin-top: 4px;
+    font-size: 14px;
+    color: black;
+}
+
 @media (min-width: 768px) { 
     .pl-container {
         display: flex;

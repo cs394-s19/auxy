@@ -192,7 +192,28 @@ class NowPlaying extends Component {
     if (nextProps.currSong.spotifyURI !== this.state.uri) {
       this.setState({ uri: nextProps.currSong.spotifyURI });
       if (this.state.connected) {
-        this.playsong(nextProps.currSong.spotifyURI);
+        const play = ({
+          spotify_uri,
+          playerInstance: {
+            _options: { getOAuthToken, id }
+          }
+        }) => {
+          getOAuthToken(access_token => {
+            fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+              method: "PUT",
+              body: JSON.stringify({ uris: [spotify_uri] }),
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`
+              }
+            });
+          });
+        };
+    
+        play({
+          playerInstance: this.player,
+          spotify_uri: nextProps.currSong.spotifyURI
+        });
       }
     }
   }
@@ -237,40 +258,50 @@ class NowPlaying extends Component {
           <div className="np-key"> JOIN: {this.props.playlistKey}</div>
         </div>
 
-        <div className="np-imagecontainer">
-          {this.props.currSong.songAlbum !== "N/A" ? (
-            <img
-              className="np-image"
-              src={this.props.currSong.songAlbum}
-              width="100%"
-              aref="Song Album"
-            />
-          ) : (
-            ""
-          )}
-        </div>
-
-        {this.props.admin ? (
-          <div className="np-addons">
-            <div className="np-button-container">
-              {/* <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button> */}
-              {this.state.playing ? 
-                <Fab size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
-                  <Pause />
-                  
-                </Fab> :
-              <Fab size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
-                <PlayArrow />
-                
-              </Fab>
-            }
-              <Fab size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
-                <Skip />
-                
-              </Fab>
+        <div style={{position: "relative"}}>
+          <div style={{display: "inline-block"}}>
+            <div className="np-imagecontainer" style={{display: "inline-Block"}}>
+              {this.props.currSong.songAlbum !== "N/A" ? (
+                <img
+                  className="np-image"
+                  src={this.props.currSong.songAlbum}
+                  width="100%"
+                  aref="Song Album"
+                />
+              ) : (
+                ""
+              )}
+            </div>
+                {this.props.admin ? (
+              <div className="np-addons">
+                <div className="np-button-container">
+                  {/* <button className="np-button" onClick={() => this.checkForPlayer()}>Connect</button> */}
+                  {this.state.playing ? 
+                    <Fab size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
+                      <Pause />
+                      
+                    </Fab> :
+                  <Fab size="small" className="playPause" onClick={() => this.playsong(this.props.currSong.spotifyURI)}>
+                    <PlayArrow />
+                    
+                  </Fab>
+                }
+                  <Fab size="small" className="playPause" onClick={this.props.nextSong}>
+                    <Skip />
+                    
+                  </Fab>
+                </div>
+              </div>
+            ) : null}
+          </div>
+          <div style={{verticalAlign: "top", paddingTop: "200px", marginLeft: "20px", textAlign: "left"}} className="currSongDisplay">
+            <div>
+              <div className="np-info-songname" style={{width: "250px"}}>{this.props.currSong.songName}</div>
+              <div className="np-info-songartist" style={{color: "white"}}>{this.props.currSong.songArtist}</div>
             </div>
           </div>
-        ) : null}
+        </div>
+
       </div>
     );
   }
