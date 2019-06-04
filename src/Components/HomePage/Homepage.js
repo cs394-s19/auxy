@@ -12,7 +12,7 @@ class Homepage extends Component {
         <div className='top-circle'></div>
         <div className='bottom-circle'></div>
         <div className='welcome-container'>
-          <div className='meet-text'>MEET</div>
+          <div data-testid="homepageTitle" className='meet-text'>MEET</div>
           <Auxy transform="scale(3.7,3.7)" className = "auxy-text"
            /> 
           
