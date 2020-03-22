@@ -31,7 +31,8 @@ class NowPlaying extends Component {
       position: -1,
       duration: 0,
       connected: false,
-      currentTrack: null
+      currentTrack: null,
+      newTokenRefresh: false,
     };
     this.playerCheckInterval = null;
   }
@@ -65,7 +66,6 @@ class NowPlaying extends Component {
   //this checks that the Spotify Player is Loaded. Notice in Public/index.html we load the Spotify Web Player.
   // Once it loads in the window, we can initialize an instance with a current Host token.
   checkForPlayer() {
-    const { token } = "token_here";
 
     if (window.Spotify !== null) {
       // clearInterval(this.playerCheckInterval);
@@ -129,63 +129,79 @@ class NowPlaying extends Component {
       }
     }
 
-    if(this.state.currentTrack === null) {
-      const play = ({
-        spotify_uri,
-        playerInstance: {
-          _options: { getOAuthToken, id }
-        }
-      }) => {
-        getOAuthToken(access_token => {
-          fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
-            method: "PUT",
-            body: JSON.stringify({ uris: [spotify_uri] }),
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${access_token}`
-            }
-          });
-        });
-      };
+
+    //---------------------------------------------------------------------------------------
+    //Triggers if the first track in a queue is being played
+
+    // if(this.state.currentTrack === null) {
+    //   console.log('first if statement triggered')
+    //   const play = ({
+    //     spotify_uri,
+    //     playerInstance: {
+    //       _options: { getOAuthToken, id }
+    //     }
+    //   }) => {
+    //     getOAuthToken(access_token => {
+    //       fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+    //         method: "PUT",
+    //         body: JSON.stringify({ uris: [spotify_uri] }),
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           Authorization: `Bearer ${access_token}`
+    //         }
+    //       });
+    //     });
+    //   };
   
-      play({
-        playerInstance: this.player,
-        spotify_uri: uri
-      });
-    }
+    //   play({
+    //     playerInstance: this.player,
+    //     spotify_uri: uri
+    //   });
+    // }
+
+    //Triggers if the track is playing and wants to be paused
+
+    //THIS ALSO SEEMS REDUNDANT, AUXY WORKS ON MY COMP WITHOUT THIS CODE PLEASE DOUBLE CHECK ON ANOTHER COMP 
+    // --------------------------------------------------------------------------------------------------------------------------
+
+
+
 
     else if(this.state.playing) {
-      const pause = ({
-        playerInstance: {
-          _options: { getOAuthToken}
-        }
-      }) => {
-        getOAuthToken(access_token => {
-          fetch(`https://api.spotify.com/v1/me/player/pause`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${access_token}`
-            }
-          });
-        });
-      };
+
+      //----------------------------------------------------------------------
+      // const pause = ({
+      //   playerInstance: {
+      //     _options: { getOAuthToken}
+      //   }
+      // }) => {
+      //   getOAuthToken(access_token => {
+      //     fetch(`https://api.spotify.com/v1/me/player/pause`, {
+      //       method: "PUT",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //         Authorization: `Bearer ${access_token}`
+      //       }
+      //     });
+      //   });
+      // };
+
+      //PRETTY SURE THIS CAN BE REMOVED AS IT'S REDUNDANT. HAVEN'T TESTED EDGE CASES YET.
+      // ------------------------------------------------
+
+
       this.player.pause().then(() => {
         console.log('Paused!');
       });
     }
+
+    //Triggers if the track is Paused and wants to Resume
     else{
       this.player.resume().then(() => {
         console.log('Resumed!');
       });
     }
   }
-
-  // shouldComponentUpdate(nextProps, nextState){
-  //   if (nextProps.currSong.songName !== this.state.songName){
-  //     console.log("UPDATE PLEASE");
-  //   }
-  // }
 
   componentWillReceiveProps(nextProps) {
     // You don't have to do this check first, but it can help prevent an unneeded render
