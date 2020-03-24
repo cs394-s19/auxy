@@ -31,7 +31,7 @@ class NowPlaying extends Component {
       position: -1,
       duration: 0,
       connected: false,
-      currentTrack: null,
+      player_Track: null,
       newTokenRefresh: false,
     };
     this.playerCheckInterval = null;
@@ -130,72 +130,42 @@ class NowPlaying extends Component {
     }
 
 
-    //---------------------------------------------------------------------------------------
-    //Triggers if the first track in a queue is being played
 
-    // if(this.state.currentTrack === null) {
-    //   console.log('first if statement triggered')
-    //   const play = ({
-    //     spotify_uri,
-    //     playerInstance: {
-    //       _options: { getOAuthToken, id }
-    //     }
-    //   }) => {
-    //     getOAuthToken(access_token => {
-    //       fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
-    //         method: "PUT",
-    //         body: JSON.stringify({ uris: [spotify_uri] }),
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //           Authorization: `Bearer ${access_token}`
-    //         }
-    //       });
-    //     });
-    //   };
+    //Triggers if the first track in a queue is being played or the first time the site is loaded - aka the Spotify Player doesn't have a track set, but the state / props do.
+    if(this.state.player_Track === null) {
+      console.log('first if statement triggered')
+      const play = ({
+        spotify_uri,
+        playerInstance: {
+          _options: { getOAuthToken, id }
+        }
+      }) => {
+        getOAuthToken(access_token => {
+          fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+            method: "PUT",
+            body: JSON.stringify({ uris: [spotify_uri] }),
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${access_token}`
+            }
+          });
+        });
+      };
   
-    //   play({
-    //     playerInstance: this.player,
-    //     spotify_uri: uri
-    //   });
-    // }
+      play({
+        playerInstance: this.player,
+        spotify_uri: uri
+      });
+    }
 
-    //Triggers if the track is playing and wants to be paused
-
-    //THIS ALSO SEEMS REDUNDANT, AUXY WORKS ON MY COMP WITHOUT THIS CODE PLEASE DOUBLE CHECK ON ANOTHER COMP 
-    // --------------------------------------------------------------------------------------------------------------------------
-
-
-
-
+    //Regular Pause
     else if(this.state.playing) {
-
-      //----------------------------------------------------------------------
-      // const pause = ({
-      //   playerInstance: {
-      //     _options: { getOAuthToken}
-      //   }
-      // }) => {
-      //   getOAuthToken(access_token => {
-      //     fetch(`https://api.spotify.com/v1/me/player/pause`, {
-      //       method: "PUT",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //         Authorization: `Bearer ${access_token}`
-      //       }
-      //     });
-      //   });
-      // };
-
-      //PRETTY SURE THIS CAN BE REMOVED AS IT'S REDUNDANT. HAVEN'T TESTED EDGE CASES YET.
-      // ------------------------------------------------
-
-
       this.player.pause().then(() => {
         console.log('Paused!');
       });
     }
 
-    //Triggers if the track is Paused and wants to Resume
+    //Regular Resume
     else{
       this.player.resume().then(() => {
         console.log('Resumed!');
@@ -237,20 +207,20 @@ class NowPlaying extends Component {
   onStateChanged(state) {
     // if we're no longer listening to music, we'll get a null state.
     if (state !== null) {
-      const { current_track: currentTrack } = state.track_window;
-      const trackName = currentTrack.name;
-      const albumName = currentTrack.album.name;
-      const artistName = currentTrack.artists
+      const { current_track: player_Track } = state.track_window;
+      const trackName = player_Track.name;
+      const albumName = player_Track.album.name;
+      const artistName = player_Track.artists
         .map(artist => artist.name)
         .join(", ");
-      const duration = currentTrack.duration_ms;
+      const duration = player_Track.duration_ms;
       const position = state.position;
       const playing = !state.paused;
       //This handles when a next song should be played.
       if (!playing && (this.state.position !== 0 && state.position === 0)) {
         this.props.nextSong();
       }
-      console.log(currentTrack);
+      console.log(player_Track);
       this.setState({
         position,
         duration,
@@ -258,7 +228,7 @@ class NowPlaying extends Component {
         albumName,
         artistName,
         playing,
-        currentTrack
+        player_Track
       });
     }
   }
